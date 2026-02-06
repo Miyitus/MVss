@@ -1,0 +1,196 @@
+@charset "UTF-8";
+/* CSS Document
+
+                                                                
+@@@@@@@   @@@  @@@@@@@   @@@@@@@  @@@  @@@  @@@@@@@@   @@@@@@   
+@@@@@@@@  @@@  @@@@@@@  @@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@   
+@@!  @@@  @@!    @@!    !@@       @@!  @@@  @@!       !@@       
+!@   @!@  !@!    !@!    !@!       !@!  @!@  !@!       !@!       
+@!@!@!@   !!@    @!!    !@!       @!@!@!@!  @!!!:!    !!@@!!    
+!!!@!!!!  !!!    !!!    !!!       !!!@!!!!  !!!!!:     !!@!!!   
+!!:  !!!  !!:    !!:    :!!       !!:  !!!  !!:            !:!  
+:!:  !:!  :!:    :!:    :!:       :!:  !:!  :!:           !:!   
+ :: ::::   ::     ::     ::: :::  ::   :::   :: ::::  :::: ::   
+:: : ::   :       :      :: :: :   :   : :  : :: ::   :: : :    
+                                                                
+                                                        
+@@@@@@@              @@@       @@@  @@@  @@@  @@@@@@@@  
+@@@@@@@@             @@@       @@@  @@@  @@@  @@@@@@@@  
+@@!  @@@             @@!       @@!  @@!  !@@  @@!       
+!@   @!@             !@!       !@!  !@!  @!!  !@!       
+@!@!@!@   @!@!@!@!@  @!!       !!@  @!@@!@!   @!!!:!    
+!!!@!!!!  !!!@!@!!!  !!!       !!!  !!@!!!    !!!!!:    
+!!:  !!!             !!:       !!:  !!: :!!   !!:       
+:!:  !:!              :!:      :!:  :!:  !:!  :!:       
+ :: ::::              :: ::::   ::   ::  :::   :: ::::  
+:: : ::              : :: : :  :     :   :::  : :: ::   
+                                                        
+                                                        
+                                                        
+tite: Biches b-like
+for CLOAQUE.ORG
+Author: Miyö Van Stenis
+http://miyovanstenis.com
+@miyovansteniss
+ */
+
+html, body{
+	width: 960px;
+	height: 679px
+	background-image:url(../../jpg/post6.png);;
+}
+
+.container2 {
+	width: 960px;
+	height: 679px;
+		}
+	
+	.container1 {
+	width: 960px;
+	height: 679px;
+
+	}
+	
+	/*IPHONE*/
+	
+	.htconex1{
+  width:275px;
+  height:530px;
+  background-color:#f3f1f1;
+  border-radius:35px;
+  border-top:6px solid #dcd9d9;
+  border-bottom:5px solid #dcd9d9;
+  border-left:2px solid #dcd9d9;
+  border-right:2px solid #dcd9d9;
+}
+.htconex2{
+  position:relative;
+  border-radius:23px;
+  margin-left:3.4px;
+  top:9px;
+  width:89%;
+  height:81.5%;
+  background-color:#1e1e1e;
+  margin-top:12px;
+  border-top:25px solid #000000;
+  border-bottom:45px solid #000000;
+  border-left:12px solid #000000;
+  border-right:12px solid #000000;
+}
+
+.htconex3{
+  position:absolute;
+  margin-left:76px;
+  letter-spacing:2px;
+  font-size:10px;
+  margin-top:3px;
+  float:left;
+}
+
+.htconex4{
+  border:5px solid #1e1e1e;
+  border-radius:99px;
+  width:0;
+  height:0;
+  position:relative;
+  float:right;
+  margin-right:35px;
+  margin-top:6px;
+}
+
+.htconex5{
+    border:1px solid #484848;
+  border-top:2px solid #484848;
+  margin-left:-3px;
+  margin-top:-3px;
+width:3px;
+  height:3px;
+  background-color:#000000;
+}
+
+.htconex6{
+  color:white;
+  padding-top:445px;
+  margin:0 auto;
+  width:270px;
+  margin-left:30px;
+}
+
+.htconex7,.htconex8,.htconex9{
+  float:left;
+  margin-right:70px;
+}
+
+.htconex10{
+  margin-top:5px;
+  width: 10px; 
+	height: 1px; 
+	border-top:2px solid #8e8e8e;
+  -webkit-transform:rotate(140deg);
+      -moz-transform:rotate(140deg);
+
+
+
+}
+
+.htconex11{
+  width: 10px; 
+	height: 1px; 
+  -webkit-transform:rotate(-140deg);
+    -moz-transform:rotate(-140deg);
+	border-top:2px solid #8e8e8e;
+  margin-top:3px;
+
+}
+
+.htconex12{
+  width:9px;
+  height:5px;
+  border:2px solid #8e8e8e;
+  border-top:2px solid transparent;
+  margin-left:3px;
+}
+
+
+.htconex13{
+  margin-top:5px;
+  width: 8px; 
+	height: 0px; 
+  margin-left:2.2px;
+	border-top:2px solid #8e8e8e;
+  -webkit-transform:rotate(-39deg);
+    -moz-transform:rotate(-39deg);
+  float:left;
+
+
+}
+
+
+.htconex14{
+  margin-top:5px;
+  width: 9px; 
+	height: 0px; 
+	border-top:2px solid #8e8e8e;
+  -webkit-transform:rotate(39deg);
+  -moz-transform:rotate(39deg);
+
+  margin-left:7px;
+
+
+}
+
+.htconex15{
+  margin-top:5px;
+  width:8px;
+  height:7px;
+  border:2px solid #8e8e8e;
+}
+
+.htconex16{
+  border-right:2px solid #8e8e8e;
+  border-top:2px solid #8e8e8e;
+  margin-top:-15px;
+  margin-left:11px;
+  height:5px;
+  width:5px;
+}

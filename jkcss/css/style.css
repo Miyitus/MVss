@@ -1,0 +1,294 @@
+html, body { 
+  overflow: hidden; 
+
+/* Old browsers */
+ width: 100%;
+ height: 100%;
+  padding:0;
+
+  margin:0;
+
+  background: #0f124a;
+
+  /* FF3.6+ */
+
+  background: -moz-linear-gradient(-45deg, #0f124a 0%, #1b2360 16%, #515b80 42%, #758391 58%, #e5e3b0 100%);
+
+  /* Chrome,Safari4+ */
+
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #0f124a), color-stop(16%, #1b2360), color-stop(42%, #515b80), color-stop(58%, #758391), color-stop(100%, #e5e3b0));
+
+  /* Chrome10+,Safari5.1+ */
+
+  background: -webkit-linear-gradient(-45deg, #0f124a 0%, #1b2360 16%, #515b80 42%, #758391 58%, #e5e3b0 100%);
+
+  /* Opera 11.10+ */
+
+  background: -o-linear-gradient(-45deg, #0f124a 0%, #1b2360 16%, #515b80 42%, #758391 58%, #e5e3b0 100%);
+
+  /* IE10+ */
+
+  background: -ms-linear-gradient(-45deg, #0f124a 0%, #1b2360 16%, #515b80 42%, #758391 58%, #e5e3b0 100%);
+
+  /* W3C */
+
+  background: linear-gradient(135deg, #0f124a 0%, #1b2360 16%, #515b80 42%, #758391 58%, #e5e3b0 100%);}
+
+
+
+
+#div {
+
+  
+
+   display: block;
+
+
+
+}
+
+.img1{
+
+	background-image: url(../img/idh.png) ;
+
+	background-repeat:no-repeat;
+
+	background-position:center;
+
+	width:600px	;
+
+	height:600px;
+
+	position:static;
+
+	padding-left:50%;
+
+	padding-top: 0px;
+
+	}
+
+	
+
+	.img2{
+
+	width:auto;
+
+	height:auto;
+
+	position:static;
+
+	padding-left: 30px;
+
+	
+
+	}
+
+.cix {
+
+	width:300px;
+
+	height: 300px;
+
+	border-radius: 50%;
+
+	margin-left:-20%;
+  margin-top: 15%;
+
+	background: -webkit-radial-gradient(65% 15%, circle, aqua, darkblue);
+
+	background: -moz-radial-gradient(65% 15%, circle, aqua, darkblue);
+
+	background: -o-radial-gradient(65% 15%, circle, aqua, darkblue);
+
+	background: -ms-radial-gradient(65% 15%, circle, aqua, darkblue);
+
+	
+
+}
+
+
+
+/*lines*/
+
+
+
+#wrapper {
+
+  position: relative;
+
+  width: 100%;
+
+  height: 100%;
+
+  left: 50%;
+
+  -webkit-transform: translateX(-50%);
+
+      -ms-transform: translateX(-50%);
+
+          transform: translateX(-50%);
+
+  border-radius: 0%;
+
+  overflow: hidden;
+
+  -webkit-mask-image: radial-gradient(circle, #ffffff, #000000);
+
+          mask-image: radial-gradient(circle, #ffffff, #000000);
+
+}
+
+
+
+.innerwrapper {
+
+  width: 100%;
+
+  height: 100%;
+
+}
+
+
+
+
+
+
+
+.line {
+
+  width: 10%;
+
+  height: 10%;
+
+  border-top: 0px solid #eee;
+
+  display: inline-block;
+
+  margin: -2px;
+
+  -webkit-transform-origin: 50% 0%;
+
+      -ms-transform-origin: 50% 0%;
+
+          transform-origin: 50% 0%;
+
+  -webkit-animation: rotationGalore 2s infinite ease-in-out;
+
+          animation: rotationGalore 2s infinite ease-in-out;
+
+}
+
+
+
+@-webkit-keyframes rotationGalore {
+
+  0%, 25% {
+
+    -webkit-transform: rotate(0deg);
+
+            transform: rotate(0deg);
+
+  }
+
+  50%,75% {
+
+    -webkit-transform: rotate(90deg);
+
+            transform: rotate(90deg);
+
+  }
+
+  100% {
+
+    -webkit-transform: rotate(180deg);
+
+            transform: rotate(180deg);
+
+  }
+
+}
+
+
+
+@keyframes rotationGalore {
+
+  0%, 25% {
+
+    -webkit-transform: rotate(0deg);
+
+            transform: rotate(0deg);
+
+  }
+
+  50%,75% {
+
+    -webkit-transform: rotate(90deg);
+
+            transform: rotate(90deg);
+
+  }
+
+  100% {
+
+    -webkit-transform: rotate(180deg);
+
+            transform: rotate(180deg);
+
+  }
+
+}
+
+
+
+
+
+/*zhite transition*/
+
+
+
+.whiteclicker {
+
+  display: inline-block;
+
+  position: relative;
+
+}
+
+.whiteclicker::after {
+
+  content: "";
+
+  display: block;
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  right: 0;
+
+  bottom: 0;
+
+  background: white;
+
+  opacity: 0;
+
+  -moz-transition: opacity 1s ease;
+
+  -o-transition: opacity 1s ease;
+
+  -webkit-transition: opacity 1s ease;
+
+  transition: opacity 1s ease;
+
+}
+
+.whiteclicker.active::after {
+
+  opacity: 1;
+
+}
+
+
+

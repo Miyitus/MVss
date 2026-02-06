@@ -1,0 +1,165 @@
+@charset "UTF-8";
+/* Reciclyng the WEB
+
+Tittle: Tumbler Breakup
+Author: Miyö Van Stenis
+URL: http://miyovanstenis.com/
+ */
+
+body, html{
+	/* Old browsers */
+  background: #8fb8ee;
+  /* FF3.6+ */
+  background: -moz-linear-gradient(-45deg, #8fb8ee 0%, #cbe2f4 40%, #dbe5eb 63%, #f9d3b8 83%, #e0b2a3 100%);
+  /* Chrome,Safari4+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #8fb8ee), color-stop(40%, #cbe2f4), color-stop(63%, #dbe5eb), color-stop(83%, #f9d3b8), color-stop(100%, #e0b2a3));
+  /* Chrome10+,Safari5.1+ */
+  background: -webkit-linear-gradient(-45deg, #8fb8ee 0%, #cbe2f4 40%, #dbe5eb 63%, #f9d3b8 83%, #e0b2a3 100%);
+  /* Opera 11.10+ */
+  background: -o-linear-gradient(-45deg, #8fb8ee 0%, #cbe2f4 40%, #dbe5eb 63%, #f9d3b8 83%, #e0b2a3 100%);
+  /* IE10+ */
+  background: -ms-linear-gradient(-45deg, #8fb8ee 0%, #cbe2f4 40%, #dbe5eb 63%, #f9d3b8 83%, #e0b2a3 100%);
+  /* W3C */
+  background: linear-gradient(135deg, #8fb8ee 0%, #cbe2f4 40%, #dbe5eb 63%, #f9d3b8 83%, #e0b2a3 100%);
+  }
+  
+.div1{
+	animation:linear;
+	height:50%;
+	width:50%;
+	}
+	
+	  
+.div2{
+	
+	padding: 0px;
+	margin: 0px;
+	height:auto;
+	width:100%;
+	}
+/**/
+
+#container{
+	width: 104px;
+	height: 176px;
+}
+
+.center {
+   position: absolute;
+   left: 50%;
+   top: 50%; 
+   margin-left: -52px;
+   margin-top: -88px;
+}
+
+#hourglass{
+    width: 104px;
+    margin: 0 auto;
+}
+
+#sand{
+    margin: 0 auto;
+    width: 56px;
+	height: 120px;
+	position: relative;
+	top: -144px;
+}
+
+.grain {
+    background-color: #000000;
+    height: 8px;
+    width: 8px;
+	position: absolute;
+}
+
+.a, .b, .c, .d, .e, .f{
+    background-color: #FFFFFF;
+    height: 8px;
+    margin: 0 auto;
+}
+
+.a, .b, .c, .d, .e, .f{
+    border-right: 16px solid black;
+    border-left: 16px solid black;
+}
+
+.a{
+    width: 72px;
+    border-top: 8px solid black;
+    border-bottom: 8px solid black;
+}
+
+.b{
+    width: 72px;
+    height: 32px;
+    border-right: 8px solid black;
+    border-left: 8px solid black;
+}
+
+.c{width: 56px;}
+.d{width: 40px;}
+.e{width: 24px;}
+.f{width: 8px;}
+
+.g1{top: 0px;left: 0px;}
+.g2{top: 0px;left: 16px;}
+.g3{top: 0px;left: 32px;}
+.g4{top: 0px;left: 48px;}
+.g5{top: 8px;left: 8px;}
+.g6{top: 8px;left: 24px;}
+.g7{top: 8px;left: 40px;}
+.g8{top: 16px;left: 16px;}
+.g9{top: 16px;left: 32px;}
+.g10{top: 24px;left: 24px;}
+.g11{top: 40px;left: 24px;}
+.g12{top: 64px;left: 24px;}
+.g13{top: 72px;left: 24px;}
+
+.hide{
+	display: none;
+}
+
+.moveg1{
+	left: 16px;
+	top: 112px;
+}
+
+.moveg2{
+	left: 48px;
+	top: 112px;
+}
+
+.moveg3{
+	top: 112px;
+}
+
+.moveg4{
+	left: 24px;
+	top: 104px;
+}
+
+.moveg5{
+	top: 112px;
+	left: 0px;
+}
+
+.moveg6{
+	left: 8px;
+	top: 104px;
+}
+
+.moveg7{
+	top: 104px;
+}
+
+.moveg8{
+	top: 96px;
+}
+
+.moveg9{
+	top: 96px;
+}
+
+.moveg10{
+	top: 88px;
+}

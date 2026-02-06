@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="author" name="Miyö Vans Stenis"/>
+<!--
+$$$$$$$\  $$\   $$\                         $$\                 $$$$$$$\                                                        
+$$  __$$\ \__|  $$ |                        \__|                $$  __$$\                                                       
+$$ |  $$ |$$\ $$$$$$\    $$$$$$$\  $$$$$$\  $$\ $$$$$$$\        $$ |  $$ | $$$$$$\   $$$$$$\   $$$$$$\  $$$$$$\$$$$\   $$$$$$$\ 
+$$$$$$$\ |$$ |\_$$  _|  $$  _____|$$  __$$\ $$ |$$  __$$\       $$ |  $$ |$$  __$$\ $$  __$$\  \____$$\ $$  _$$  _$$\ $$  _____|
+$$  __$$\ $$ |  $$ |    $$ /      $$ /  $$ |$$ |$$ |  $$ |      $$ |  $$ |$$ |  \__|$$$$$$$$ | $$$$$$$ |$$ / $$ / $$ |\$$$$$$\  
+$$ |  $$ |$$ |  $$ |$$\ $$ |      $$ |  $$ |$$ |$$ |  $$ |      $$ |  $$ |$$ |      $$   ____|$$  __$$ |$$ | $$ | $$ | \____$$\ 
+$$$$$$$  |$$ |  \$$$$  |\$$$$$$$\ \$$$$$$  |$$ |$$ |  $$ |      $$$$$$$  |$$ |      \$$$$$$$\ \$$$$$$$ |$$ | $$ | $$ |$$$$$$$  |
+\_______/ \__|   \____/  \_______| \______/ \__|\__|  \__|      \_______/ \__|       \_______| \_______|\__| \__| \__|\_______/ 
+
+Author: Miyö Van Stenis
+http://miyovanstenis.com
+@miyovansteniss
+-->
+<meta content="year" name="2013"/>
+<title>BITCOIN DREAMS</title>
+
+<link rel="stylesheet" type="text/css" href="css/wifi.css">
+<link rel="stylesheet" type="text/css" href="css/bnt.css">
+<link rel="stylesheet" type="text/css" href="css/bitcoin.css">
+<link rel="stylesheet" type="text/css" href="css/macbook.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
+<style type="text/css">
+#rain {
+position:absolute;
+width:300px;
+height: 200px;
+margin-top: 0;
+overflow: hidden;
+}
+#rain span {
+	position: absolute;
+	cursor: pointer;
+	font-size: 1px;
+	top: -1px;
+	height: 0px;
+	background-color: #00FFFF;
+}
+</style>
+<script type="text/javascript">
+<!--
+var O = new Array();
+var L = 1;
+var F = 15;
+var R = .75;
+var G = .75;
+var B = 10;
+var M = "#CCCCFF";
+var N = Math.round(100/L);
+function resize() { ny = document.getElementById("rain").offsetHeight; }
+onresize = resize;
+function touch(o){
+with(O[o]){
+V = -F;
+obj.style.background = M;
+}
+}
+function tomb(o){
+with(O[o]){
+H += V;
+V++;
+if(H > ny){
+V = -Math.round(V*.5);
+H += V;
+}
+if(H > 0){
+obj.style.height = Math.round(H)+"px";
+if(Math.abs(H-HB) > 0){
+c = H*255/ny;
+obj.style.background = "RGB("+Math.round(c*R)+","+Math.round(c*G)+","+Math.round(c*B)+")";
+HB = H;
+}
+} else {
+V=0;
+H=1;
+}
+}
+setTimeout("tomb("+o+")", 32);
+}
+function CObj(N){
+this.N  = N;
+this.HB = 0;
+this.V  = 0;
+this.H  = 0;
+this.obj = document.createElement("span");
+this.obj.onmouseover = new Function("touch("+N+");");
+this.obj.style.width = L+"%";
+this.obj.style.left = Math.ceil(N*L)+"%";
+document.getElementById("rain").appendChild(this.obj);
+}
+onload = function() {
+resize();
+for(i=0;i<N;i++)O[i] = new CObj(i);
+for(i=0;i<N;i++) setTimeout("tomb("+i+")", 200*i);
+}
+//-->
+</script>
+</head>
+
+<body>
+<!--
+   $$\    
+ $$$$$$\  
+$$  __$$\ 
+$$ /  \__|
+\$$$$$$\   bitcoin- DREAMS-------((((-
+ \___ $$\ 
+$$\  \$$ |
+\$$$$$$  |
+ \_$$  _/ 
+   \ _/   
+          
+          💻💴💵💷💶💸💳💰💎
+-->
+<div id="rain" style="position:absolute; width:280px; height:60%; z-index:2; left: 50%; margin-left: -140px; top: 200px; visibility: visible;">
+<span style="width: 1%; left: 0%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 1%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 2%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 3%; height: 5; background: none repeat scroll 0% 0% rgb(188, 188, 255);"></span><span style="width: 1%; left: 4%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 5%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 6%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255); color: #0ff;"></span><span style="width: 1%; left: 7%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 8%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 9%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 10%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 11%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 12%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 13%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 14%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 15%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 16%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 17%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 18%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 19%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 20%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 21%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 22%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 23%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 24%; height: 5; background: none repeat scroll 0% 0% rgb(188, 188, 255);"></span><span style="width: 1%; left: 25%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 26%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 27%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 28%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 29%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 30%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 31%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 32%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 33%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 34%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 97px; height: 5; background: none repeat scroll 0% 0% rgb(188, 188, 255);"></span><span style="width: 1%; left: 36%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 37%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 38%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 39%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 40%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 41%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 42%; height: 5; background: none repeat scroll 0% 0% rgb(188, 188, 255);"></span><span style="width: 1%; left: 43%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 44%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 45%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 46%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 47%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 48%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 49%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 50%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 51%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 52%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 53%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 54%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 55%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 56%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 57%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 58%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 59%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 60%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 61%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 62%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 63%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 64%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 65%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 66%; height: 5; background: none repeat scroll 0% 0% rgb(188, 188, 255);"></span><span style="width: 1%; left: 67%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 68%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 69%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 70%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 71%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 72%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 73%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 74%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 75%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 76%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 77%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 216px; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 79%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 80%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 81%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 82%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 83%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 84%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 85%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 86%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 87%; height: 5; background: none repeat scroll 0% 0% rgb(190, 190, 255);"></span><span style="width: 1%; left: 88%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 89%; height: 5; background: none repeat scroll 0% 0% rgb(185, 185, 255);"></span><span style="width: 1%; left: 90%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 91%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 92%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 93%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 94%; height: 5; background: none repeat scroll 0% 0% rgb(187, 187, 255);"></span><span style="width: 1%; left: 95%; height: 5; background: none repeat scroll 0% 0% rgb(188, 188, 255);"></span><span style="width: 1%; left: 96%; height: 5; background: none repeat scroll 0% 0% rgb(188, 188, 255);"></span><span style="width: 1%; left: 97%; height: 5; background: none repeat scroll 0% 0% rgb(191, 191, 255);"></span><span style="width: 1%; left: 98%; height: 5; background: none repeat scroll 0% 0% rgb(188, 188, 255);"></span><span style="width: 1%; left: 99%; height: 5; background: none repeat scroll 0% 0% rgb(188, 188, 255);"></span></div>
+<button><span></span>
+
+<div class="container">
+	<div class="bitcoin"></div>
+	<div class="shadow"></div>
+</div>
+
+</button>
+
+<div id="circle">
+<div class="circle one">
+	<div class="circle two">
+		<div class="circle three">
+			<div class="circle four">
+				<div class="circle five">
+					<div class="circle six">
+						<div class="circle seven">
+							<div class="circle eight">
+								<div class="circle nine">
+									<div class="circle ten">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+
+
+<div>
+<p></p>
+<p></p>
+<p></p>
+  <p><i class="macbook"></i></p>
+</div>
+<!--
+NUBES
+-->
+<div id="clouds" style="position: fixed; z-index:-0;  top:-225px; height:100%; width:100%; visibility:visible"><img src="img/clouds.png"></div> 
+
+</body>
+</html>

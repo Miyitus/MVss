@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<titlTumblr Breakup</title>
+<link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+
+<!-- Script of the clock-->
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="hourglass.js"></script>
+        
+<!-- script of the sparkles-->
+<script type="text/javascript">
+// <![CDATA[
+var colour="#00baff";
+var sparkles=120;
+
+/****************************
+*  Tinkerbell Magic Sparkle *
+* (c) 2005 mf2fm web-design *
+*  http://www.mf2fm.com/rv  *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+
+window.onload=function() { if (document.getElementById) {
+  var i, rats, rlef, rdow;
+  for (var i=0; i<sparkles; i++) {
+    var rats=createDiv(3, 3);
+    rats.style.visibility="hidden";
+    document.body.appendChild(tiny[i]=rats);
+    starv[i]=0;
+    tinyv[i]=0;
+    var rats=createDiv(5, 5);
+    rats.style.backgroundColor="transparent";
+    rats.style.visibility="hidden";
+    var rlef=createDiv(1, 5);
+    var rdow=createDiv(5, 1);
+    rats.appendChild(rlef);
+    rats.appendChild(rdow);
+    rlef.style.top="2px";
+    rlef.style.left="0px";
+    rdow.style.top="0px";
+    rdow.style.left="2px";
+    document.body.appendChild(star[i]=rats);
+  }
+  set_width();
+  sparkle();
+}}
+
+function sparkle() {
+  var c;
+  if (x!=ox || y!=oy) {
+    ox=x;
+    oy=y;
+    for (c=0; c<sparkles; c++) if (!starv[c]) {
+      star[c].style.left=(starx[c]=x)+"px";
+      star[c].style.top=(stary[c]=y)+"px";
+      star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+      star[c].style.visibility="visible";
+      starv[c]=50;
+      break;
+    }
+  }
+  for (c=0; c<sparkles; c++) {
+    if (starv[c]) update_star(c);
+    if (tinyv[c]) update_tiny(c);
+  }
+  setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+  if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+  if (starv[i]) {
+    stary[i]+=1+Math.random()*3;
+    if (stary[i]<shigh+sdown) {
+      star[i].style.top=stary[i]+"px";
+      starx[i]+=(i%5-2)/5;
+      star[i].style.left=starx[i]+"px";
+    }
+    else {
+      star[i].style.visibility="hidden";
+      starv[i]=0;
+      return;
+    }
+  }
+  else {
+    tinyv[i]=50;
+    tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+    tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+    tiny[i].style.width="2px";
+    tiny[i].style.height="2px";
+    star[i].style.visibility="hidden";
+    tiny[i].style.visibility="visible"
+  }
+}
+
+function update_tiny(i) {
+  if (--tinyv[i]==25) {
+    tiny[i].style.width="1px";
+    tiny[i].style.height="1px";
+  }
+  if (tinyv[i]) {
+    tinyy[i]+=1+Math.random()*3;
+    if (tinyy[i]<shigh+sdown) {
+      tiny[i].style.top=tinyy[i]+"px";
+      tinyx[i]+=(i%5-2)/5;
+      tiny[i].style.left=tinyx[i]+"px";
+    }
+    else {
+      tiny[i].style.visibility="hidden";
+      tinyv[i]=0;
+      return;
+    }
+  }
+  else tiny[i].style.visibility="hidden";
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  set_scroll();
+  y=(e)?e.pageY:event.y+sdown;
+  x=(e)?e.pageX:event.x+sleft;
+}
+
+function set_scroll() {
+  if (typeof(self.pageYOffset)=="number") {
+    sdown=self.pageYOffset;
+    sleft=self.pageXOffset;
+  }
+  else if (document.body.scrollTop || document.body.scrollLeft) {
+    sdown=document.body.scrollTop;
+    sleft=document.body.scrollLeft;
+  }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+    sleft=document.documentElement.scrollLeft;
+	sdown=document.documentElement.scrollTop;
+  }
+  else {
+    sdown=0;
+    sleft=0;
+  }
+}
+
+window.onresize=set_width;
+function set_width() {
+  if (typeof(self.innerWidth)=="number") {
+    swide=self.innerWidth;
+    shigh=self.innerHeight;
+  }
+  else if (document.documentElement && document.documentElement.clientWidth) {
+    swide=document.documentElement.clientWidth;
+    shigh=document.documentElement.clientHeight;
+  }
+  else if (document.body.clientWidth) {
+    swide=document.body.clientWidth;
+    shigh=document.body.clientHeight;
+  }
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height+"px";
+  div.style.width=width+"px";
+  div.style.overflow="hidden";
+  div.style.backgroundColor=colour;
+  return (div);
+}
+// ]]>
+</script>
+
+</script>
+
+<title>Tumblr Breakup</title>
+</head>
+
+<body >
+ 	
+		<div id="container" class="center">
+			<div id="hourglass">
+				<div class="a"></div>
+				<div class="b"></div>
+				<div class="c"></div>
+				<div class="d"></div>
+				<div class="e"></div>
+				<div class="f"></div>
+				<div class="f"></div>
+				<div class="e"></div>
+				<div class="d"></div>
+				<div class="c"></div>
+				<div class="b"></div>
+				<div class="a"></div>
+			</div>
+			<div id="sand">
+				<div class="grain g1"></div>
+				<div class="grain g2"></div>
+				<div class="grain g3"></div>
+				<div class="grain g4"></div>
+				<div class="grain g5"></div>
+				<div class="grain g6"></div>
+				<div class="grain g7"></div>
+				<div class="grain g8"></div>
+				<div class="grain g9"></div>
+				<div class="grain g10"></div>
+				<div class="grain g11"></div>
+				<div class="grain g12 hide"></div>
+				<div class="grain g13"></div>
+			</div>
+		</div>
+	</body>
+
+  <script src="js/index.js"></script>
+  
+<div class="div2">
+<img src="gif/1.png" width="250px" height="188px" />
+<img src="gif/4.gif" width="5%" height="5%" />
+<img src="gif/49.gif" width="15%" height="15%" />
+<img src="gif/17.gif" width="250px" height="49px" />
+<img src="gif/9.gif" width="15%" height="15%" />
+<img src="gif/22.gif" width="20%" height="20%" /></div>
+
+<div class="div2">
+<img src="gif/112.gif" width="15%" height="15%" />
+<img src="gif/15.gif" width="20%" height="20%" />
+<img src="gif/34.gif" width="15%" height="15%" />
+<img src="gif/33.gif" width="15%" height="15%" />
+<img src="gif/26.gif" width="20%" height="20%" />
+<img src="gif/23.gif" width="10%" height="10%" /></div>
+
+<div class="div2">
+<img src="gif/8.gif" width="20%" height="20%" />
+<img src="gif/34.png" width="20%" height="15%" />
+<img src="gif/18.gif" width="15%" height="15%" />
+<img src="gif/24.gif" width="250px" height="110px" />
+<img src="gif/31.gif" width="20%" height="20%" /></div>
+
+<div class="div2">
+<img src="gif/79.gif" width="20%" height="20%" />
+<img src="gif/28.gif" width="20%" height="20%" />
+<img src="gif/large.png" width="20%" height="20%" />
+<img src="gif/16.gif" width="20%" height="20%" />
+<img src="gif/ego.png" width="10%" height="10%" /></div>
+
+<div class="div2">
+<img src="gif/23.png" width="15%" height="15%" />
+<img src="gif/20.gif" width="15%" height="15%" />
+<img src="gif/35.gif" width="20%" height="20%" />
+<img src="gif/36.gif" width="20%" height="20%" />
+<img src="gif/37.gif" width="15%" height="15%" />
+<img src="gif/38.gif" width="10%" height="10%" /></div>
+
+<div class="div2">
+<img src="gif/689.gif" width="15%" height="15%" />
+<img src="gif/864.gif" width="15%" height="15%" />
+<img src="gif/534.gif" width="15%" height="15%" />
+<img src="gif/sj.png" width="15%" height="10%" />
+<img src="gif/78.gif" width="15%" height="15%" />
+<img src="gif/56.gif" width="20%" height="20%" /></div>
+
+<div class="div2">
+<img src="gif/455.gif" width="30%" height="30%" />
+<img src="gif/40.gif" width="30%" height="30%" />
+<img src="gif/67.gif" width="250px" height="250px" />
+<img src="gif/find.gif" width="160px" height="160px" /></div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta content="author" name="Miyö Vans Stenis"/>
+<style>
+			body {
+				background-image:url(../jpg/post4.png);
+				background-repeat:no-repeat;
+				margin: 0;
+				overflow: hidden;
+				
+			}
+		</style>
+<title>Cloaque-post4</title>
+<!--
+
+                                                                
+@@@@@@@   @@@  @@@@@@@   @@@@@@@  @@@  @@@  @@@@@@@@   @@@@@@   
+@@@@@@@@  @@@  @@@@@@@  @@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@   
+@@!  @@@  @@!    @@!    !@@       @@!  @@@  @@!       !@@       
+!@   @!@  !@!    !@!    !@!       !@!  @!@  !@!       !@!       
+@!@!@!@   !!@    @!!    !@!       @!@!@!@!  @!!!:!    !!@@!!    
+!!!@!!!!  !!!    !!!    !!!       !!!@!!!!  !!!!!:     !!@!!!   
+!!:  !!!  !!:    !!:    :!!       !!:  !!!  !!:            !:!  
+:!:  !:!  :!:    :!:    :!:       :!:  !:!  :!:           !:!   
+ :: ::::   ::     ::     ::: :::  ::   :::   :: ::::  :::: ::   
+:: : ::   :       :      :: :: :   :   : :  : :: ::   :: : :    
+                                                                
+                                                        
+@@@@@@@              @@@       @@@  @@@  @@@  @@@@@@@@  
+@@@@@@@@             @@@       @@@  @@@  @@@  @@@@@@@@  
+@@!  @@@             @@!       @@!  @@!  !@@  @@!       
+!@   @!@             !@!       !@!  !@!  @!!  !@!       
+@!@!@!@   @!@!@!@!@  @!!       !!@  @!@@!@!   @!!!:!    
+!!!@!!!!  !!!@!@!!!  !!!       !!!  !!@!!!    !!!!!:    
+!!:  !!!             !!:       !!:  !!: :!!   !!:       
+:!:  !:!              :!:      :!:  :!:  !:!  :!:       
+ :: ::::              :: ::::   ::   ::  :::   :: ::::  
+:: : ::              : :: : :  :     :   :::  : :: ::   
+                                                        
+                                                        
+                                                        
+tite: Biches b-like
+for CLOAQUE.ORG
+Author: Miyö Van Stenis
+http://miyovanstenis.com
+@miyovansteniss
+-->
+<meta content="year" name="2013"/>
+<link href="css/form.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body marginheight="0" marginwidth="0">
+<script src="http://brangerbriz.net/labs/threejs_playGnd/js/three.min.js"></script>
+		<script src="http://brangerbriz.net/labs/threejs_playGnd/js/Detector.js"></script>
+		<script>
+
+			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+			
+			var camera, scene, renderer;
+			var geometry, material, mesh;
+
+			function setup() {
+
+				var W = 960, H = 679;
+				renderer = new THREE.WebGLRenderer();
+				renderer.setSize( W, H );
+				document.body.appendChild( renderer.domElement );
+
+				camera = new THREE.PerspectiveCamera( 50, W/H, 1, 10000 );
+				camera.position.z = 500;
+				
+				
+
+				scene = new THREE.Scene();
+				
+				
+				// paste your code from the geometryGUI here
+
+geometry = new THREE.TorusKnotGeometry(100, 44.14, 100, 33, 9.95, 5.7, 14.81);
+material = new THREE.MeshNormalMaterial({shading: THREE.FlatShading, side: THREE.DoubleSide, transparent: true, opacity: 1});
+mesh = new THREE.Mesh(geometry, material);
+mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.64;
+mesh.rotation.x = -200.29;
+mesh.rotation.z = 3.97;
+scene.add(mesh);
+
+			}
+
+			function draw() {
+
+				requestAnimationFrame( draw );
+				mesh.position.x = Math.sin( Date.now() * 0.001 ) * 50;  
+	mesh.rotation.z = Date.now() * 0.0005;
+				
+				// experiment with code from the snippets menu here
+
+				renderer.render( scene, camera );
+
+			}
+
+			setup();
+			draw();
+
+		</script>
+</body>
+</html>

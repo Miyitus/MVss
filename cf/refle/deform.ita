@@ -1,0 +1,73 @@
+
+          Anfy Deform 1.0 - Copyright (C) by Fabio Ciucci 1996
+
+Questa applet puo' deformare qualsiasi immagine GIF o JPG,
+Ricordatevi che sono richieste sia Deform.class che Deformb.class.
+Questa applet e' totalmente parametrizzata, per cui si possono generare
+tutti i tipi di deformazione che vi interessano.
+Ecco un esempio di quello che va scritto hell'html (le cose dopo i ; sono
+commenti con i valori minimi e massimi accettati):
+
+
+<applet code="Deform.class" width=150 height=132> ; Classtag iniziale
+<param name=image value="imfad1.gof">   ; Immagine da caricare
+<param name=res value="1">              ; risoluzione (1-8)
+<param name=distval value="130">        ; Valore di distorsione (0 .. 500)
+<param name=dfact value="35">           ; Fattore di distorsione (1 .. 100)
+<param name=dspeed value="3">           ; Velocita' (1 .. 50)
+<param name=doffset value="146">        ; Scostamento fusione X (0 .. width)
+<param name=xv1 value="10">             ; Scostamento X1 (1 .. 19)
+<param name=yv1 value="12">             ; Scostamento Y1 (1 .. 19)
+<param name=xv2 value="15">             ; Scostamento X2 (1 .. 19)
+<param name=yv2 value="18">             ; Scostamento Y2 (1 .. 19)
+Sorry, your browser doesn't suppor Java.  ; Msg in browsers non java
+</applet>
+
+
+Istruzioni dettagliate:
+
+L'immagine GIF/JPG puo' essere di qualsiasi grandezza.
+Se res=1, ricordati di mettere nei tab "width" e "height" la grandezza
+esatta dell'immagine. Se res=2, mettici il doppio della grandezza, se res=3
+il triplo e cosi' via.
+Infatti, res e' una specie di zoom.
+
+Il parametro "distval" (0 .. 500) cambia il tipo di onda: valori piccoli
+creano molte piccole onde, valori alti creano poche grandi onde.
+
+Il parametro "dfact" (1 .. 100) controlla il fattore di distorsione.
+Valori minori causano distorsione maggiore, valori piu' altri minore
+distorsione.
+
+Il parametro "dspeed" (1 .. 50) determina la velocita' delle onde.
+
+Il parametro "doffset" non e' facile da spiegare. Comunque occorre metterci
+valori compresi tra 0 e la larghezza (width) dell'immagine.
+I risultati migliori si ottengono con valori vicini alla larghezza
+dell'immagine.
+
+Con xv1,yv1,xv2,yv2 (1 .. 19) puoi controllare lo scostamento tra le due onde
+radiali che fondendosi tra loro generano la distorsione.
+
+
+
+Copyright e note sulla distribuzione.
+
+Fabio Ciucci e' l'autore e proprietario di questa applet.
+Puoi usare liberamente questa applet per abbellire le tue pagine web.
+Pero', dato che sono l'autore, ho inserito una finestrella segreta che
+apparira' se l'applet e' clickata col mouse: e' esterna al browser, percui
+non danneggera' il design della tua bellissima pagina html.
+Tale piccola finestrella mostra semplicemente il mio nome e chiede se si
+vuole fare una visitina alla pagina delle mie applet, per poterle prendere
+e usare. L'utente potra' connettersi o meno, a seconda delle sue preferenze,
+dopo aver visitato il vostro stupendo sito. Spero che questa credit part non
+sia un problema eccessivo per te.... considera che userai un effetto
+programmato da me, senza pagare niente!
+
+
+Fabio Ciucci (Randy/Ram Jam)
+
+fabioc@anfiteatro.it
+
+

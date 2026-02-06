@@ -1,0 +1,189 @@
+                                                               
+-->
+<html>
+<!--
+                            
+              __                                          
+             /_/                                          
+  _   _  __ _   ______ ______ ______ ______ ______ ______ 
+ | | | |/ _` | |______|______|______|______|______|______|
+ | |_| | (_| |                                            
+  \__,_|\__,_|                                            
+                                                          
+                            
+Title: uÂ´------
+year: 2013 
+Flash animation + HTML + GIF
+bug: SWF Files no longer supported
+Net.Art Piece restored on 2022 using Ruffle.js
+Code with <3 by Miyö Van Stenis
+-->
+
+<head>
+<title>uÂ´------</title>
+<meta content="artist" name="Miyö Vans Stenis"/>
+<meta content="year" name="2013"/>
+<meta name="Keywords" content="uÂ'------" />
+<meta name="Description" content="Wildlife" />
+
+
+<style type="text/css">
+body {
+margin:0; 
+padding:0; 
+position:absolute; 
+overflow:hidden; 
+background:#cccc33; 
+background-image:url('background_1.gif'); 
+background-repeat:repeat; 
+left:0; 
+top:0; 
+width:100%; 
+height:100%;
+}
+<!-- Del objeto inmaterial
+I
+
+Yo desayuno humildemente inmaterialidad
+
+me cubro antes de salir con el manto de su metáfora
+
+la hago cuerpo mientras ella en mis manos
+
+silenciosa, se resbala
+
+ 
+
+Es mi amada odiosa
+
+hizo que Klein se lanzara al vacío solo para sentirla
+
+¡oye el estruendo de nuestra decepción!
+
+Ya de Klein no queda nada
+
+Se deshizo al sumergirse en ella
+
+ 
+
+Afuera en la calle
+
+mi amada loca me da vida cuando nadie la ve
+
+lo que hace que para mi su amor sea mi suerte
+
+pero ella también, inmaterialmente, me mata
+
+cuando trenzo los cabellos de su compleja nada
+
+ 
+
+Bella y maliciosa, lo inmaterial
+
+por las noches se me escapa con las palabras
+
+y hace de los verbos nuestro amante clandestino
+
+sentada en la ventana, la veo en el amanecer
+
+satisfecha por la noche.
+
+ 
+
+II
+
+de la metáfora del ordenador
+
+De su santa imagen
+
+solo veo su infinita representación
+
+pone un espejo frente a mis ojos
+
+y yo con ella
+
+allí me multiplico.
+-->
+</style>
+<script type="text/javascript"><!--
+var object = new Array();
+var sp = 2.5;
+var rs = 2;
+var N  = 1;
+var xm = 0;
+var ym = 0;
+document.onmousemove = function(e){
+if (window.event) e = window.event;
+xm = (e.x || e.clientX);
+ym = (e.y || e.clientY);
+}
+function CObj(parent,img,cx,cy){
+this.obj = document.createElement("img");
+this.obj.src = img.src;
+this.obj.style.position = "absolute";
+this.obj.style.left = -1000;
+this.obj.style.zIndex = 1000-N;
+document.body.appendChild(this.obj);
+this.OmW = img.width * 0.5;
+this.OmH = img.height * 0.5;
+this.ddx = 0;
+this.ddy = 0;
+this.PX  = 0;
+this.PY  = 0;
+this.x   = 0;
+this.y   = 0;
+this.x0  = 0;
+this.y0  = 0;
+this.cx  = cx;
+this.cy  = cy;
+this.parent = parent;
+this.run = function () {
+with (this) {
+if(parent == null) x0 = xm, y0 = ym;
+else x0 = parent.x, y0 = parent.y;
+x = PX += (ddx += ((x0-PX-ddx) + cx) / rs) / sp;
+y = PY += (ddy += ((y0-PY-ddy) + cy) / rs) / sp;
+obj.style.left = x - OmW;
+obj.style.top  = y - OmH;
+}
+}
+}
+function run(){
+for(i in object)object[i].run();
+setTimeout(run,16);
+}
+onload = function() {
+xm = document.body.offsetWidth * 0.5;
+ym = document.body.offsetHeight * 0.5;
+k  = 1 * Math.PI;
+object[N++] = OO = new CObj(null, document.getElementById("wildlife"), 0, 0);
+for(i=0;i<360;i+=600){
+O = OO;
+for(j=10;j<35;j+=1){
+x = Math.cos((i+10*j)/k)*j;
+y = Math.sin((i+10*j)/k)*j;
+object[N++] = o = new CObj(O , document.getElementById("wildlife"), x, y);
+O = o;
+}
+}
+run();
+}
+//-->
+</script>
+</head>
+<body>
+<table width="700" border="0" align="center">
+  <tr>
+    <th scope="col">
+<img id="wildlife" src="wildlife_1.gif" style="left:-10000px;position:absolute" />
+<div style="position:absolute; z-index:-1; left:50%; margin-left:-132px; top:-75; width:250px; height:600px;"><img src="bee_hive_1.gif" width="250" height="600" /></div>
+<div style="position:absolute; z-index:-2; left:0px; top:-150px; width:100%; height:100%;"><img src="tree_1.gif" /></div>
+<div style="position:absolute; z-index:-3; left:0px; top:0px; width:100%; height:100%;background-image:url('screen_1.gif'); background-repeat:repeat;"></div>
+<div style="position:absolute; z-index:999; left:0px; bottom:0px; width:100%; height:800px;background-image:url('screen_2.png'); background-repeat:repeat;"></div></th>
+ 
+  </tr>
+</table>
+
+</body>
+
+</html>

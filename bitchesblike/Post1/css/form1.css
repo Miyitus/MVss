@@ -1,0 +1,192 @@
+@charset "UTF-8";
+/* CSS Document
+
+                                                                
+@@@@@@@   @@@  @@@@@@@   @@@@@@@  @@@  @@@  @@@@@@@@   @@@@@@   
+@@@@@@@@  @@@  @@@@@@@  @@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@   
+@@!  @@@  @@!    @@!    !@@       @@!  @@@  @@!       !@@       
+!@   @!@  !@!    !@!    !@!       !@!  @!@  !@!       !@!       
+@!@!@!@   !!@    @!!    !@!       @!@!@!@!  @!!!:!    !!@@!!    
+!!!@!!!!  !!!    !!!    !!!       !!!@!!!!  !!!!!:     !!@!!!   
+!!:  !!!  !!:    !!:    :!!       !!:  !!!  !!:            !:!  
+:!:  !:!  :!:    :!:    :!:       :!:  !:!  :!:           !:!   
+ :: ::::   ::     ::     ::: :::  ::   :::   :: ::::  :::: ::   
+:: : ::   :       :      :: :: :   :   : :  : :: ::   :: : :    
+                                                                
+                                                        
+@@@@@@@              @@@       @@@  @@@  @@@  @@@@@@@@  
+@@@@@@@@             @@@       @@@  @@@  @@@  @@@@@@@@  
+@@!  @@@             @@!       @@!  @@!  !@@  @@!       
+!@   @!@             !@!       !@!  !@!  @!!  !@!       
+@!@!@!@   @!@!@!@!@  @!!       !!@  @!@@!@!   @!!!:!    
+!!!@!!!!  !!!@!@!!!  !!!       !!!  !!@!!!    !!!!!:    
+!!:  !!!             !!:       !!:  !!: :!!   !!:       
+:!:  !:!              :!:      :!:  :!:  !:!  :!:       
+ :: ::::              :: ::::   ::   ::  :::   :: ::::  
+:: : ::              : :: : :  :     :   :::  : :: ::   
+                                                        
+                                                        
+                                                        
+tite: Biches b-like
+for CLOAQUE.ORG
+Author: Miyö Van Stenis
+http://miyovanstenis.com
+@miyovansteniss
+ */
+html, body{
+	width: 960px;
+	height: 679px;
+	position:absolute;
+}
+
+.container {
+	width: 960px;
+	height: 914px;
+	margin: 0px;
+	padding: 0px;
+	background-image:url(../../jpg/1s.png);}
+	
+	.container1 {
+	width: 960px;
+	height: 655px;
+	
+	}
+	
+.img {
+	padding-left: 600px;
+}
+
+
+/* BAR ANIMATION */
+
+body {
+    font-family: 'Helvetica', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+}
+.msg {
+	text-align: center;
+	font-weight: bold;
+	margin: 0px;
+}
+.loader_box {
+	text-align: right;
+	width: 320px;
+	border: 1px solid #999;
+	padding: 1px;
+	height: 8px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.loader {
+    width: 0;
+    height: 100%;
+    background-color: #6188F5;
+    background-repeat: repeat-x;
+    background-position: 0 0;
+    /*background-size*/
+    -webkit-background-size: 16px 8px;
+    -moz-background-size: 16px 8px;
+    -o-background-size: 16px 8px;
+    background-size: 16px 8px;
+    background-image: -webkit-linear-gradient(315deg,transparent,transparent 33%,rgba(0, 0, 0, 0.12) 33%,rgba(0, 0, 0, 0.12) 66%,transparent 66%,transparent);
+    background-image: -moz-linear-gradient(315deg,transparent,transparent 33%,rgba(0, 0, 0, 0.12) 33%,rgba(0, 0, 0, 0.12) 66%,transparent 66%,transparent);
+    background-image: -o-linear-gradient(315deg,transparent,transparent 33%,rgba(0, 0, 0, 0.12) 33%,rgba(0, 0, 0, 0.12) 66%,transparent 66%,transparent);
+    background-image: linear-gradient(315deg,transparent,transparent 33%,rgba(0, 0, 0, 0.12) 33%,rgba(0, 0, 0, 0.12) 66%,transparent 66%,transparent);
+    /*animation*/
+    -webkit-animation: load 5s linear 0 infinite;
+    -moz-animation: load 5s linear 0 infinite;
+    -ms-animation: load 5s linear 0 infinite;
+    -o-animation: load 5s linear 0 infinite;
+    animation: load 5s linear 0 infinite;
+}
+/* Then animate the stuff */
+@-webkit-keyframes load { 
+    0% { width: 0% ;
+		background-position:0 0;}
+    100% { width: 100%;
+			background-position:-40px 0;
+			}
+}
+@-ms-keyframes load { 
+   0% { width: 0% ;
+		background-position:0 0;}
+    100% { width: 100%;
+			background-position:-40px 0;
+			}
+}
+@-o-keyframes load { 
+    0% { width: 0% ;
+		background-position:0 0;}
+    100% { width: 100%;
+			background-position:-40px 0;
+			}
+}
+@keyframes load { 
+  0% { width: 0% ;
+		background-position:0 0;}
+    100% { width: 100%;
+			background-position:-40px 0;
+			}
+}
+
+
+/*MONITOR */
+body {
+    -webkit-perspective: 700;
+	-moz-perspective: 700;
+	perspective: 700;
+	background:#FFF;
+}
+
+.box {
+    width:960px;
+    height:679px;
+	size: 70%;
+	background-image:url(../../jpg/riri.gif);
+    overflow:hidden;
+    -webkit-animation: box-animation 5s ease infinite alternate;
+	-moz-animation: box-animation 5s ease infinite alternate;
+	animation: box-animation 5s ease infinite alternate;
+	position: relative;
+	margin: 0px auto;
+}
+
+.reflection {
+    width:300%;
+    height:700%;
+    -webkit-animation: reflection-animation 5s ease infinite alternate;
+	-moz-animation: reflection-animation 5s ease infinite alternate;
+	animation: reflection-animation 5s ease infinite alternate;
+    background:-webkit-gradient(linear,100% 0%,0% 100%,color-stop(0,rgba(255,255,255,.5)),color-stop(.5,rgba(255,255,255,.1)),color-stop(.5,rgba(255,255,255,0)),color-stop(1,rgba(255,255,255,0)));
+	background:url(../../jpg/riri.gif);
+}
+
+@-webkit-keyframes box-animation {
+    0% { -webkit-transform:rotateY(30deg); }
+    50% { -webkit-transform:rotateY(0deg);}
+	100% { -webkit-transform:rotateY(-30deg);}
+}
+@-webkit-keyframes reflection-animation {
+    0% { -webkit-transform: translateX(-40%); }
+    100% { -webkit-transform: translateX(0%); }
+}
+
+@-moz-keyframes box-animation {
+    0% { -moz-transform:rotateY(30deg); }
+    50% { -moz-transform:rotateY(0deg);}
+	100% { -moz-transform:rotateY(-30deg);}
+}
+@-moz-keyframes reflection-animation {
+    0% { -moz-transform: translateX(-60%); }
+    100% { -moz-transform: translateX(0%); }
+}
+
+@keyframes box-animation {
+    0% { transform:rotateY(30deg); }
+    50% { transform:rotateY(0deg);}
+	100% { transform:rotateY(-30deg);}
+}
+@keyframes reflection-animation {
+    0% { transform: translateX(-60%); }
+    100% { transform: translateX(0%); }
+}

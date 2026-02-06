@@ -1,0 +1,57 @@
+/*
+                                                                                                   
+`7MMF'   `7MF'`7MMF' .g8"""bgd `7MMF'`7MM"""Mq.`7MMF'`7MM"""Mq.       db  MMP""MM""YMM `7MM"""YMM  
+  `MA     ,V    MM .dP'     `M   MM    MM   `MM. MM    MM   `MM.     ;MM: P'   MM   `7   MM    `7  
+   VM:   ,V     MM dM'       `   MM    MM   ,M9  MM    MM   ,M9     ,V^MM.     MM        MM   d    
+    MM.  M'     MM MM            MM    MMmmdM9   MM    MMmmdM9     ,M  `MM     MM        MMmmMM    
+    `MM A'      MM MM.    `7MMF' MM    MM        MM    MM  YM.     AbmmmqMA    MM        MM   Y  , 
+     :MM;       MM `Mb.     MM   MM    MM        MM    MM   `Mb.  A'     VML   MM        MM     ,M 
+      VF      .JMML. `"bmmmdPY .JMML..JMML.    .JMML..JMML. .JMM.AMA.   .AMMA.JMML.    .JMMmmmmMMM 
+                                                                                                   
+
+  */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+.html, body{
+	background-color: #f9f200;
+}
+.pass {
+	font-size:72px;}
+.img{
+	padding-top: 180px;
+	width: auto;
+	height: auto;
+	padding-left: 10px;
+	}
+.box1{
+	margin-top: 15%;
+	margin-left: 15%;
+	width: 300px;
+	height: 200px;
+	
+	}
+#copy {
+  font: 14px "Open Sans";
+  color: #000;
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  padding-left: 15px;
+  padding-top: 15px;
+}
+#copy2 {
+  font: 12px "Open Sans";
+  color: #000;
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  margin-left: 60%;
+  padding-right:: 15px;
+  padding-top: 15px;
+}
+#copy a {
+  color: #fff;
+}

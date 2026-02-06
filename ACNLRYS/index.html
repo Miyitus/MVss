@@ -1,0 +1,124 @@
+<!doctype html>
+<!--
+  ~ jquery.mb.components
+  ~ Copyright (c) 2001-2010. Matteo Bicocchi (Pupunzi); Open lab srl, Firenze - Italy
+  ~ email: mbicocchi@open-lab.com
+  ~ site: http://pupunzi.com
+  ~
+  ~ Licences: MIT, GPL
+  ~ http://www.opensource.org/licenses/mit-license.php
+  ~ http://www.gnu.org/licenses/gpl.html
+  -->
+<html>
+<head>
+	<title>ACNLRYS [A Creepy Night Light Reflecting on your Screen]</title>
+	<link href="css/mb.YTVPlayer.css" media="all" rel="stylesheet" type="text/css" />
+
+	<style type="text/css">
+
+		body{
+			background: url("images/miss.png");
+			background-repeat:repeat;
+			margin:0;
+		}
+
+		#content{
+			color:white;
+			font:40px/40px Calibri;
+			text-align:left;
+			padding-top:200px;
+			text-shadow:#666666 2px 2px 4px;
+			margin-left:100px;
+		}
+
+		.movie{
+			display:none;
+		}
+
+		.dida{
+			position:fixed;
+			bottom:0;
+			font: 12px/14px Arial, sans-serif;
+			color:white;
+			padding:10px;
+		}
+		
+		.top{
+			position:top;
+			bottom:0;
+			font: 12px/14px Arial, sans-serif;
+			color:white;
+			padding:10px;
+		}
+		.left{
+			position: absolute;
+			bottom:0;
+			font: 12px/14px Arial, sans-serif;
+			color:white;
+			padding:10px;
+		}
+
+		button{
+			display:block;
+			background:transparent;
+			border:none;
+			color:white;
+			font-size:18px;
+			cursor:pointer;
+		}
+
+		button.command{
+			display:inline-block;
+		}
+
+		button:hover, button.sel{
+			color: #ffcc00;
+		}
+
+	</style>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="inc/jquery.metadata.js"></script>
+	<script type="text/javascript" src="inc/jquery.mb.YTPlayer.js"></script>
+	<script type="text/javascript">
+
+		$(function(){
+
+			$("button").not(".command").click(function(){
+				$("button").not(".command").removeClass("sel");
+				$(this).addClass("sel");
+			});
+
+      //debug functions
+			$(document).bind("YTPStart", function(){ $("#eventListener").html("YTPStart")});
+			$(document).bind("YTPEnd", function(){ $("#eventListener").html("YTPStop")});
+			$(document).bind("YTPPause", function(){ $("#eventListener").html("YTPPause")});
+			$(document).bind("YTPBuffering", function(){ $("#eventListener").html("YTPBuffering")});
+
+      $("#bgndVideo").mb_YTPlayer();
+
+		});
+
+	</script>
+
+</head>
+<body>
+
+	<a id="bgndVideo" href="http://www.youtube.com/watch?v=i25BsskoVas&feature=youtu.be" class="movie {opacity:.8, isBgndMovie:{width:'window',mute:false}, optimizeDisplay:true, showControls:true, ratio:'4/3', loop: true, quality:'small'}"></a>
+
+</div>
+<div class="top">
+<img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/><img src="images/pan.png"/></div>
+
+<div class="left">
+<img src="images/let.png"/><img src="images/let.png"/><img src="images/let.png"/><img src="images/let.png"/><img src="images/let.png" width="100" height="100"/><img src="images/let.png" width="50" height="50"/><img src="images/let.png" width="95" height="95"/><img src="images/let.png" width="48" height="48"/><img src="images/let.png" width="200" height="200"/><img src="images/let.png"/><img src="images/let.png" width="90" height="90"/>
+
+
+<p><img src="images/pre.tiff"/></p></div>
+
+<div class="dida">
+<img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /><img src="images/gw.tiff" /></div>
+
+</body>
+
+</html>

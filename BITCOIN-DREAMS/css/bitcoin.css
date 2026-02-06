@@ -1,0 +1,123 @@
+/*
+
+$$$$$$$\  $$\   $$\                         $$\                 $$$$$$$\                                                        
+$$  __$$\ \__|  $$ |                        \__|                $$  __$$\                                                       
+$$ |  $$ |$$\ $$$$$$\    $$$$$$$\  $$$$$$\  $$\ $$$$$$$\        $$ |  $$ | $$$$$$\   $$$$$$\   $$$$$$\  $$$$$$\$$$$\   $$$$$$$\ 
+$$$$$$$\ |$$ |\_$$  _|  $$  _____|$$  __$$\ $$ |$$  __$$\       $$ |  $$ |$$  __$$\ $$  __$$\  \____$$\ $$  _$$  _$$\ $$  _____|
+$$  __$$\ $$ |  $$ |    $$ /      $$ /  $$ |$$ |$$ |  $$ |      $$ |  $$ |$$ |  \__|$$$$$$$$ | $$$$$$$ |$$ / $$ / $$ |\$$$$$$\  
+$$ |  $$ |$$ |  $$ |$$\ $$ |      $$ |  $$ |$$ |$$ |  $$ |      $$ |  $$ |$$ |      $$   ____|$$  __$$ |$$ | $$ | $$ | \____$$\ 
+$$$$$$$  |$$ |  \$$$$  |\$$$$$$$\ \$$$$$$  |$$ |$$ |  $$ |      $$$$$$$  |$$ |      \$$$$$$$\ \$$$$$$$ |$$ | $$ | $$ |$$$$$$$  |
+\_______/ \__|   \____/  \_______| \______/ \__|\__|  \__|      \_______/ \__|       \_______| \_______|\__| \__| \__|\_______/ 
+
+
+for GLITCH-MONEY
+Author: Miyö Van Stenis
+http://miyovanstenis.com
+@miyovansteniss
+
+
+Original Credit of the coin animation:
+Marco Barría - Rotation Money
+http://cssdeck.com/labs/gapaeldz
+*/
+
+html, body{
+	min-height:50%;
+}
+
+
+.container{
+	width:300px;
+	height:300px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-250px 0 0 -150px;
+	perspective:1000;
+}
+
+.bitcoin{
+	background-image: url("../img/bit.gif");
+	border-radius:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	width:300px;
+	height:300px;
+	animation:moneda 5s 2s ease-out infinite;
+	z-index:20;
+  -webkit-transform-style: preserve-3d;
+}
+
+.bitcoin:after {
+    background-color: #a37131;
+    background-image: url("../img/bit.gif");
+    background-size: 100% 100%;
+    border-radius: 100%;
+    content: '';
+    height: 300px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 300px;
+    -webkit-transform: translateZ(-5px);
+}
+.bitcoin:before {
+    background-color: #a37131;
+    background-image: url("../img/bit.gif");
+    background-size: 100% 100%;
+    border-radius: 100%;
+    content: '';
+    height: 300px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 300px;
+    -webkit-transform: translateZ(-10px);
+}
+	
+	@keyframes moneda{
+		0%{
+			transform:rotateY(0deg) rotateX(0deg) translateX(0);
+		}
+		20%{
+ 			top:15px;
+		}
+		40%{
+ 			top:45px;
+		}
+		60%{
+ 			top:114px;
+		}
+		80%{
+			top:150px;
+		}
+		100%{
+			transform:rotateY(3500deg) rotateX(90deg) translateX(20px);
+			top:156px;
+		}
+	}
+
+.shadow{
+	background:rgba(0,0,0,0);
+	border-radius:100%;
+	position:absolute;
+	top:250px;
+	left:0;
+	width:300px;
+	height:60px;
+	-webkit-filter: blur(20px);
+	animation:shadow 5s 2s ease-out infinite;
+	z-index:10;
+} 
+	
+	@keyframes shadow{
+		0%{
+			transform:rotateY(0deg) rotateX(90deg) translateX(0);
+		}
+		100%{
+			transform:rotateY(-3500deg) rotateX(90deg) translateX(30px);
+			height:150px;
+			background:rgba(0,0,0,.40);
+		}
+	}
