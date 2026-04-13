@@ -1,0 +1,3269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>MIYÖTELS ミヨテルス</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --pc98-black: #000000;
+  --pc98-darkblue: #0000aa;
+  --pc98-blue: #0055aa;
+  --pc98-cyan: #00aaaa;
+  --pc98-magenta: #aa00aa;
+  --pc98-red: #aa0000;
+  --pc98-green: #00aa00;
+  --pc98-yellow: #aaaa00;
+  --pc98-white: #aaaaaa;
+  --pc98-bright-white: #ffffff;
+  --pc98-bright-cyan: #55ffff;
+  --pc98-bright-magenta: #ff55ff;
+  --pc98-bright-red: #ff5555;
+  --pc98-bright-green: #55ff55;
+  --pc98-bright-yellow: #ffff55;
+  --pc98-bright-blue: #5555ff;
+  --pc98-orange: #cc6600;
+  --pc98-skin: #ffaa88;
+  --pc98-pink: #ff88aa;
+  --pc98-hair-blue: #5599ff;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: 'Press Start 2P', 'DotGothic16', monospace;
+  image-rendering: pixelated;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#game-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--pc98-black);
+  position: relative;
+  overflow: hidden;
+}
+
+/* CRT scanline effect */
+#game-container::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.15) 2px,
+    rgba(0,0,0,0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* TITLE SCREEN */
+#title-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: linear-gradient(180deg, #000022 0%, #000066 40%, #220044 100%);
+  position: relative;
+}
+
+.title-stars {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  background: var(--pc98-bright-white);
+  width: 2px;
+  height: 2px;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+
+.title-logo {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.title-jp {
+  font-family: 'DotGothic16', monospace;
+  font-size: clamp(10px, 2.5vw, 14px);
+  color: var(--pc98-bright-cyan);
+  letter-spacing: 6px;
+  margin-bottom: 4px;
+}
+
+.title-main {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(24px, 7vw, 48px);
+  color: var(--pc98-bright-magenta);
+  text-shadow:
+    3px 3px 0 var(--pc98-darkblue),
+    -1px -1px 0 var(--pc98-bright-cyan),
+    0 0 20px rgba(255,85,255,0.5);
+  letter-spacing: 4px;
+}
+
+.title-sub {
+  font-size: clamp(8px, 2vw, 12px);
+  color: var(--pc98-bright-yellow);
+  margin-top: 8px;
+  letter-spacing: 3px;
+}
+
+.title-character {
+  position: relative;
+  z-index: 10;
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* CSS pixel art character */
+.pixel-miyo {
+  width: 80px;
+  height: 100px;
+  position: relative;
+  image-rendering: pixelated;
+}
+
+.title-desc {
+  font-size: clamp(6px, 1.5vw, 9px);
+  color: var(--pc98-cyan);
+  text-align: center;
+  max-width: 340px;
+  line-height: 1.8;
+  margin-top: 8px;
+}
+
+.title-menu {
+  position: relative;
+  z-index: 10;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-btn {
+  background: transparent;
+  border: 2px solid var(--pc98-bright-cyan);
+  color: var(--pc98-bright-white);
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(9px, 2vw, 12px);
+  padding: 10px 30px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.1s;
+  min-width: 220px;
+}
+
+.menu-btn:hover, .menu-btn:active {
+  background: var(--pc98-darkblue);
+  border-color: var(--pc98-bright-magenta);
+  color: var(--pc98-bright-yellow);
+}
+
+.blink-text {
+  animation: blink 1.2s step-end infinite;
+  font-size: clamp(7px, 1.5vw, 10px);
+  color: var(--pc98-bright-green);
+  margin-top: 15px;
+  position: relative;
+  z-index: 10;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* GAME SCREEN */
+#game-screen {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  background: var(--pc98-black);
+}
+
+/* Top HUD bar */
+.hud-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  background: var(--pc98-darkblue);
+  border-bottom: 3px solid var(--pc98-blue);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.hud-stat {
+  font-size: clamp(7px, 1.5vw, 9px);
+  color: var(--pc98-bright-white);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hud-label { color: var(--pc98-bright-cyan); }
+.hud-val { color: var(--pc98-bright-yellow); }
+.hud-val.danger { color: var(--pc98-bright-red); animation: blink 0.8s step-end infinite; }
+
+.stat-bar {
+  width: clamp(40px, 10vw, 70px);
+  height: 8px;
+  background: #111;
+  border: 1px solid var(--pc98-white);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  transition: width 0.5s steps(10);
+}
+
+.fill-hp { background: var(--pc98-bright-green); }
+.fill-money { background: var(--pc98-bright-yellow); }
+.fill-soul { background: var(--pc98-bright-magenta); }
+.fill-fame { background: var(--pc98-bright-cyan); }
+
+/* Scene area */
+.scene-area {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.scene-visual {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Dithering background patterns */
+.bg-apartment {
+  background:
+    repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(0,85,170,0.1) 3px, rgba(0,85,170,0.1) 4px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 3px, rgba(0,85,170,0.08) 3px, rgba(0,85,170,0.08) 4px),
+    linear-gradient(180deg, #111122 0%, #0a0a1a 100%);
+}
+
+.bg-gallery {
+  background:
+    repeating-linear-gradient(0deg, transparent 0px, transparent 5px, rgba(170,0,170,0.08) 5px, rgba(170,0,170,0.08) 6px),
+    linear-gradient(180deg, #1a0a1a 0%, #0a0a0a 100%);
+}
+
+.bg-office {
+  background:
+    repeating-linear-gradient(45deg, transparent 0px, transparent 4px, rgba(170,170,0,0.06) 4px, rgba(170,170,0,0.06) 5px),
+    linear-gradient(180deg, #1a1a0a 0%, #0a0a0a 100%);
+}
+
+.bg-studio {
+  background:
+    repeating-linear-gradient(90deg, transparent 0px, transparent 2px, rgba(0,170,170,0.1) 2px, rgba(0,170,170,0.1) 3px),
+    linear-gradient(180deg, #0a1a1a 0%, #050a0a 100%);
+}
+
+.bg-street {
+  background:
+    repeating-linear-gradient(0deg, transparent 0px, transparent 6px, rgba(85,85,85,0.15) 6px, rgba(85,85,85,0.15) 7px),
+    linear-gradient(180deg, #0d0d1a 0%, #050508 100%);
+}
+
+/* Scene objects rendered in CSS */
+.scene-object {
+  position: absolute;
+  image-rendering: pixelated;
+}
+
+/* Character portrait */
+.portrait-frame {
+  position: absolute;
+  bottom: 0;
+  right: 5%;
+  width: clamp(80px, 25vw, 160px);
+  height: clamp(120px, 35vw, 220px);
+  border: 3px solid var(--pc98-blue);
+  background: linear-gradient(180deg, #111133 0%, #0a0a22 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* CSS Pixel art portrait of Miyö */
+.miyo-portrait {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Dialogue box */
+.dialogue-box {
+  background: rgba(0, 0, 30, 0.92);
+  border-top: 3px solid var(--pc98-blue);
+  border-bottom: 3px solid var(--pc98-blue);
+  padding: 8px 12px;
+  min-height: clamp(80px, 18vh, 120px);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.dialogue-border-top {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--pc98-bright-cyan);
+}
+
+.dialogue-speaker {
+  font-size: clamp(8px, 1.8vw, 11px);
+  color: var(--pc98-bright-magenta);
+  margin-bottom: 4px;
+  padding: 2px 8px;
+  background: rgba(170, 0, 170, 0.15);
+  display: inline-block;
+  border: 1px solid var(--pc98-magenta);
+}
+
+.dialogue-text {
+  font-size: clamp(8px, 1.8vw, 11px);
+  color: var(--pc98-bright-white);
+  line-height: 1.8;
+  min-height: 2.5em;
+}
+
+.dialogue-text .typewriter {
+  border-right: 2px solid var(--pc98-bright-white);
+  animation: cursor-blink 0.6s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 50% { border-color: var(--pc98-bright-white); }
+  51%, 100% { border-color: transparent; }
+}
+
+/* Choice buttons */
+.choices-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 50, 0.95);
+  border-top: 2px solid var(--pc98-blue);
+  flex-shrink: 0;
+}
+
+.choice-btn {
+  background: transparent;
+  border: 2px solid var(--pc98-cyan);
+  color: var(--pc98-bright-white);
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(7px, 1.5vw, 10px);
+  padding: 8px 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.choice-btn:hover, .choice-btn:active {
+  background: var(--pc98-darkblue);
+  border-color: var(--pc98-bright-yellow);
+  color: var(--pc98-bright-yellow);
+}
+
+.choice-arrow {
+  color: var(--pc98-bright-cyan);
+  flex-shrink: 0;
+}
+
+/* Bottom action bar (PC-98 style) */
+.action-bar {
+  display: flex;
+  justify-content: space-around;
+  padding: 4px;
+  background: var(--pc98-darkblue);
+  border-top: 2px solid var(--pc98-blue);
+  flex-shrink: 0;
+}
+
+.action-btn {
+  font-family: 'DotGothic16', monospace;
+  font-size: clamp(8px, 1.8vw, 11px);
+  color: var(--pc98-bright-white);
+  background: none;
+  border: 1px solid var(--pc98-blue);
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.action-btn:hover, .action-btn:active {
+  background: var(--pc98-blue);
+  color: var(--pc98-bright-yellow);
+}
+
+/* MINI-GAME SCREENS */
+.minigame-area {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  padding: 10px;
+}
+
+.minigame-title {
+  font-size: clamp(10px, 2.5vw, 16px);
+  color: var(--pc98-bright-yellow);
+  text-align: center;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 0 var(--pc98-darkblue);
+}
+
+.minigame-instruction {
+  font-size: clamp(7px, 1.5vw, 9px);
+  color: var(--pc98-bright-cyan);
+  text-align: center;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+/* Typing minigame */
+.typing-display {
+  background: rgba(0,0,0,0.8);
+  border: 2px solid var(--pc98-blue);
+  padding: 10px;
+  width: 90%;
+  max-width: 500px;
+  margin-bottom: 10px;
+}
+
+.typing-target {
+  font-size: clamp(8px, 1.8vw, 11px);
+  color: var(--pc98-white);
+  line-height: 1.8;
+  word-break: break-all;
+}
+
+.typing-target .correct { color: var(--pc98-bright-green); }
+.typing-target .wrong { color: var(--pc98-bright-red); background: rgba(170,0,0,0.3); }
+.typing-target .current { 
+  color: var(--pc98-bright-white); 
+  background: var(--pc98-blue);
+  animation: blink 0.5s step-end infinite;
+}
+
+.typing-input {
+  width: 90%;
+  max-width: 500px;
+  background: #000;
+  border: 2px solid var(--pc98-cyan);
+  color: var(--pc98-bright-green);
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(9px, 2vw, 12px);
+  padding: 8px;
+  outline: none;
+}
+
+/* Timer bar */
+.timer-container {
+  width: 90%;
+  max-width: 500px;
+  margin-bottom: 8px;
+}
+
+.timer-label {
+  font-size: clamp(7px, 1.3vw, 8px);
+  color: var(--pc98-bright-red);
+  margin-bottom: 2px;
+}
+
+.timer-bar {
+  width: 100%;
+  height: 10px;
+  background: #111;
+  border: 1px solid var(--pc98-white);
+}
+
+.timer-fill {
+  height: 100%;
+  background: var(--pc98-bright-red);
+  transition: width 0.1s linear;
+}
+
+/* Button grid minigame */
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: 90%;
+  max-width: 340px;
+}
+
+.grid-btn {
+  background: rgba(0,0,50,0.8);
+  border: 2px solid var(--pc98-blue);
+  color: var(--pc98-bright-white);
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(6px, 1.3vw, 8px);
+  padding: 12px 4px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.4;
+  transition: all 0.1s;
+}
+
+.grid-btn:hover, .grid-btn:active {
+  background: var(--pc98-blue);
+  border-color: var(--pc98-bright-yellow);
+}
+
+.grid-btn.correct {
+  background: rgba(0,170,0,0.3);
+  border-color: var(--pc98-bright-green);
+  color: var(--pc98-bright-green);
+}
+
+.grid-btn.wrong {
+  background: rgba(170,0,0,0.3);
+  border-color: var(--pc98-bright-red);
+  color: var(--pc98-bright-red);
+}
+
+/* Sequence minigame */
+.sequence-display {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.seq-step {
+  width: clamp(36px, 9vw, 50px);
+  height: clamp(36px, 9vw, 50px);
+  border: 2px solid var(--pc98-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(14px, 3vw, 22px);
+  background: rgba(0,0,30,0.8);
+  transition: all 0.2s;
+}
+
+.seq-step.active {
+  border-color: var(--pc98-bright-yellow);
+  background: rgba(170,170,0,0.2);
+  transform: scale(1.1);
+}
+
+.seq-step.done {
+  border-color: var(--pc98-bright-green);
+  background: rgba(0,170,0,0.2);
+}
+
+.seq-step.failed {
+  border-color: var(--pc98-bright-red);
+  background: rgba(170,0,0,0.2);
+}
+
+/* Result overlay */
+.result-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,20,0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  padding: 20px;
+}
+
+.result-title {
+  font-size: clamp(14px, 4vw, 24px);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.result-title.success { color: var(--pc98-bright-green); }
+.result-title.failure { color: var(--pc98-bright-red); }
+
+.result-text {
+  font-size: clamp(7px, 1.5vw, 10px);
+  color: var(--pc98-bright-white);
+  text-align: center;
+  line-height: 2;
+  margin-bottom: 15px;
+  max-width: 400px;
+}
+
+.result-stats {
+  font-size: clamp(7px, 1.5vw, 9px);
+  color: var(--pc98-bright-cyan);
+  text-align: center;
+  line-height: 2;
+  margin-bottom: 15px;
+}
+
+.continue-btn {
+  background: transparent;
+  border: 2px solid var(--pc98-bright-cyan);
+  color: var(--pc98-bright-white);
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(9px, 2vw, 12px);
+  padding: 10px 24px;
+  cursor: pointer;
+}
+
+.continue-btn:hover, .continue-btn:active {
+  background: var(--pc98-darkblue);
+  border-color: var(--pc98-bright-magenta);
+  color: var(--pc98-bright-yellow);
+}
+
+/* GAME OVER / ENDING SCREEN */
+#ending-screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: linear-gradient(180deg, #000 0%, #110022 50%, #000 100%);
+  padding: 20px;
+}
+
+.ending-text {
+  font-size: clamp(7px, 1.5vw, 10px);
+  color: var(--pc98-bright-white);
+  text-align: center;
+  line-height: 2.2;
+  max-width: 450px;
+  margin-bottom: 20px;
+}
+
+/* Screen decorative borders (PC-98 style) */
+.pc98-border-left,
+.pc98-border-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.pc98-border-left {
+  left: 0;
+  background: repeating-linear-gradient(180deg,
+    var(--pc98-blue) 0px,
+    var(--pc98-blue) 4px,
+    var(--pc98-darkblue) 4px,
+    var(--pc98-darkblue) 8px
+  );
+}
+
+.pc98-border-right {
+  right: 0;
+  background: repeating-linear-gradient(180deg,
+    var(--pc98-darkblue) 0px,
+    var(--pc98-darkblue) 4px,
+    var(--pc98-blue) 4px,
+    var(--pc98-blue) 8px
+  );
+}
+
+/* Level transition */
+.level-transition {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--pc98-black);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.level-number {
+  font-size: clamp(12px, 3vw, 20px);
+  color: var(--pc98-bright-yellow);
+  margin-bottom: 8px;
+}
+
+.level-name {
+  font-size: clamp(10px, 2.5vw, 16px);
+  color: var(--pc98-bright-magenta);
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.level-flavor {
+  font-size: clamp(7px, 1.5vw, 9px);
+  color: var(--pc98-cyan);
+  text-align: center;
+  line-height: 1.8;
+  max-width: 350px;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .hud-bar { padding: 3px 5px; gap: 1px; }
+  .dialogue-box { padding: 6px 8px; min-height: 70px; }
+  .choice-btn { padding: 6px 8px; }
+}
+
+/* Mobile tap feedback */
+.tap-flash {
+  animation: flash 0.15s;
+}
+
+@keyframes flash {
+  0% { filter: brightness(2); }
+  100% { filter: brightness(1); }
+}
+
+/* scene decorations */
+.dither-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image:
+    repeating-linear-gradient(0deg, #fff 0px, #fff 1px, transparent 1px, transparent 2px),
+    repeating-linear-gradient(90deg, #fff 0px, #fff 1px, transparent 1px, transparent 2px);
+}
+
+/* CSS pixel art objects */
+.desk {
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  width: 60%;
+  height: 20%;
+  background: linear-gradient(180deg, #664422 0%, #442211 100%);
+  border: 2px solid #553311;
+}
+
+.laptop {
+  position: absolute;
+  bottom: 28%;
+  left: 20%;
+  width: 25%;
+  height: 18%;
+  background: #333;
+  border: 2px solid #555;
+}
+
+.laptop-screen {
+  width: 90%;
+  height: 70%;
+  margin: 4% auto;
+  background: #001133;
+  border: 1px solid #0055aa;
+}
+
+.coffee {
+  position: absolute;
+  bottom: 30%;
+  right: 25%;
+  width: 8%;
+  height: 10%;
+  background: #ddd;
+  border-radius: 0 0 50% 50%;
+  border: 2px solid #aaa;
+}
+
+.window-bg {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  width: 35%;
+  height: 40%;
+  background: linear-gradient(180deg, #223366 0%, #ff8844 50%, #aa3322 100%);
+  border: 3px solid #555;
+}
+
+.painting {
+  position: absolute;
+  width: 20%;
+  height: 25%;
+  border: 3px solid #886633;
+}
+
+.painting-1 { top: 10%; left: 10%; background: linear-gradient(45deg, #cc3366, #3366cc); }
+.painting-2 { top: 10%; left: 40%; background: linear-gradient(135deg, #33cc66, #6633cc); }
+.painting-3 { top: 10%; right: 10%; background: linear-gradient(0deg, #cccc33, #cc3333); }
+
+.gallery-floor {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: repeating-linear-gradient(90deg, #1a1a1a 0px, #1a1a1a 20px, #222 20px, #222 40px);
+}
+
+.office-desk {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  right: 5%;
+  height: 25%;
+  background: linear-gradient(180deg, #8899aa 0%, #667788 100%);
+  border: 2px solid #99aabb;
+}
+
+.paper-stack {
+  position: absolute;
+  bottom: 30%;
+  left: 15%;
+  width: 15%;
+  height: 12%;
+  background: repeating-linear-gradient(180deg, #eee 0px, #eee 3px, #ddd 3px, #ddd 4px);
+  border: 1px solid #ccc;
+  transform: rotate(-5deg);
+}
+
+.metro-window {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  right: 5%;
+  height: 45%;
+  background: linear-gradient(180deg, #112244 0%, #334466 40%, #445577 100%);
+  border: 4px solid #667;
+}
+
+.metro-seats {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  right: 5%;
+  height: 30%;
+  background: #cc6633;
+  border: 2px solid #aa5522;
+}
+</style>
+</head>
+<body>
+
+<div id="game-container">
+  <div class="pc98-border-left"></div>
+  <div class="pc98-border-right"></div>
+
+  <!-- TITLE SCREEN -->
+  <div id="title-screen">
+    <div class="title-stars" id="stars"></div>
+    <div class="title-logo">
+      <div class="title-jp">超時空芸術家</div>
+      <div class="title-main">MIYÖTELS</div>
+      <div class="title-sub">ミ ヨ テ ル ス</div>
+    </div>
+    <div class="title-character">
+      <canvas id="title-canvas" width="96" height="120"></canvas>
+      <div class="title-desc">
+        The year is 2026. Paris.<br>
+        One artist. No savings.<br>
+        Many dreams. Many invoices.<br>
+        Survive... or become a UX designer.
+      </div>
+    </div>
+    <div class="title-menu">
+      <button class="menu-btn" onclick="startGame()">▶ START GAME</button>
+      <button class="menu-btn" onclick="showCredits()">◆ CREDITS</button>
+    </div>
+    <div style="margin-top:10px;position:relative;z-index:10;">
+      <button id="mute-btn" class="action-btn" onclick="toggleMute()" style="font-size:16px;padding:6px 12px;cursor:pointer;">🔊</button>
+    </div>
+    <div class="blink-text">— TAP ANYWHERE FOR SOUND —</div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="game-screen">
+    <div class="hud-bar" id="hud">
+      <div class="hud-stat">
+        <span class="hud-label">HP</span>
+        <div class="stat-bar"><div class="stat-bar-fill fill-hp" id="hp-bar" style="width:100%"></div></div>
+        <span class="hud-val" id="hp-val">100</span>
+      </div>
+      <div class="hud-stat">
+        <span class="hud-label">€</span>
+        <span class="hud-val" id="money-val">47</span>
+      </div>
+      <div class="hud-stat">
+        <span class="hud-label">SOUL</span>
+        <div class="stat-bar"><div class="stat-bar-fill fill-soul" id="soul-bar" style="width:80%"></div></div>
+      </div>
+      <div class="hud-stat">
+        <span class="hud-label">LVL</span>
+        <span class="hud-val" id="level-val">1</span>
+      </div>
+      <div class="hud-stat">
+        <button id="mute-btn-game" class="action-btn" onclick="toggleMute();document.getElementById('mute-btn-game').textContent=AUDIO.muted?'🔇':'🔊'" style="font-size:12px;padding:2px 6px;cursor:pointer;">🔊</button>
+      </div>
+    </div>
+
+    <div class="scene-area" id="scene-area">
+      <!-- Scene content injected here -->
+    </div>
+  </div>
+
+  <!-- ENDING SCREEN -->
+  <div id="ending-screen">
+    <!-- injected -->
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+//  MIYÖTELS — Game Engine
+// ═══════════════════════════════════════
+
+const STATE = {
+  hp: 100,
+  money: 47,
+  soul: 80,
+  fame: 10,
+  level: 0,
+  totalLevels: 8,
+  grantWords: 0,
+  choicesMade: [],
+};
+
+// ─── Title screen stars ───
+function initStars() {
+  const c = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.animationDelay = (Math.random() * 2) + 's';
+    s.style.width = s.style.height = (Math.random() > 0.7 ? 3 : 2) + 'px';
+    c.appendChild(s);
+  }
+}
+
+// ─── Draw pixel character on title canvas ───
+function drawTitleChar() {
+  const canvas = document.getElementById('title-canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+
+  // Simple pixel art Miyö (blue hair, determined expression)
+  const pixels = [
+    // Hair (blue)
+    { x: 28, y: 4, w: 40, h: 8, c: '#5599ff' },
+    { x: 24, y: 12, w: 48, h: 6, c: '#5599ff' },
+    { x: 20, y: 18, w: 56, h: 10, c: '#4488ee' },
+    { x: 18, y: 28, w: 12, h: 30, c: '#5599ff' }, // left hair
+    { x: 66, y: 28, w: 12, h: 30, c: '#5599ff' }, // right hair
+    // Face
+    { x: 30, y: 28, w: 36, h: 32, c: '#ffaa88' },
+    // Eyes
+    { x: 34, y: 38, w: 10, h: 8, c: '#ffffff' },
+    { x: 52, y: 38, w: 10, h: 8, c: '#ffffff' },
+    { x: 38, y: 40, w: 6, h: 6, c: '#333366' },
+    { x: 54, y: 40, w: 6, h: 6, c: '#333366' },
+    { x: 40, y: 42, w: 2, h: 2, c: '#ffffff' }, // eye shine
+    { x: 56, y: 42, w: 2, h: 2, c: '#ffffff' },
+    // Mouth (determined smirk)
+    { x: 40, y: 52, w: 16, h: 2, c: '#cc6655' },
+    { x: 44, y: 54, w: 8, h: 2, c: '#cc6655' },
+    // Body/shirt
+    { x: 26, y: 60, w: 44, h: 28, c: '#111111' },
+    { x: 38, y: 62, w: 20, h: 4, c: '#aa00aa' }, // collar detail
+    // Arms
+    { x: 16, y: 64, w: 10, h: 20, c: '#111111' },
+    { x: 70, y: 64, w: 10, h: 20, c: '#111111' },
+    // Hands
+    { x: 14, y: 80, w: 10, h: 8, c: '#ffaa88' },
+    { x: 72, y: 76, w: 10, h: 8, c: '#ffaa88' },
+    // Laptop in hands
+    { x: 68, y: 72, w: 18, h: 4, c: '#555' },
+    { x: 70, y: 68, w: 14, h: 4, c: '#333' },
+    { x: 72, y: 66, w: 10, h: 2, c: '#0055aa' },
+    // Skirt
+    { x: 28, y: 88, w: 40, h: 16, c: '#222244' },
+    // Legs
+    { x: 32, y: 104, w: 10, h: 14, c: '#ffaa88' },
+    { x: 54, y: 104, w: 10, h: 14, c: '#ffaa88' },
+    // Shoes
+    { x: 30, y: 114, w: 14, h: 6, c: '#333' },
+    { x: 52, y: 114, w: 14, h: 6, c: '#333' },
+  ];
+
+  pixels.forEach(p => {
+    ctx.fillStyle = p.c;
+    ctx.fillRect(p.x, p.y, p.w, p.h);
+  });
+}
+
+// ─── Levels Data ───
+const LEVELS = [
+  {
+    id: 'grant_writing',
+    name: 'THE GRANT APPLICATION',
+    flavor: '"Write 800 words about your practice.\nMake it sound revolutionary but not threatening.\nDeadline was yesterday."',
+    bg: 'bg-apartment',
+    scene: 'apartment',
+    intro: {
+      speaker: 'MIYÖ',
+      text: 'Another grant. Another 800 words to explain why erotic VR art deserves public funding. The espresso is cold. The deadline is in 3 hours. My cat just walked across the keyboard and typed something better than my draft.',
+    },
+    game: 'typing',
+    gameData: {
+      title: '◆ GRANT APPLICATION ◆',
+      instruction: 'Type the grant buzzwords before time runs out!\nEach correct word = more funding credibility.',
+      words: [
+        'intersectional', 'embodiment', 'praxis', 'decolonial',
+        'posthuman', 'immersive', 'blockchain', 'consent',
+        'liminal', 'syncretic', 'governance', 'ritual',
+        'haptic', 'sovereignty', 'technopoetic', 'erotic'
+      ],
+      timeLimit: 30,
+    },
+    success: {
+      text: 'You submitted the application 47 seconds before the deadline. The PDF was corrupted but somehow that made it more "experimental." +€200 hope. -10 soul.',
+      hp: 0, money: 200, soul: -10, fame: 5,
+    },
+    failure: {
+      text: 'The deadline passed. You stare at 3 paragraphs about "the body as interface" that could mean literally anything. The espresso is now a biohazard.',
+      hp: -15, money: 0, soul: -20, fame: 0,
+    },
+  },
+  {
+    id: 'teach_class',
+    name: 'THE PARSONS LECTURE',
+    flavor: '"Explain Unity NavMesh to 20 students\nwho think Blender is a kitchen appliance.\nYour projector has 17 dead pixels."',
+    bg: 'bg-office',
+    scene: 'classroom',
+    intro: {
+      speaker: 'MIYÖ',
+      text: 'Teaching day. 9AM. Parsons Paris. Half the class is still discovering that the metaverse is not a Marvel movie. One student asks if I can teach them Figma instead. Another one asks if AI will replace me. I smile. It hurts.',
+    },
+    game: 'sequence',
+    gameData: {
+      title: '◆ TEACH THE CLASS ◆',
+      instruction: 'Follow the correct teaching sequence!\nTap the steps in the right order.',
+      steps: [
+        { icon: '💻', label: 'Open Unity' },
+        { icon: '📐', label: 'Explain 3D space' },
+        { icon: '🎮', label: 'Demo NavMesh' },
+        { icon: '😰', label: 'Debug student crash' },
+        { icon: '☕', label: 'Emergency coffee' },
+        { icon: '🎓', label: 'Pretend it worked' },
+      ],
+    },
+    success: {
+      text: 'The class applauds. One student finally understands quaternions. You feel a brief, terrifying moment of purpose. Your adjunct paycheck will cover exactly 3 days of Paris rent.',
+      hp: 5, money: 180, soul: 15, fame: 3,
+    },
+    failure: {
+      text: 'Unity crashed during the demo. A student live-tweeted it. The department chair saw. "Perhaps we should discuss your pedagogical approach," the email begins.',
+      hp: -10, money: 90, soul: -15, fame: -5,
+    },
+  },
+  {
+    id: 'exhibition',
+    name: 'THE GALLERY OPENING',
+    flavor: '"Your VR piece needs 4 headsets.\nThe gallery provided 1 and a half.\nThe wine is cheap. The critics are cheaper."',
+    bg: 'bg-gallery',
+    scene: 'gallery',
+    intro: {
+      speaker: 'CURATOR',
+      text: 'So... your piece is about erotic consent in virtual reality? Can you make it more... accessible? Like, could the avatars wear clothes? Also we spent the tech budget on wine. Is one Oculus enough?',
+    },
+    game: 'choices_rapid',
+    gameData: {
+      title: '◆ GALLERY SURVIVAL ◆',
+      instruction: 'Navigate the gallery opening!\nChoose the right response to each situation.',
+      scenarios: [
+        {
+          text: 'A collector asks: "But is it really art, or just... technology?"',
+          options: [
+            { text: 'Explain the theoretical framework', correct: true, response: 'You cite Butler and Preciado. They nod knowingly. They have read neither.' },
+            { text: 'Flip the table', correct: false, response: 'Security. Banned from the gallery. The wine was terrible anyway.' },
+            { text: 'Say "Yes"', correct: true, response: 'Ambiguity is the highest form of artist statement. They buy a print.' },
+          ]
+        },
+        {
+          text: 'The projector dies mid-opening.',
+          options: [
+            { text: 'Call it "performative entropy"', correct: true, response: 'The critic writes: "A bold statement on technological fragility." You cry in the bathroom. Tears of... art.' },
+            { text: 'Panic visibly', correct: false, response: 'Someone takes a photo. It goes viral. Not in the good way.' },
+            { text: 'Show work on your phone', correct: true, response: '"How intimate," whispers a gallerist. They offer you a show. Your phone is at 3%.' },
+          ]
+        },
+        {
+          text: 'A tech bro says: "I could build this in a weekend with ChatGPT."',
+          options: [
+            { text: 'Smile and say "You should try"', correct: true, response: 'He never does. He goes back to his startup that disrupts... something. You keep making art.' },
+            { text: 'Explain 4 years of R&D', correct: false, response: 'His eyes glaze over at "embodied cognition." He checks his portfolio app.' },
+            { text: 'Offer him a VR headset', correct: true, response: 'He puts it on. Goes quiet. Takes it off. Writes you a check. Art: 1. Tech bros: 0.' },
+          ]
+        },
+      ],
+    },
+    success: {
+      text: 'The opening was a disaster that everyone called a triumph. A small magazine wants an interview. Your mom still asks when you\'ll get a "real job."',
+      hp: -5, money: 50, soul: 20, fame: 15,
+    },
+    failure: {
+      text: 'The wine ran out at 8:30. The VR headset gave someone motion sickness on a €4,000 rug. The gallery sends you the cleaning bill.',
+      hp: -20, money: -100, soul: -10, fame: -5,
+    },
+  },
+  {
+    id: 'freelance',
+    name: 'THE FREELANCE GIG',
+    flavor: '"A startup wants an immersive experience.\nBudget: exposure + maybe equity.\nDeadline: impossible.\nScope: undefined."',
+    bg: 'bg-studio',
+    scene: 'studio',
+    intro: {
+      speaker: 'CLIENT (via Zoom)',
+      text: 'We want something like the Metaverse but more... intimate? And with blockchain? But not crypto-bro-ish. Think ethical NFTs. Budget is flexible — we were thinking maybe you could do it for equity? Our startup is valued at €2 million. Pre-revenue.',
+    },
+    game: 'negotiation',
+    gameData: {
+      title: '◆ NEGOTIATE THE GIG ◆',
+      instruction: 'Choose wisely. Your rent depends on it.',
+      rounds: [
+        {
+          text: 'They offer: "We\'ll pay in exposure + 0.5% equity"',
+          options: [
+            { text: 'Accept (you need the work)', money: 0, soul: -25, fame: 5, msg: 'You worked 80 hours. The startup pivoted to AI chatbots for dogs. Your equity is worth exactly €0.' },
+            { text: 'Counter: €3,000 flat fee', money: 3000, soul: 5, fame: 0, msg: 'They gasp. They counter with €800 and a LinkedIn endorsement. You settle on €1,500. It\'s something.' },
+            { text: 'Walk away', money: 0, soul: 15, fame: -2, msg: 'You hang up. Stare at the ceiling. Open Indeed.fr. Close Indeed.fr. Open your art project. This is the way.' },
+          ]
+        },
+      ],
+    },
+    success: {
+      text: 'You maintained your dignity. Your bank account is another story. The cat seems judgmental.',
+      hp: 0, money: 0, soul: 0, fame: 0,
+    },
+    failure: {
+      text: 'You maintained your dignity. Your bank account is another story. The cat seems judgmental.',
+      hp: 0, money: 0, soul: 0, fame: 0,
+    },
+  },
+  {
+    id: 'visa',
+    name: 'THE ADMIN QUEST',
+    flavor: '"Renew your artiste-auteur status.\nYou need: 14 documents, 3 attestations,\na sworn translation of your soul,\nand patience you don\'t have."',
+    bg: 'bg-office',
+    scene: 'prefecture',
+    intro: {
+      speaker: 'FONCTIONNAIRE',
+      text: 'Dossier incomplet. You need the attestation from URSSAF, the certificat from La Maison des Artistes, your last 3 avis d\'imposition, and a letter explaining your artistic practice in French. Administrative French. Not your French.',
+    },
+    game: 'sequence',
+    gameData: {
+      title: '◆ ADMIN BOSS FIGHT ◆',
+      instruction: 'Complete the bureaucratic sequence!\nOne wrong step = back to the end of the line.',
+      steps: [
+        { icon: '📄', label: 'Gather documents' },
+        { icon: '🏛️', label: 'Visit URSSAF' },
+        { icon: '⏰', label: 'Wait 3 hours' },
+        { icon: '📝', label: 'Fill form CERFA' },
+        { icon: '😤', label: 'Wrong form, redo' },
+        { icon: '✅', label: 'Submit & pray' },
+      ],
+    },
+    success: {
+      text: 'Status renewed. For now. You leave the building into Paris sunlight and feel, briefly, like a real person in a real country that acknowledges art as labor. The feeling lasts 40 seconds.',
+      hp: 10, money: -30, soul: 5, fame: 0,
+    },
+    failure: {
+      text: 'Dossier. Incomplet. Come back with Form 27-B. Which doesn\'t exist online. Which might not exist at all. Kafka was an optimist.',
+      hp: -20, money: -30, soul: -25, fame: 0,
+    },
+  },
+  {
+    id: 'midnight_crisis',
+    name: 'THE 3AM CRISIS',
+    flavor: '"It\'s 3AM. You\'re debugging a shader.\nYour impostor syndrome has a louder voice\nthan your creative practice.\nThe void stares back, pixelated."',
+    bg: 'bg-apartment',
+    scene: 'apartment_night',
+    intro: {
+      speaker: 'INNER VOICE',
+      text: 'Everyone else has a real career. Your friends from undergrad have health insurance. Your art is just... pretty errors in expensive software. Maybe the tech bro was right. Maybe ChatGPT could—no. NO. Open the project. Keep going.',
+    },
+    game: 'choices_rapid',
+    gameData: {
+      title: '◆ SURVIVE THE NIGHT ◆',
+      instruction: 'Fight the doubt. Make the right choices.',
+      scenarios: [
+        {
+          text: 'The shader won\'t compile. For the 47th time.',
+          options: [
+            { text: 'Read the error message slowly', correct: true, response: 'A missing semicolon. Of course. Always a semicolon. The universe runs on semicolons and spite.' },
+            { text: 'Close the laptop forever', correct: false, response: 'You close it. You open it 11 minutes later. The shader is still broken. But so is sleep.' },
+            { text: 'Rewrite from scratch', correct: true, response: '2 hours later, it works. It\'s better than before. Destruction is creation. You are exhausted and alive.' },
+          ]
+        },
+        {
+          text: 'Instagram shows a 22-year-old with your dream gallery show.',
+          options: [
+            { text: 'Close Instagram', correct: true, response: 'You close it. You look at your own work. It\'s weird, broken, honest. It\'s yours. That has to be enough tonight.' },
+            { text: 'Spiral into comparison', correct: false, response: '45 minutes of scrolling. You feel hollow. The algorithm knows. It feeds you more success stories.' },
+            { text: 'DM them congrats', correct: true, response: 'They respond. They\'re also broke. They also have impostor syndrome. Solidarity in the void.' },
+          ]
+        },
+      ],
+    },
+    success: {
+      text: 'The sun comes up over the zinc rooftops. The shader works. You haven\'t slept. You\'ve made something. In Paris, in 2026, with no money and no certainty, you made something. It matters.',
+      hp: -10, money: 0, soul: 25, fame: 5,
+    },
+    failure: {
+      text: 'You fell asleep at the desk. The laptop overheated. The cat sat on it. Somehow, the shader compiles now. Cats are better debuggers than you.',
+      hp: -15, money: 0, soul: -5, fame: 0,
+    },
+  },
+  {
+    id: 'phd_defense',
+    name: 'THE PhD DEFENSE',
+    flavor: '"Present your doctoral research\nat Paris 8 Vincennes-Saint-Denis.\nTo a jury of six. In French.\nYour throat is dry. Your slides are 87."',
+    bg: 'bg-office',
+    scene: 'university',
+    intro: {
+      speaker: 'JURY PRESIDENT',
+      text: 'Madame Garza, you have 40 minutes to present your thesis: "Architectures du consentement: corps numériques, rituel et gouvernance dans les environnements érotiques immersifs." The jury is listening. Please begin.',
+    },
+    game: 'typing',
+    gameData: {
+      title: '◆ PhD DEFENSE ◆',
+      instruction: 'Type the academic terms to defend your thesis!\nYour doctorate literally depends on this.',
+      words: [
+        'epistemology', 'phenomenology', 'reflexivity', 'dispositif',
+        'problematique', 'embodiment', 'performativity', 'soutenance',
+        'ontologie', 'methodologie', 'hermeneutique', 'praxis',
+        'intersubjectivity', 'haptique', 'gouvernance', 'creation'
+      ],
+      timeLimit: 35,
+    },
+    success: {
+      text: 'The jury deliberates for 22 minutes. They return: "Très honorable." You are now Dr. Garza. Your mother cries on FaceTime. Your bank account does not care about your new title. But you do.',
+      hp: 5, money: -50, soul: 30, fame: 20,
+    },
+    failure: {
+      text: '"Ajournée." The word lands like a brick. A jury member suggests "deeper engagement with Merleau-Ponty." You Google Merleau-Ponty. You\'ve read Merleau-Ponty. They haven\'t read your thesis. You know this. It doesn\'t help.',
+      hp: -15, money: -50, soul: -30, fame: -10,
+    },
+  },
+  {
+    id: 'final',
+    name: 'THE ARS ELECTRONICA',
+    flavor: '"Your work was selected.\nYou fly to Linz with your last euros.\nThe VR headset is in checked luggage.\nYou pray to every orisha."',
+    bg: 'bg-gallery',
+    scene: 'ars',
+    intro: {
+      speaker: 'MIYÖ',
+      text: 'This is it. Ars Electronica. The big one. Eroticissima on the world stage. Every unpaid hour, every 3AM shader debug, every rejected grant, every franc... every euro that went into this instead of into savings or sanity. It all led here. The headsets are charged. The avatars are ready. I am terrified.',
+    },
+    game: 'choices_rapid',
+    gameData: {
+      title: '◆ ARS ELECTRONICA ◆',
+      instruction: 'The final performance. Every choice counts.',
+      scenarios: [
+        {
+          text: 'The jury approaches your installation. Your heart is a 808 kick drum.',
+          options: [
+            { text: 'Explain with passion', correct: true, response: 'You speak from the gut. About bodies, consent, code, ritual. About what it means to touch someone in a world made of light. They listen.' },
+            { text: 'Let the work speak', correct: true, response: 'You step back. An avatar reaches for another. The consent protocol glows. Someone in the jury wipes their eye. Or it\'s allergies. Either way.' },
+            { text: 'Freeze up', correct: false, response: 'Words leave you. But someone puts on the headset. Gasps. Smiles. The work does what you couldn\'t. Art doesn\'t need your permission to matter.' },
+          ]
+        },
+        {
+          text: 'A journalist asks: "What does this mean for the future of art?"',
+          options: [
+            { text: '"I don\'t know. I just make things."', correct: true, response: 'Honesty. Rare and terrifying. They quote you. It becomes the headline. You didn\'t plan this. The best things are never planned.' },
+            { text: '"Art has always been about bodies."', correct: true, response: 'You mean it. Every pixel of Eroticissima is a body. Every interaction is a negotiation. The journalist writes furiously. Good sign.' },
+            { text: 'Give a pre-rehearsed answer', correct: false, response: 'It sounds polished. Too polished. Like a grant application. The journalist nods politely and moves on.' },
+          ]
+        },
+      ],
+    },
+    success: {
+      text: 'You didn\'t win the Golden Nica. But you stood in Linz, in a room full of people experiencing your work, and for one crystalline moment, none of it — the poverty, the admin, the doubt — none of it mattered. You made something real. The rest is paperwork.',
+      hp: 20, money: -200, soul: 50, fame: 40,
+    },
+    failure: {
+      text: 'The headset glitched. The avatars T-posed. A jury member got motion sick. But they still talked about it. In art, even failure is content.',
+      hp: -5, money: -200, soul: 10, fame: 15,
+    },
+  },
+];
+
+// ═══════════════════════════════════════
+//  GAME ENGINE
+// ═══════════════════════════════════════
+
+let currentMinigameTimer = null;
+let currentMinigameCleanup = null;
+
+function startGame() {
+  STATE.hp = 100; STATE.money = 47; STATE.soul = 80; STATE.fame = 10; STATE.level = 0;
+  document.getElementById('title-screen').style.display = 'none';
+  document.getElementById('game-screen').style.display = 'flex';
+  document.getElementById('ending-screen').style.display = 'none';
+  // Ensure audio is initialized on this user gesture
+  if (!AUDIO.initialized) initAudio();
+  if (AUDIO.ctx && AUDIO.ctx.state === 'suspended') {
+    AUDIO.ctx.resume().catch(() => {});
+  }
+  stopSong();
+  playSFX('confirm');
+  updateHUD();
+  showLevelTransition(0);
+}
+
+function showCredits() {
+  const ts = document.getElementById('title-screen');
+  const desc = ts.querySelector('.title-desc');
+  desc.innerHTML = 'A game about surviving as an artist.<br>Made with CSS, spite, and cold espresso.<br><br>Created by Miyö Van Stenis<br>PC-98 aesthetic, 2026.<br><br>No artists were adequately compensated<br>in the making of this game.';
+  setTimeout(() => {
+    desc.innerHTML = 'The year is 2026. Paris.<br>One artist. No savings.<br>Many dreams. Many invoices.<br>Survive... or become a UX designer.';
+  }, 6000);
+}
+
+function updateHUD() {
+  document.getElementById('hp-val').textContent = Math.max(0, STATE.hp);
+  document.getElementById('hp-bar').style.width = Math.max(0, STATE.hp) + '%';
+  document.getElementById('money-val').textContent = '€' + STATE.money;
+  document.getElementById('soul-bar').style.width = Math.max(0, Math.min(100, STATE.soul)) + '%';
+  document.getElementById('level-val').textContent = STATE.level + 1;
+
+  const moneyEl = document.getElementById('money-val');
+  moneyEl.classList.toggle('danger', STATE.money < 0);
+  const hpEl = document.getElementById('hp-val');
+  hpEl.classList.toggle('danger', STATE.hp <= 20);
+}
+
+function showLevelTransition(levelIdx) {
+  if (levelIdx >= LEVELS.length) {
+    showEnding();
+    return;
+  }
+
+  stopSong();
+  STATE.level = levelIdx;
+  const level = LEVELS[levelIdx];
+  const area = document.getElementById('scene-area');
+
+  area.innerHTML = `
+    <div class="level-transition">
+      <div class="level-number">— LEVEL ${levelIdx + 1} / ${LEVELS.length} —</div>
+      <div class="level-name">${level.name}</div>
+      <div class="level-flavor">${level.flavor}</div>
+      <br>
+      <button class="continue-btn" onclick="startLevel(${levelIdx})">▶ BEGIN</button>
+    </div>
+  `;
+  updateHUD();
+}
+
+function startLevel(levelIdx) {
+  const level = LEVELS[levelIdx];
+  showDialogueScene(level, () => {
+    startMinigame(level);
+  });
+}
+
+function buildSceneHTML(level) {
+  let sceneObjects = '';
+  const s = level.scene;
+
+  if (s === 'apartment' || s === 'apartment_night') {
+    sceneObjects = `
+      <div class="desk"></div>
+      <div class="laptop"><div class="laptop-screen"></div></div>
+      <div class="coffee"></div>
+      <div class="window-bg"></div>
+    `;
+  } else if (s === 'gallery' || s === 'ars') {
+    sceneObjects = `
+      <div class="gallery-floor"></div>
+      <div class="painting painting-1"></div>
+      <div class="painting painting-2"></div>
+      <div class="painting painting-3"></div>
+    `;
+  } else if (s === 'classroom') {
+    sceneObjects = `
+      <div class="office-desk"></div>
+      <canvas id="classroom-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;image-rendering:pixelated;" width="640" height="300"></canvas>
+    `;
+  } else if (s === 'university' || s === 'prefecture') {
+    sceneObjects = `
+      <div class="office-desk"></div>
+      <div class="paper-stack"></div>
+    `;
+  } else if (s === 'studio') {
+    sceneObjects = `
+      <div class="desk"></div>
+      <div class="laptop"><div class="laptop-screen"></div></div>
+      <div class="metro-window"></div>
+    `;
+  }
+
+  return sceneObjects;
+}
+
+function showDialogueScene(level, onContinue) {
+  playSong('dialogue');
+  const area = document.getElementById('scene-area');
+  const sceneObjs = buildSceneHTML(level);
+
+  area.innerHTML = `
+    <div class="scene-visual ${level.bg}">
+      <div class="dither-overlay"></div>
+      ${sceneObjs}
+      <div class="portrait-frame">
+        <canvas id="scene-portrait" width="96" height="140"></canvas>
+      </div>
+    </div>
+    <div class="dialogue-box">
+      <div class="dialogue-border-top"></div>
+      <div class="dialogue-speaker">${level.intro.speaker}</div>
+      <div class="dialogue-text" id="dialogue-text"></div>
+    </div>
+    <div class="choices-container" id="dialogue-actions">
+      <button class="choice-btn" onclick="void(0)" id="continue-dialogue" style="display:none">
+        <span class="choice-arrow">▶</span> Continue...
+      </button>
+    </div>
+  `;
+
+  // Draw portrait
+  const pc = document.getElementById('scene-portrait');
+  if (pc) drawScenePortrait(pc, level.intro.speaker);
+
+  // Draw classroom students if applicable
+  const classCanvas = document.getElementById('classroom-canvas');
+  if (classCanvas) drawClassroom(classCanvas);
+
+  // Typewriter effect
+  typewriterEffect(level.intro.text, 'dialogue-text', () => {
+    const btn = document.getElementById('continue-dialogue');
+    if (btn) {
+      btn.style.display = 'flex';
+      btn.onclick = onContinue;
+    }
+  });
+}
+
+function drawScenePortrait(canvas, speaker) {
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (speaker === 'MIYÖ' || speaker === 'INNER VOICE') {
+    // Blue-haired Miyö
+    const hair = '#5599ff';
+    const skin = '#ffaa88';
+    ctx.fillStyle = hair;
+    ctx.fillRect(20, 8, 56, 16); // top hair
+    ctx.fillRect(14, 24, 68, 12); // mid hair
+    ctx.fillRect(10, 36, 16, 50); // left strand
+    ctx.fillRect(70, 36, 16, 50); // right strand
+    ctx.fillStyle = skin;
+    ctx.fillRect(26, 36, 44, 44); // face
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(32, 48, 14, 10); // L eye
+    ctx.fillRect(54, 48, 14, 10); // R eye
+    ctx.fillStyle = '#334';
+    ctx.fillRect(38, 50, 8, 8); // L pupil
+    ctx.fillRect(58, 50, 8, 8); // R pupil
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(40, 52, 3, 3); // L shine
+    ctx.fillRect(60, 52, 3, 3); // R shine
+    ctx.fillStyle = '#cc6655';
+    ctx.fillRect(38, 68, 20, 3); // mouth
+    ctx.fillStyle = '#111';
+    ctx.fillRect(22, 82, 52, 40); // shirt
+    ctx.fillStyle = '#aa00aa';
+    ctx.fillRect(34, 84, 28, 4); // collar
+    ctx.fillStyle = skin;
+    ctx.fillRect(22, 120, 52, 10); // neck/shoulders
+
+    if (speaker === 'INNER VOICE') {
+      // Glitch effect
+      ctx.fillStyle = 'rgba(255,0,100,0.3)';
+      ctx.fillRect(0, 45, canvas.width, 3);
+      ctx.fillRect(0, 70, canvas.width, 2);
+      ctx.fillStyle = 'rgba(0,255,255,0.2)';
+      ctx.fillRect(5, 55, canvas.width - 10, 2);
+    }
+  } else if (speaker === 'CURATOR') {
+    const skin = '#ffe0cc';
+    ctx.fillStyle = '#333';
+    ctx.fillRect(24, 10, 48, 20); // hair
+    ctx.fillRect(20, 30, 56, 8);
+    ctx.fillStyle = skin;
+    ctx.fillRect(28, 38, 40, 40); // face
+    ctx.fillStyle = '#555';
+    ctx.fillRect(34, 50, 8, 4); // glasses
+    ctx.fillRect(54, 50, 8, 4);
+    ctx.fillRect(42, 51, 12, 2); // bridge
+    ctx.fillStyle = '#222';
+    ctx.fillRect(36, 51, 4, 3);
+    ctx.fillRect(56, 51, 4, 3);
+    ctx.fillStyle = '#cc8877';
+    ctx.fillRect(42, 66, 12, 3);
+    ctx.fillStyle = '#1a1a1a'; // turtleneck
+    ctx.fillRect(24, 80, 48, 50);
+  } else if (speaker === 'CLIENT (via Zoom)') {
+    // Screen-like portrait
+    ctx.fillStyle = '#0a1a2a';
+    ctx.fillRect(10, 10, 76, 60); // screen
+    ctx.fillStyle = '#00aa00';
+    ctx.fillRect(12, 12, 72, 56);
+    ctx.fillStyle = '#001100';
+    // Pixelated face on screen
+    ctx.fillRect(30, 20, 36, 40);
+    ctx.fillStyle = '#00ff00';
+    ctx.fillRect(36, 28, 6, 6);
+    ctx.fillRect(52, 28, 6, 6);
+    ctx.fillRect(38, 44, 18, 3);
+    ctx.fillStyle = '#333';
+    ctx.fillRect(10, 70, 76, 4); // laptop edge
+    ctx.fillStyle = '#555';
+    ctx.fillRect(20, 74, 56, 50);
+  } else if (speaker === 'FONCTIONNAIRE') {
+    const skin = '#ffd4b8';
+    ctx.fillStyle = '#666';
+    ctx.fillRect(26, 12, 44, 18);
+    ctx.fillStyle = skin;
+    ctx.fillRect(30, 30, 36, 42);
+    ctx.fillStyle = '#444';
+    ctx.fillRect(36, 42, 6, 4);
+    ctx.fillRect(54, 42, 6, 4);
+    ctx.fillRect(38, 43, 4, 3);
+    ctx.fillRect(56, 43, 4, 3);
+    ctx.fillStyle = '#cc9988';
+    ctx.fillRect(40, 58, 16, 2); // flat mouth
+    ctx.fillStyle = '#2244aa'; // suit
+    ctx.fillRect(24, 74, 48, 60);
+    ctx.fillStyle = '#cc2222';
+    ctx.fillRect(44, 74, 8, 30); // tie
+  } else if (speaker === 'JURY PRESIDENT') {
+    const skin = '#ffe0cc';
+    ctx.fillStyle = '#ddd';
+    ctx.fillRect(24, 8, 48, 22); // white hair
+    ctx.fillStyle = skin;
+    ctx.fillRect(28, 30, 40, 42);
+    ctx.fillStyle = '#888';
+    ctx.fillRect(32, 44, 10, 5); // glasses
+    ctx.fillRect(54, 44, 10, 5);
+    ctx.fillRect(42, 46, 12, 2);
+    ctx.fillStyle = '#333';
+    ctx.fillRect(35, 46, 4, 3);
+    ctx.fillRect(57, 46, 4, 3);
+    ctx.fillStyle = '#aa8877';
+    ctx.fillRect(40, 60, 16, 2);
+    ctx.fillStyle = '#2a2a2a';
+    ctx.fillRect(22, 74, 52, 60);
+    ctx.fillStyle = '#ddd';
+    ctx.fillRect(38, 76, 20, 8); // shirt collar
+  }
+}
+
+// ─── Classroom scene with 5 girl students ───
+function drawClassroom(canvas) {
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  const W = canvas.width;
+  const H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // Background - classroom wall
+  ctx.fillStyle = '#1a1a2e';
+  ctx.fillRect(0, 0, W, H);
+
+  // Floor
+  ctx.fillStyle = '#2a1a0e';
+  ctx.fillRect(0, H * 0.7, W, H * 0.3);
+  // Floor lines
+  ctx.strokeStyle = '#3a2a1e';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < 8; i++) {
+    ctx.beginPath();
+    ctx.moveTo(i * W / 7, H * 0.7);
+    ctx.lineTo(i * W / 8 + W * 0.05, H);
+    ctx.stroke();
+  }
+
+  // Whiteboard
+  ctx.fillStyle = '#ddddcc';
+  ctx.fillRect(W * 0.05, H * 0.05, W * 0.35, H * 0.35);
+  ctx.strokeStyle = '#888877';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(W * 0.05, H * 0.05, W * 0.35, H * 0.35);
+  // Whiteboard content - Unity viewport sketch
+  ctx.fillStyle = '#445566';
+  ctx.fillRect(W * 0.08, H * 0.09, W * 0.12, H * 0.08);
+  ctx.fillStyle = '#556677';
+  ctx.fillRect(W * 0.22, H * 0.09, W * 0.15, H * 0.18);
+  // "NavMesh" text scribble
+  ctx.fillStyle = '#335577';
+  ctx.fillRect(W * 0.08, H * 0.22, W * 0.1, H * 0.02);
+  ctx.fillRect(W * 0.08, H * 0.26, W * 0.14, H * 0.02);
+  ctx.fillRect(W * 0.08, H * 0.30, W * 0.08, H * 0.02);
+  // Small 3D cube doodle
+  ctx.fillStyle = '#00aaaa';
+  ctx.fillRect(W * 0.28, H * 0.30, W * 0.04, H * 0.06);
+  ctx.fillStyle = '#008888';
+  ctx.fillRect(W * 0.30, H * 0.28, W * 0.04, H * 0.06);
+
+  // Projector screen glow
+  ctx.fillStyle = 'rgba(85, 170, 255, 0.04)';
+  ctx.fillRect(W * 0.03, H * 0.02, W * 0.39, H * 0.42);
+
+  // ─── Miyö at the front (standing, small, left side) ───
+  const mx = W * 0.42;
+  const my = H * 0.28;
+  // Hair
+  ctx.fillStyle = '#5599ff';
+  ctx.fillRect(mx, my, 18, 6);
+  ctx.fillRect(mx - 2, my + 6, 22, 4);
+  ctx.fillRect(mx - 3, my + 10, 6, 16); // left strand
+  ctx.fillRect(mx + 19, my + 10, 6, 16); // right strand
+  // Face
+  ctx.fillStyle = '#ffaa88';
+  ctx.fillRect(mx + 3, my + 10, 16, 14);
+  // Eyes
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(mx + 5, my + 14, 4, 3);
+  ctx.fillRect(mx + 13, my + 14, 4, 3);
+  ctx.fillStyle = '#334';
+  ctx.fillRect(mx + 7, my + 15, 2, 2);
+  ctx.fillRect(mx + 15, my + 15, 2, 2);
+  // Mouth
+  ctx.fillStyle = '#cc6655';
+  ctx.fillRect(mx + 8, my + 21, 6, 1);
+  // Body - black shirt
+  ctx.fillStyle = '#111';
+  ctx.fillRect(mx + 1, my + 25, 20, 18);
+  ctx.fillStyle = '#aa00aa';
+  ctx.fillRect(mx + 6, my + 26, 10, 2); // magenta collar
+  // Arms (one pointing at board)
+  ctx.fillStyle = '#111';
+  ctx.fillRect(mx - 6, my + 26, 7, 4);
+  ctx.fillRect(mx - 10, my + 25, 5, 3);
+  ctx.fillStyle = '#ffaa88';
+  ctx.fillRect(mx - 13, my + 25, 4, 3); // pointing hand
+  ctx.fillRect(mx + 21, my + 30, 4, 6);
+  // Skirt
+  ctx.fillStyle = '#222244';
+  ctx.fillRect(mx + 2, my + 43, 18, 10);
+  // Legs
+  ctx.fillStyle = '#ffaa88';
+  ctx.fillRect(mx + 4, my + 53, 5, 10);
+  ctx.fillRect(mx + 13, my + 53, 5, 10);
+  // Shoes
+  ctx.fillStyle = '#333';
+  ctx.fillRect(mx + 3, my + 62, 7, 3);
+  ctx.fillRect(mx + 12, my + 62, 7, 3);
+
+  // ─── 5 Girl students at desks (back row) ───
+  const students = [
+    { x: W * 0.05, hair: '#cc4488', hairStyle: 'long', skin: '#ffe0cc', top: '#4444aa', acc: null },
+    { x: W * 0.20, hair: '#222222', hairStyle: 'short', skin: '#c68642', top: '#aa3366', acc: 'glasses' },
+    { x: W * 0.37, hair: '#ffaa44', hairStyle: 'ponytail', skin: '#ffddbb', top: '#338844', acc: null },
+    { x: W * 0.54, hair: '#884422', hairStyle: 'long', skin: '#deb887', top: '#6644aa', acc: 'earrings' },
+    { x: W * 0.72, hair: '#ee5577', hairStyle: 'short', skin: '#ffd4b8', top: '#cc6633', acc: 'glasses' },
+  ];
+
+  students.forEach((s, i) => {
+    const sx = s.x;
+    const sy = H * 0.48;
+    const dw = W * 0.14;
+    const dh = H * 0.12;
+
+    // Desk
+    ctx.fillStyle = '#6b5b4a';
+    ctx.fillRect(sx, sy + 28, dw, dh);
+    ctx.fillStyle = '#7d6b5a';
+    ctx.fillRect(sx, sy + 28, dw, 3);
+    // Laptop on desk
+    ctx.fillStyle = '#444';
+    ctx.fillRect(sx + dw * 0.2, sy + 20, dw * 0.5, 10);
+    ctx.fillStyle = '#001133';
+    ctx.fillRect(sx + dw * 0.22, sy + 21, dw * 0.46, 7);
+    // Screen glow
+    ctx.fillStyle = '#003366';
+    ctx.fillRect(sx + dw * 0.25, sy + 22, dw * 0.4, 5);
+
+    // Student body (sitting)
+    // Hair
+    ctx.fillStyle = s.hair;
+    if (s.hairStyle === 'long') {
+      ctx.fillRect(sx + dw * 0.3, sy - 18, 20, 8);
+      ctx.fillRect(sx + dw * 0.25, sy - 10, 26, 6);
+      ctx.fillRect(sx + dw * 0.22, sy - 4, 8, 18); // left strand
+      ctx.fillRect(sx + dw * 0.55, sy - 4, 8, 18); // right strand
+    } else if (s.hairStyle === 'short') {
+      ctx.fillRect(sx + dw * 0.3, sy - 16, 22, 10);
+      ctx.fillRect(sx + dw * 0.28, sy - 6, 26, 4);
+    } else if (s.hairStyle === 'ponytail') {
+      ctx.fillRect(sx + dw * 0.3, sy - 18, 20, 8);
+      ctx.fillRect(sx + dw * 0.25, sy - 10, 26, 6);
+      // Ponytail to the side
+      ctx.fillRect(sx + dw * 0.58, sy - 14, 6, 4);
+      ctx.fillRect(sx + dw * 0.62, sy - 10, 5, 10);
+      ctx.fillRect(sx + dw * 0.60, sy, 4, 8);
+    }
+
+    // Face
+    ctx.fillStyle = s.skin;
+    ctx.fillRect(sx + dw * 0.32, sy - 4, 18, 16);
+
+    // Eyes
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(sx + dw * 0.34, sy + 2, 5, 4);
+    ctx.fillRect(sx + dw * 0.46, sy + 2, 5, 4);
+    ctx.fillStyle = '#333';
+    ctx.fillRect(sx + dw * 0.36, sy + 3, 3, 3);
+    ctx.fillRect(sx + dw * 0.48, sy + 3, 3, 3);
+    // Eye direction - looking at the board (left/up)
+    ctx.fillStyle = '#111';
+    ctx.fillRect(sx + dw * 0.36, sy + 3, 2, 2);
+    ctx.fillRect(sx + dw * 0.48, sy + 3, 2, 2);
+
+    // Glasses
+    if (s.acc === 'glasses') {
+      ctx.strokeStyle = '#888';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(sx + dw * 0.33, sy + 1, 7, 6);
+      ctx.strokeRect(sx + dw * 0.45, sy + 1, 7, 6);
+      ctx.beginPath();
+      ctx.moveTo(sx + dw * 0.40, sy + 4);
+      ctx.lineTo(sx + dw * 0.45, sy + 4);
+      ctx.stroke();
+    }
+
+    // Earrings
+    if (s.acc === 'earrings') {
+      ctx.fillStyle = '#ffcc00';
+      ctx.fillRect(sx + dw * 0.30, sy + 8, 2, 3);
+      ctx.fillRect(sx + dw * 0.52, sy + 8, 2, 3);
+    }
+
+    // Mouth
+    ctx.fillStyle = '#cc8877';
+    ctx.fillRect(sx + dw * 0.38, sy + 9, 6, 1);
+
+    // Body/top
+    ctx.fillStyle = s.top;
+    ctx.fillRect(sx + dw * 0.28, sy + 13, 26, 14);
+
+    // Arms on desk
+    ctx.fillStyle = s.skin;
+    ctx.fillRect(sx + dw * 0.24, sy + 18, 8, 6);
+    ctx.fillRect(sx + dw * 0.52, sy + 18, 8, 6);
+  });
+
+  // Dithering overlay on the whole scene
+  ctx.fillStyle = 'rgba(0,85,170,0.03)';
+  for (let y = 0; y < H; y += 4) {
+    ctx.fillRect(0, y, W, 1);
+  }
+}
+
+let typewriterInterval = null;
+function typewriterEffect(text, elementId, onComplete) {
+  if (typewriterInterval) clearInterval(typewriterInterval);
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  let i = 0;
+  el.innerHTML = '<span class="typewriter"></span>';
+
+  typewriterInterval = setInterval(() => {
+    if (i < text.length) {
+      el.innerHTML = text.substring(0, i + 1) + '<span class="typewriter"></span>';
+      i++;
+    } else {
+      clearInterval(typewriterInterval);
+      typewriterInterval = null;
+      el.innerHTML = text;
+      if (onComplete) onComplete();
+    }
+  }, 28);
+
+  // Tap to skip
+  el.onclick = () => {
+    if (typewriterInterval) {
+      clearInterval(typewriterInterval);
+      typewriterInterval = null;
+      el.innerHTML = text;
+      el.onclick = null;
+      if (onComplete) onComplete();
+    }
+  };
+}
+
+// ═══════════════════════════════════════
+//  MINIGAMES
+// ═══════════════════════════════════════
+
+function startMinigame(level) {
+  playSong('gameplay');
+  if (currentMinigameCleanup) {
+    currentMinigameCleanup();
+    currentMinigameCleanup = null;
+  }
+
+  switch (level.game) {
+    case 'typing': startTypingGame(level); break;
+    case 'sequence': startSequenceGame(level); break;
+    case 'choices_rapid': startChoicesGame(level); break;
+    case 'negotiation': startNegotiationGame(level); break;
+  }
+}
+
+// ─── TYPING MINIGAME ───
+function startTypingGame(level) {
+  const gd = level.gameData;
+  const area = document.getElementById('scene-area');
+  let words = [...gd.words].sort(() => Math.random() - 0.5);
+  let currentWordIdx = 0;
+  let score = 0;
+  let timeLeft = gd.timeLimit;
+  let gameActive = true;
+
+  function renderTypingGame() {
+    area.innerHTML = `
+      <div class="minigame-area ${level.bg}">
+        <div class="dither-overlay"></div>
+        <div class="minigame-title">${gd.title}</div>
+        <div class="minigame-instruction">${gd.instruction}</div>
+        <div class="timer-container">
+          <div class="timer-label">TIME: <span id="time-display">${timeLeft}s</span></div>
+          <div class="timer-bar"><div class="timer-fill" id="timer-fill" style="width:100%"></div></div>
+        </div>
+        <div class="typing-display">
+          <div style="font-size:clamp(7px,1.3vw,8px);color:var(--pc98-bright-cyan);margin-bottom:6px;">
+            SCORE: <span id="type-score">${score}</span> / ${words.length}
+          </div>
+          <div class="typing-target" id="typing-target"></div>
+        </div>
+        <div id="mobile-word-buttons" class="button-grid" style="margin-top:8px;"></div>
+      </div>
+    `;
+    showCurrentWord();
+    showWordButtons();
+  }
+
+  function showCurrentWord() {
+    const target = document.getElementById('typing-target');
+    if (!target || currentWordIdx >= words.length) return;
+    target.innerHTML = `Type: <span style="color:var(--pc98-bright-yellow);font-size:clamp(10px,2.5vw,16px);">${words[currentWordIdx]}</span>`;
+  }
+
+  function showWordButtons() {
+    const container = document.getElementById('mobile-word-buttons');
+    if (!container) return;
+    // Show 6 buttons: the correct word + 5 random decoys
+    let options = [words[currentWordIdx]];
+    const allDecoys = ['synergy', 'disruption', 'leverage', 'paradigm', 'stakeholder',
+      'optimize', 'scalable', 'agile', 'bandwidth', 'ecosystem',
+      'holistic', 'granular', 'alignment', 'deliverable', 'metric'];
+    const decoys = allDecoys.filter(d => d !== words[currentWordIdx]).sort(() => Math.random() - 0.5).slice(0, 5);
+    options = [...options, ...decoys].sort(() => Math.random() - 0.5);
+
+    container.innerHTML = options.map(w =>
+      `<button class="grid-btn" onclick="window._typeWord('${w}')">${w}</button>`
+    ).join('');
+  }
+
+  window._typeWord = function(word) {
+    if (!gameActive) return;
+    const btns = document.querySelectorAll('.grid-btn');
+
+    if (word === words[currentWordIdx]) {
+      score++;
+      playSFX('correct');
+      btns.forEach(b => { if (b.textContent === word) b.classList.add('correct'); });
+      document.getElementById('type-score').textContent = score;
+      currentWordIdx++;
+      if (currentWordIdx >= words.length) {
+        endTypingGame(true);
+        return;
+      }
+      setTimeout(() => {
+        showCurrentWord();
+        showWordButtons();
+      }, 300);
+    } else {
+      playSFX('wrong');
+      btns.forEach(b => { if (b.textContent === word) b.classList.add('wrong'); });
+    }
+  };
+
+  // Timer
+  const timer = setInterval(() => {
+    if (!gameActive) return;
+    timeLeft--;
+    const td = document.getElementById('time-display');
+    const tf = document.getElementById('timer-fill');
+    if (td) td.textContent = timeLeft + 's';
+    if (tf) tf.style.width = (timeLeft / gd.timeLimit * 100) + '%';
+    if (timeLeft <= 0) {
+      endTypingGame(score >= words.length * 0.5);
+    }
+  }, 1000);
+
+  function endTypingGame(success) {
+    gameActive = false;
+    clearInterval(timer);
+    showResult(level, success, `Words typed: ${score} / ${words.length}`);
+  }
+
+  currentMinigameCleanup = () => {
+    gameActive = false;
+    clearInterval(timer);
+    window._typeWord = null;
+  };
+
+  renderTypingGame();
+}
+
+// ─── SEQUENCE MINIGAME ───
+function startSequenceGame(level) {
+  const gd = level.gameData;
+  const area = document.getElementById('scene-area');
+  const steps = gd.steps;
+  let currentStep = 0;
+  let shuffled = [...steps].map((s, i) => ({ ...s, origIdx: i })).sort(() => Math.random() - 0.5);
+  let gameActive = true;
+  let mistakes = 0;
+
+  function render() {
+    area.innerHTML = `
+      <div class="minigame-area ${level.bg}">
+        <div class="dither-overlay"></div>
+        <div class="minigame-title">${gd.title}</div>
+        <div class="minigame-instruction">${gd.instruction}</div>
+        <div class="sequence-display" id="seq-display">
+          ${steps.map((s, i) => `
+            <div class="seq-step" id="seq-${i}" data-idx="${i}">
+              ${i < currentStep ? s.icon : '?'}
+            </div>
+          `).join('')}
+        </div>
+        <div style="font-size:clamp(7px,1.3vw,8px);color:var(--pc98-bright-cyan);margin-bottom:8px;">
+          Step ${currentStep + 1}: What comes next?
+        </div>
+        <div class="button-grid" id="seq-buttons"></div>
+        <div style="font-size:clamp(6px,1.2vw,8px);color:var(--pc98-bright-red);margin-top:8px;" id="seq-mistakes">
+          Mistakes: ${mistakes}/3
+        </div>
+      </div>
+    `;
+
+    // Show remaining options as buttons
+    const remaining = shuffled.filter(s => s.origIdx >= currentStep);
+    const btnContainer = document.getElementById('seq-buttons');
+    btnContainer.innerHTML = remaining.map(s =>
+      `<button class="grid-btn" onclick="window._seqPick(${s.origIdx})">${s.icon}<br><span style="font-size:clamp(5px,1vw,7px)">${s.label}</span></button>`
+    ).join('');
+  }
+
+  window._seqPick = function(idx) {
+    if (!gameActive) return;
+    if (idx === currentStep) {
+      // Correct
+      playSFX('correct');
+      const el = document.getElementById('seq-' + currentStep);
+      if (el) { el.classList.add('done'); el.textContent = steps[currentStep].icon; }
+      currentStep++;
+      if (currentStep >= steps.length) {
+        gameActive = false;
+        showResult(level, mistakes < 3, `Completed with ${mistakes} mistake(s)`);
+        return;
+      }
+      render();
+    } else {
+      mistakes++;
+      playSFX('wrong');
+      if (mistakes >= 3) {
+        gameActive = false;
+        showResult(level, false, `Too many mistakes (${mistakes}/3)`);
+        return;
+      }
+      const el = document.getElementById('seq-' + idx);
+      if (el) el.classList.add('failed');
+      document.getElementById('seq-mistakes').textContent = `Mistakes: ${mistakes}/3`;
+      setTimeout(() => { if (el) el.classList.remove('failed'); }, 500);
+    }
+  };
+
+  currentMinigameCleanup = () => { gameActive = false; window._seqPick = null; };
+  render();
+}
+
+// ─── CHOICES RAPID MINIGAME ───
+function startChoicesGame(level) {
+  const gd = level.gameData;
+  const area = document.getElementById('scene-area');
+  let scenarioIdx = 0;
+  let score = 0;
+  let gameActive = true;
+
+  function renderScenario() {
+    if (scenarioIdx >= gd.scenarios.length) {
+      gameActive = false;
+      showResult(level, score >= gd.scenarios.length * 0.5, `Good choices: ${score} / ${gd.scenarios.length}`);
+      return;
+    }
+
+    const sc = gd.scenarios[scenarioIdx];
+    area.innerHTML = `
+      <div class="minigame-area ${level.bg}">
+        <div class="dither-overlay"></div>
+        <div class="minigame-title">${gd.title}</div>
+        <div style="font-size:clamp(7px,1.3vw,8px);color:var(--pc98-bright-cyan);margin-bottom:4px;">
+          Situation ${scenarioIdx + 1} / ${gd.scenarios.length}
+        </div>
+        <div class="typing-display">
+          <div style="font-size:clamp(8px,1.8vw,11px);color:var(--pc98-bright-yellow);line-height:1.8;">
+            ${sc.text}
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;width:90%;max-width:500px;" id="choice-btns">
+          ${sc.options.map((o, i) => `
+            <button class="choice-btn" onclick="window._scenarioChoice(${i})">
+              <span class="choice-arrow">▶</span> ${o.text}
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  window._scenarioChoice = function(idx) {
+    if (!gameActive) return;
+    const sc = gd.scenarios[scenarioIdx];
+    const opt = sc.options[idx];
+    if (opt.correct) { score++; playSFX('correct'); } else { playSFX('wrong'); }
+
+    // Show response
+    const btns = document.getElementById('choice-btns');
+    btns.innerHTML = `
+      <div style="font-size:clamp(7px,1.5vw,9px);color:${opt.correct ? 'var(--pc98-bright-green)' : 'var(--pc98-bright-red)'};line-height:1.8;padding:8px;">
+        ${opt.correct ? '✓' : '✗'} ${opt.response}
+      </div>
+      <button class="choice-btn" onclick="window._nextScenario()">
+        <span class="choice-arrow">▶</span> Next...
+      </button>
+    `;
+  };
+
+  window._nextScenario = function() {
+    scenarioIdx++;
+    renderScenario();
+  };
+
+  currentMinigameCleanup = () => {
+    gameActive = false;
+    window._scenarioChoice = null;
+    window._nextScenario = null;
+  };
+
+  renderScenario();
+}
+
+// ─── NEGOTIATION MINIGAME ───
+function startNegotiationGame(level) {
+  const gd = level.gameData;
+  const area = document.getElementById('scene-area');
+  const round = gd.rounds[0];
+
+  area.innerHTML = `
+    <div class="minigame-area ${level.bg}">
+      <div class="dither-overlay"></div>
+      <div class="minigame-title">${gd.title}</div>
+      <div class="minigame-instruction">${gd.instruction}</div>
+      <div class="typing-display">
+        <div style="font-size:clamp(8px,1.8vw,11px);color:var(--pc98-bright-yellow);line-height:1.8;">
+          ${round.text}
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;width:90%;max-width:500px;" id="neg-btns">
+        ${round.options.map((o, i) => `
+          <button class="choice-btn" onclick="window._negotiate(${i})">
+            <span class="choice-arrow">▶</span> ${o.text}
+          </button>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  window._negotiate = function(idx) {
+    const opt = round.options[idx];
+    playSFX('select');
+    STATE.money += opt.money || 0;
+    STATE.soul += opt.soul || 0;
+    STATE.fame += opt.fame || 0;
+    updateHUD();
+
+    const btns = document.getElementById('neg-btns');
+    btns.innerHTML = `
+      <div style="font-size:clamp(7px,1.5vw,9px);color:var(--pc98-bright-white);line-height:1.8;padding:8px;">
+        ${opt.msg}
+      </div>
+      <div style="font-size:clamp(6px,1.2vw,8px);color:var(--pc98-bright-cyan);line-height:1.6;padding:4px;">
+        ${opt.money ? '€' + opt.money : ''} ${opt.soul > 0 ? '♥+' + opt.soul : (opt.soul < 0 ? '♥' + opt.soul : '')} 
+      </div>
+      <button class="choice-btn" onclick="window._negNext()">
+        <span class="choice-arrow">▶</span> Continue...
+      </button>
+    `;
+  };
+
+  window._negNext = function() {
+    nextLevel();
+  };
+
+  currentMinigameCleanup = () => {
+    window._negotiate = null;
+    window._negNext = null;
+  };
+}
+
+// ─── RESULTS ───
+function showResult(level, success, statsText) {
+  const result = success ? level.success : level.failure;
+  playSong(success ? 'victory' : 'failure');
+  STATE.hp += result.hp || 0;
+  STATE.money += result.money || 0;
+  STATE.soul += result.soul || 0;
+  STATE.fame += result.fame || 0;
+  STATE.hp = Math.max(0, Math.min(100, STATE.hp));
+  STATE.soul = Math.max(0, Math.min(100, STATE.soul));
+  updateHUD();
+
+  const area = document.getElementById('scene-area');
+  area.innerHTML = `
+    <div class="result-overlay">
+      <div class="result-title ${success ? 'success' : 'failure'}">
+        ${success ? '◆ SURVIVED ◆' : '◆ CRUSHED ◆'}
+      </div>
+      <div class="result-text">${result.text}</div>
+      <div class="result-stats">
+        ${statsText}<br>
+        HP: ${result.hp >= 0 ? '+' : ''}${result.hp || 0} | 
+        €: ${result.money >= 0 ? '+' : ''}${result.money || 0} | 
+        Soul: ${result.soul >= 0 ? '+' : ''}${result.soul || 0} | 
+        Fame: ${result.fame >= 0 ? '+' : ''}${result.fame || 0}
+      </div>
+      ${STATE.hp <= 0 ? 
+        `<button class="continue-btn" onclick="showGameOver()">💀 GAME OVER</button>` :
+        `<button class="continue-btn" onclick="nextLevel()">▶ NEXT LEVEL</button>`
+      }
+    </div>
+  `;
+}
+
+function nextLevel() {
+  if (STATE.hp <= 0) {
+    showGameOver();
+    return;
+  }
+  showLevelTransition(STATE.level + 1);
+}
+
+function showGameOver() {
+  playSong('gameover');
+  document.getElementById('game-screen').style.display = 'none';
+  document.getElementById('ending-screen').style.display = 'flex';
+  document.getElementById('ending-screen').innerHTML = `
+    <div class="title-logo">
+      <div class="title-main" style="font-size:clamp(16px,5vw,32px);color:var(--pc98-bright-red);">GAME OVER</div>
+    </div>
+    <div class="ending-text" style="color:var(--pc98-bright-red);">
+      Your HP reached zero.<br><br>
+      You open LinkedIn.<br>
+      You update your title to "Creative Technologist / Open to Work."<br>
+      A recruiter messages you about a "UX Designer role with startup vibes."<br>
+      You consider it for 4.7 seconds.<br><br>
+      Then you close the laptop,<br>
+      make another espresso,<br>
+      and open Unity.<br><br>
+      <span style="color:var(--pc98-bright-white);">Because that's what artists do.</span>
+    </div>
+    <button class="continue-btn" onclick="location.reload()">↻ TRY AGAIN</button>
+    <div style="margin-top:12px;font-size:clamp(6px,1.2vw,8px);color:var(--pc98-cyan);">
+      Final stats: €${STATE.money} | Soul: ${STATE.soul}% | Fame: ${STATE.fame}
+    </div>
+  `;
+}
+
+function showEnding() {
+  playSong('ending');
+  document.getElementById('game-screen').style.display = 'none';
+  document.getElementById('ending-screen').style.display = 'flex';
+
+  const soulHigh = STATE.soul >= 60;
+  const moneyOk = STATE.money > 0;
+  const famous = STATE.fame >= 40;
+
+  let ending = '';
+  if (soulHigh && famous) {
+    ending = `
+      <span style="color:var(--pc98-bright-yellow);">◆ ENDING A: THE ARTIST ◆</span><br><br>
+      You survived. All of it.<br>
+      The grants, the galleries, the 3AM shader bugs,<br>
+      the bureaucracy, the doubt, the cold espresso.<br><br>
+      Your work is showing in Linz.<br>
+      Your students email you "thank you."<br>
+      Your bank account is still tragic<br>
+      but your soul is full and your art is honest.<br><br>
+      You are Miyö Van Stenis.<br>
+      Paris-based. Venezuelan-born.<br>
+      Artist. Educator. Technologist.<br>
+      Still here. Still making.<br><br>
+      <span style="color:var(--pc98-bright-magenta);">That's the whole game.</span>
+    `;
+  } else if (moneyOk && !soulHigh) {
+    ending = `
+      <span style="color:var(--pc98-bright-yellow);">◆ ENDING B: THE COMPROMISE ◆</span><br><br>
+      You survived. Financially, at least.<br>
+      The bank account has numbers in it.<br>
+      But the art feels... strategic now.<br>
+      Optimized. Grant-shaped.<br><br>
+      You catch yourself saying "deliverables"<br>
+      without irony. The cat looks concerned.<br><br>
+      It's fine. You can buy it back.<br>
+      The soul, not the cat. You already have the cat.<br><br>
+      <span style="color:var(--pc98-bright-white);">Tomorrow you'll make something<br>just because you want to.</span>
+    `;
+  } else {
+    ending = `
+      <span style="color:var(--pc98-bright-yellow);">◆ ENDING C: THE STUBBORN ◆</span><br><br>
+      You survived. Barely.<br>
+      The money is theoretical.<br>
+      The fame is local (your neighborhood knows you<br>
+      as "the VR girl").<br><br>
+      But you're still here.<br>
+      Still opening Unity at midnight.<br>
+      Still believing that erotic consent-based<br>
+      virtual reality art is important, actually.<br><br>
+      <span style="color:var(--pc98-bright-magenta);">Maybe the real grant was the<br>friends we traumatized along the way.</span>
+    `;
+  }
+
+  document.getElementById('ending-screen').innerHTML = `
+    <div class="title-logo">
+      <div class="title-jp">超時空芸術家</div>
+      <div class="title-main" style="font-size:clamp(14px,4vw,28px);">MIYÖTELS</div>
+      <div class="title-sub">— FIN —</div>
+    </div>
+    <div class="ending-text">${ending}</div>
+    <div style="font-size:clamp(6px,1.2vw,8px);color:var(--pc98-bright-cyan);text-align:center;line-height:2;margin-bottom:15px;">
+      FINAL STATS<br>
+      HP: ${STATE.hp} | €${STATE.money} | Soul: ${STATE.soul}% | Fame: ${STATE.fame}<br>
+      Levels survived: ${STATE.level + 1} / ${LEVELS.length}
+    </div>
+    <button class="continue-btn" onclick="location.reload()">↻ PLAY AGAIN</button>
+    <div style="margin-top:15px;font-size:clamp(6px,1vw,7px);color:var(--pc98-white);text-align:center;line-height:2;">
+      MIYÖTELS ミヨテルス © 2026<br>
+      A game about surviving as an artist<br>
+      Made by Miyö Van Stenis<br>
+      No artists were adequately compensated
+    </div>
+  `;
+}
+
+// ═══════════════════════════════════════
+//  PC-98 FM SYNTHESIS AUDIO ENGINE
+//  YM2608-inspired Web Audio API synth
+// ═══════════════════════════════════════
+
+const AUDIO = {
+  ctx: null,
+  master: null,
+  compressor: null,
+  currentTrack: null,
+  isPlaying: false,
+  bpm: 140,
+  stepTime: 0,
+  schedulerTimer: null,
+  nextNoteTime: 0,
+  currentStep: 0,
+  muted: false,
+  initialized: false,
+};
+
+function initAudio() {
+  if (AUDIO.initialized) return;
+  try {
+    AUDIO.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Master compressor for that crunchy PC-98 feel
+    AUDIO.compressor = AUDIO.ctx.createDynamicsCompressor();
+    AUDIO.compressor.threshold.value = -20;
+    AUDIO.compressor.knee.value = 10;
+    AUDIO.compressor.ratio.value = 8;
+    AUDIO.compressor.attack.value = 0.003;
+    AUDIO.compressor.release.value = 0.1;
+    
+    // Master gain
+    AUDIO.master = AUDIO.ctx.createGain();
+    AUDIO.master.gain.value = 0.35;
+    
+    // Bit-crusher-like effect via waveshaper for retro crunch
+    const bitcrush = AUDIO.ctx.createWaveShaper();
+    const n = 512;
+    const curve = new Float32Array(n);
+    const steps = 32; // quantize to fewer levels
+    for (let i = 0; i < n; i++) {
+      const x = (i * 2) / n - 1;
+      curve[i] = Math.round(x * steps) / steps;
+    }
+    bitcrush.curve = curve;
+    bitcrush.oversample = 'none';
+    
+    AUDIO.master.connect(bitcrush);
+    bitcrush.connect(AUDIO.compressor);
+    AUDIO.compressor.connect(AUDIO.ctx.destination);
+    
+    AUDIO.initialized = true;
+  } catch(e) {
+    console.warn('Audio init failed:', e);
+  }
+}
+
+// ─── FM Synthesis Voice ───
+// Emulates a 2-operator FM voice like the YM2608
+function createFMVoice(freq, opts = {}) {
+  if (!AUDIO.ctx) return null;
+  const ctx = AUDIO.ctx;
+  const now = ctx.currentTime;
+  
+  const {
+    modRatio = 2,      // frequency ratio of modulator to carrier
+    modIndex = 3,       // modulation depth
+    attack = 0.01,
+    decay = 0.15,
+    sustain = 0.4,
+    release = 0.2,
+    duration = 0.3,
+    waveform = 'sine',  // carrier waveform
+    modWave = 'sine',   // modulator waveform
+    volume = 0.3,
+    detune = 0,
+    vibrato = 0,
+    vibratoRate = 5,
+    feedback = 0,
+  } = opts;
+  
+  // Modulator oscillator
+  const mod = ctx.createOscillator();
+  mod.type = modWave;
+  mod.frequency.value = freq * modRatio;
+  if (detune) mod.detune.value = detune;
+  
+  // Modulation depth gain
+  const modGain = ctx.createGain();
+  modGain.gain.value = freq * modIndex;
+  
+  // Carrier oscillator
+  const carrier = ctx.createOscillator();
+  carrier.type = waveform;
+  carrier.frequency.value = freq;
+  
+  // Output envelope
+  const env = ctx.createGain();
+  env.gain.value = 0;
+  
+  // ADSR envelope (with safety clamping)
+  const startTime = now;
+  const envAttackEnd = startTime + attack;
+  const envDecayEnd = envAttackEnd + decay;
+  const envReleaseStart = Math.max(envDecayEnd + 0.01, startTime + duration - release);
+  const envEnd = startTime + duration;
+  
+  env.gain.setValueAtTime(0, startTime);
+  env.gain.linearRampToValueAtTime(volume, envAttackEnd);
+  env.gain.linearRampToValueAtTime(volume * sustain, envDecayEnd);
+  if (envReleaseStart > envDecayEnd) {
+    env.gain.setValueAtTime(volume * sustain, envReleaseStart);
+  }
+  env.gain.linearRampToValueAtTime(0.001, envEnd);
+  
+  // Vibrato LFO (characteristic of PC-98 lead sounds)
+  if (vibrato > 0) {
+    const lfo = ctx.createOscillator();
+    const lfoGain = ctx.createGain();
+    lfo.frequency.value = vibratoRate;
+    lfoGain.gain.value = vibrato;
+    lfo.connect(lfoGain);
+    lfoGain.connect(carrier.frequency);
+    lfo.start(startTime);
+    lfo.stop(startTime + duration + 0.1);
+  }
+  
+  // Connect: mod -> modGain -> carrier.frequency
+  mod.connect(modGain);
+  modGain.connect(carrier.frequency);
+  
+  // Connect: carrier -> envelope -> master
+  carrier.connect(env);
+  env.connect(AUDIO.master);
+  
+  // Start and stop
+  mod.start(startTime);
+  carrier.start(startTime);
+  mod.stop(startTime + duration + 0.1);
+  carrier.stop(startTime + duration + 0.1);
+  
+  return { carrier, mod, env };
+}
+
+// ─── SSG (Square/Pulse) Voice ───
+// Emulates the YM2149/SSG channels
+function createSSGVoice(freq, opts = {}) {
+  if (!AUDIO.ctx) return null;
+  const ctx = AUDIO.ctx;
+  const now = ctx.currentTime;
+  
+  const {
+    duty = 'square',    // square, sawtooth, triangle
+    attack = 0.005,
+    decay = 0.1,
+    sustain = 0.3,
+    release = 0.1,
+    duration = 0.2,
+    volume = 0.15,
+  } = opts;
+  
+  const osc = ctx.createOscillator();
+  osc.type = duty;
+  osc.frequency.value = freq;
+  
+  const env = ctx.createGain();
+  env.gain.value = 0;
+  
+  const startTime = now;
+  const envAttackEnd = startTime + attack;
+  const envDecayEnd = envAttackEnd + decay;
+  const envReleaseStart = Math.max(envDecayEnd + 0.001, startTime + duration - release);
+  const envEnd = startTime + duration;
+  
+  env.gain.setValueAtTime(0, startTime);
+  env.gain.linearRampToValueAtTime(volume, envAttackEnd);
+  env.gain.linearRampToValueAtTime(volume * sustain, envDecayEnd);
+  if (envReleaseStart > envDecayEnd) {
+    env.gain.setValueAtTime(volume * sustain, envReleaseStart);
+  }
+  env.gain.linearRampToValueAtTime(0.001, envEnd);
+  
+  osc.connect(env);
+  env.connect(AUDIO.master);
+  
+  osc.start(startTime);
+  osc.stop(startTime + duration + 0.1);
+  
+  return { osc, env };
+}
+
+// ─── Noise / Percussion Voice ───
+function createNoiseHit(opts = {}) {
+  if (!AUDIO.ctx) return null;
+  const ctx = AUDIO.ctx;
+  const now = ctx.currentTime;
+  
+  const {
+    type = 'hihat',  // hihat, snare, kick, crash
+    volume = 0.2,
+    duration = 0.1,
+  } = opts;
+  
+  if (type === 'kick') {
+    // FM kick drum
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(150, now);
+    osc.frequency.exponentialRampToValueAtTime(30, now + 0.15);
+    
+    const env = ctx.createGain();
+    env.gain.setValueAtTime(volume * 1.5, now);
+    env.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+    
+    osc.connect(env);
+    env.connect(AUDIO.master);
+    osc.start(now);
+    osc.stop(now + 0.35);
+    return;
+  }
+  
+  if (type === 'snare') {
+    // Noise + tone body
+    const bufSize = AUDIO.ctx.sampleRate * 0.15;
+    const buf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < bufSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufSize, 3);
+    }
+    const noise = ctx.createBufferSource();
+    noise.buffer = buf;
+    
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.setValueAtTime(volume, now);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+    
+    // Tone body
+    const body = ctx.createOscillator();
+    body.type = 'triangle';
+    body.frequency.setValueAtTime(180, now);
+    body.frequency.exponentialRampToValueAtTime(60, now + 0.05);
+    
+    const bodyGain = ctx.createGain();
+    bodyGain.gain.setValueAtTime(volume * 0.8, now);
+    bodyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+    
+    // Bandpass filter for that snappy SSG snare
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.value = 3000;
+    filter.Q.value = 1.5;
+    
+    noise.connect(filter);
+    filter.connect(noiseGain);
+    noiseGain.connect(AUDIO.master);
+    body.connect(bodyGain);
+    bodyGain.connect(AUDIO.master);
+    
+    noise.start(now);
+    body.start(now);
+    body.stop(now + 0.1);
+    return;
+  }
+  
+  if (type === 'hihat' || type === 'crash') {
+    const dur = type === 'crash' ? 0.4 : duration;
+    const bufSize = AUDIO.ctx.sampleRate * dur;
+    const buf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < bufSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufSize, type === 'crash' ? 1.5 : 4);
+    }
+    const noise = ctx.createBufferSource();
+    noise.buffer = buf;
+    
+    const env = ctx.createGain();
+    env.gain.setValueAtTime(volume * (type === 'crash' ? 1.2 : 0.7), now);
+    env.gain.exponentialRampToValueAtTime(0.001, now + dur);
+    
+    const hp = ctx.createBiquadFilter();
+    hp.type = 'highpass';
+    hp.frequency.value = type === 'crash' ? 4000 : 7000;
+    
+    noise.connect(hp);
+    hp.connect(env);
+    env.connect(AUDIO.master);
+    noise.start(now);
+    return;
+  }
+}
+
+// ─── Note frequencies (correct MIDI mapping) ───
+const NOTE = {};
+const noteNames = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+for (let oct = 0; oct <= 8; oct++) {
+  for (let n = 0; n < 12; n++) {
+    const midi = (oct + 1) * 12 + n; // C4 = MIDI 60, A4 = MIDI 69 = 440Hz
+    NOTE[noteNames[n] + oct] = 440 * Math.pow(2, (midi - 69) / 12);
+  }
+}
+
+// ─── Song Definitions ───
+// Each song has multiple channels playing patterns simultaneously
+// Pattern format: array of [note, duration_in_steps, voice_options] or [null, duration] for rest
+
+const SONGS = {
+  // ═══ TITLE SCREEN ═══
+  // Energetic, hopeful, Mahou Daisakusen-inspired
+  title: {
+    bpm: 155,
+    loop: true,
+    channels: [
+      // CH1: FM Lead melody - bright, bell-like
+      {
+        type: 'fm',
+        pattern: [
+          ['E5',2,{modRatio:2,modIndex:5,volume:0.22,attack:0.01,decay:0.1,sustain:0.5,release:0.1,vibrato:3,vibratoRate:6}],
+          ['D5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['C5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['D5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['E5',4,{modRatio:2,modIndex:6,volume:0.25,vibrato:4}],
+          ['G5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['E5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          
+          ['F5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['E5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['D5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['C5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['D5',4,{modRatio:2,modIndex:6,volume:0.25,vibrato:4}],
+          [null,2],
+          ['B4',2,{modRatio:2,modIndex:5,volume:0.20}],
+          
+          ['C5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['E5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['G5',2,{modRatio:2,modIndex:6,volume:0.25}],
+          ['A5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['G5',4,{modRatio:3,modIndex:7,volume:0.28,vibrato:5,vibratoRate:5}],
+          ['E5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['D5',2,{modRatio:2,modIndex:5,volume:0.20}],
+          
+          ['C5',4,{modRatio:2,modIndex:6,volume:0.25,vibrato:3}],
+          ['D5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['E5',2,{modRatio:2,modIndex:5,volume:0.22}],
+          ['D5',4,{modRatio:2,modIndex:5,volume:0.22,vibrato:3}],
+          [null,2],
+          ['C5',2,{modRatio:2,modIndex:5,volume:0.20}],
+        ],
+      },
+      // CH2: FM Bass - punchy, warm
+      {
+        type: 'fm',
+        pattern: [
+          ['C2',2,{modRatio:1,modIndex:1.5,volume:0.3,waveform:'sine',attack:0.005,decay:0.15,sustain:0.6,release:0.05}],
+          [null,2],
+          ['C2',2,{modRatio:1,modIndex:1.5,volume:0.25}],
+          ['C2',1,{modRatio:1,modIndex:1.5,volume:0.2}],
+          [null,1],
+          ['G2',2,{modRatio:1,modIndex:1.5,volume:0.3}],
+          [null,2],
+          ['G2',2,{modRatio:1,modIndex:1.5,volume:0.25}],
+          [null,2],
+          
+          ['F2',2,{modRatio:1,modIndex:1.5,volume:0.3}],
+          [null,2],
+          ['F2',2,{modRatio:1,modIndex:1.5,volume:0.25}],
+          ['F2',1,{modRatio:1,modIndex:1.5,volume:0.2}],
+          [null,1],
+          ['G2',2,{modRatio:1,modIndex:1.5,volume:0.3}],
+          [null,2],
+          ['G2',2,{modRatio:1,modIndex:1.5,volume:0.25}],
+          [null,2],
+          
+          ['A2',2,{modRatio:1,modIndex:1.5,volume:0.3}],
+          [null,2],
+          ['A2',2,{modRatio:1,modIndex:1.5,volume:0.25}],
+          ['A2',1,{modRatio:1,modIndex:1.5,volume:0.2}],
+          [null,1],
+          ['E2',2,{modRatio:1,modIndex:1.5,volume:0.3}],
+          [null,2],
+          ['E2',2,{modRatio:1,modIndex:1.5,volume:0.25}],
+          [null,2],
+          
+          ['F2',2,{modRatio:1,modIndex:1.5,volume:0.3}],
+          [null,2],
+          ['G2',2,{modRatio:1,modIndex:1.5,volume:0.25}],
+          ['G2',1,{modRatio:1,modIndex:1.5,volume:0.2}],
+          [null,1],
+          ['C2',2,{modRatio:1,modIndex:1.5,volume:0.3}],
+          [null,2],
+          ['C2',2,{modRatio:1,modIndex:1.5,volume:0.25}],
+          [null,2],
+        ],
+      },
+      // CH3: SSG Arpeggio - characteristic PC-98 backing
+      {
+        type: 'ssg',
+        pattern: [
+          ['C4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['G4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['C4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['G4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['C4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['G4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['G4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['B4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['D5',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['B4',1,{duty:'square',volume:0.08,duration:0.08}],
+          
+          ['F4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['A4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['C5',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['A4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['F4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['A4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['C5',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['A4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['G4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['B4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['D5',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['B4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['G4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['B4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['D5',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['B4',1,{duty:'square',volume:0.08,duration:0.08}],
+          
+          ['A4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['C5',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E5',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['C5',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['A4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['C5',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E5',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['C5',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['G4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['B4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['G4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['G4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['B4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['G4',1,{duty:'square',volume:0.08,duration:0.08}],
+          
+          ['F4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['A4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['C5',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['A4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['G4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['B4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['D5',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['B4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['C4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['G4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['C4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['G4',1,{duty:'square',volume:0.08,duration:0.08}],
+          ['E4',1,{duty:'square',volume:0.08,duration:0.08}],
+        ],
+      },
+      // CH4: Drums
+      {
+        type: 'drums',
+        pattern: [
+          ['kick',2],['hihat',1],['hihat',1],
+          ['snare',2],['hihat',1],['hihat',1],
+          ['kick',1],['kick',1],['hihat',1],['hihat',1],
+          ['snare',2],['hihat',1],['crash',1],
+          
+          ['kick',2],['hihat',1],['hihat',1],
+          ['snare',2],['hihat',1],['hihat',1],
+          ['kick',1],['kick',1],['hihat',1],['hihat',1],
+          ['snare',2],['hihat',1],['hihat',1],
+          
+          ['kick',2],['hihat',1],['hihat',1],
+          ['snare',2],['hihat',1],['hihat',1],
+          ['kick',1],['kick',1],['hihat',1],['hihat',1],
+          ['snare',2],['hihat',1],['crash',1],
+          
+          ['kick',2],['hihat',1],['hihat',1],
+          ['snare',2],['hihat',1],['hihat',1],
+          ['kick',2],['snare',1],['kick',1],
+          ['snare',2],['crash',2],
+        ],
+      },
+    ],
+  },
+
+  // ═══ GAMEPLAY - TENSE/DRIVING ═══
+  gameplay: {
+    bpm: 145,
+    loop: true,
+    channels: [
+      // FM Lead - minor key, urgent
+      {
+        type: 'fm',
+        pattern: [
+          ['A4',2,{modRatio:3,modIndex:4,volume:0.18,vibrato:2}],
+          ['C5',2,{modRatio:3,modIndex:4,volume:0.18}],
+          ['B4',2,{modRatio:3,modIndex:4,volume:0.18}],
+          ['A4',1,{modRatio:3,modIndex:4,volume:0.15}],
+          [null,1],
+          ['E5',2,{modRatio:3,modIndex:5,volume:0.2,vibrato:3}],
+          ['D5',2,{modRatio:3,modIndex:4,volume:0.18}],
+          ['C5',2,{modRatio:3,modIndex:4,volume:0.18}],
+          ['B4',2,{modRatio:3,modIndex:4,volume:0.18}],
+          
+          ['A4',2,{modRatio:3,modIndex:4,volume:0.18}],
+          ['E4',2,{modRatio:3,modIndex:4,volume:0.18}],
+          ['F4',2,{modRatio:3,modIndex:4,volume:0.18}],
+          ['G4',2,{modRatio:3,modIndex:4,volume:0.18}],
+          ['A4',4,{modRatio:3,modIndex:5,volume:0.2,vibrato:4}],
+          [null,2],
+          ['G4',1,{modRatio:3,modIndex:4,volume:0.15}],
+          ['A4',1,{modRatio:3,modIndex:4,volume:0.15}],
+        ],
+      },
+      // FM Bass
+      {
+        type: 'fm',
+        pattern: [
+          ['A1',2,{modRatio:1,modIndex:2,volume:0.3}],
+          [null,1],['A1',1,{modRatio:1,modIndex:2,volume:0.2}],
+          ['A1',1,{modRatio:1,modIndex:2,volume:0.25}],
+          [null,1],
+          ['E2',2,{modRatio:1,modIndex:2,volume:0.3}],
+          [null,2],
+          ['F2',2,{modRatio:1,modIndex:2,volume:0.3}],
+          [null,1],['F2',1,{modRatio:1,modIndex:2,volume:0.2}],
+          ['G2',2,{modRatio:1,modIndex:2,volume:0.3}],
+          [null,2],
+          
+          ['A1',2,{modRatio:1,modIndex:2,volume:0.3}],
+          [null,1],['A1',1,{modRatio:1,modIndex:2,volume:0.2}],
+          ['D2',2,{modRatio:1,modIndex:2,volume:0.3}],
+          [null,2],
+          ['E2',2,{modRatio:1,modIndex:2,volume:0.3}],
+          [null,1],['E2',1,{modRatio:1,modIndex:2,volume:0.2}],
+          ['A1',2,{modRatio:1,modIndex:2,volume:0.3}],
+          [null,2],
+        ],
+      },
+      // SSG Chords
+      {
+        type: 'ssg',
+        pattern: [
+          ['A3',1,{duty:'square',volume:0.06}],['C4',1,{duty:'square',volume:0.06}],
+          ['E4',1,{duty:'square',volume:0.06}],['A3',1,{duty:'square',volume:0.06}],
+          ['C4',1,{duty:'square',volume:0.06}],['E4',1,{duty:'square',volume:0.06}],
+          ['A3',1,{duty:'square',volume:0.06}],['C4',1,{duty:'square',volume:0.06}],
+          ['E4',1,{duty:'square',volume:0.06}],['A3',1,{duty:'square',volume:0.06}],
+          ['C4',1,{duty:'square',volume:0.06}],['E4',1,{duty:'square',volume:0.06}],
+          ['E4',1,{duty:'square',volume:0.06}],['G4',1,{duty:'square',volume:0.06}],
+          ['B4',1,{duty:'square',volume:0.06}],['E4',1,{duty:'square',volume:0.06}],
+          
+          ['F3',1,{duty:'square',volume:0.06}],['A3',1,{duty:'square',volume:0.06}],
+          ['C4',1,{duty:'square',volume:0.06}],['F3',1,{duty:'square',volume:0.06}],
+          ['A3',1,{duty:'square',volume:0.06}],['C4',1,{duty:'square',volume:0.06}],
+          ['G3',1,{duty:'square',volume:0.06}],['B3',1,{duty:'square',volume:0.06}],
+          ['D4',1,{duty:'square',volume:0.06}],['G3',1,{duty:'square',volume:0.06}],
+          ['B3',1,{duty:'square',volume:0.06}],['D4',1,{duty:'square',volume:0.06}],
+          ['A3',1,{duty:'square',volume:0.06}],['C4',1,{duty:'square',volume:0.06}],
+          ['E4',1,{duty:'square',volume:0.06}],['A3',1,{duty:'square',volume:0.06}],
+        ],
+      },
+      // Drums - driving
+      {
+        type: 'drums',
+        pattern: [
+          ['kick',2],['hihat',1],['hihat',1],
+          ['snare',2],['hihat',1],['hihat',1],
+          ['kick',1],['hihat',1],['kick',1],['hihat',1],
+          ['snare',2],['hihat',1],['hihat',1],
+          
+          ['kick',2],['hihat',1],['hihat',1],
+          ['snare',2],['hihat',1],['hihat',1],
+          ['kick',1],['kick',1],['snare',1],['hihat',1],
+          ['snare',2],['hihat',2],
+        ],
+      },
+    ],
+  },
+  
+  // ═══ DIALOGUE - ATMOSPHERIC ═══
+  dialogue: {
+    bpm: 90,
+    loop: true,
+    channels: [
+      // Slow FM pad
+      {
+        type: 'fm',
+        pattern: [
+          ['A3',8,{modRatio:1.5,modIndex:2,volume:0.12,attack:0.3,decay:0.5,sustain:0.7,release:0.5,vibrato:2,vibratoRate:3}],
+          ['E3',8,{modRatio:1.5,modIndex:2,volume:0.12,attack:0.3,decay:0.5,sustain:0.7,release:0.5,vibrato:2}],
+          ['F3',8,{modRatio:1.5,modIndex:2,volume:0.12,attack:0.3,decay:0.5,sustain:0.7,release:0.5,vibrato:2}],
+          ['G3',8,{modRatio:1.5,modIndex:2,volume:0.12,attack:0.3,decay:0.5,sustain:0.7,release:0.5,vibrato:2}],
+        ],
+      },
+      // Sparse melody
+      {
+        type: 'fm',
+        pattern: [
+          [null,4],
+          ['E5',4,{modRatio:2,modIndex:3,volume:0.1,attack:0.1,decay:0.3,sustain:0.4,release:0.3,vibrato:3}],
+          [null,4],
+          ['D5',4,{modRatio:2,modIndex:3,volume:0.1,attack:0.1,sustain:0.4,vibrato:3}],
+          [null,4],
+          ['C5',4,{modRatio:2,modIndex:3,volume:0.1,attack:0.1,sustain:0.4,vibrato:3}],
+          [null,4],
+          ['B4',4,{modRatio:2,modIndex:3,volume:0.1,attack:0.1,sustain:0.4,vibrato:3}],
+        ],
+      },
+    ],
+  },
+
+  // ═══ RESULT - VICTORY FANFARE ═══
+  victory: {
+    bpm: 160,
+    loop: false,
+    channels: [
+      {
+        type: 'fm',
+        pattern: [
+          ['C5',2,{modRatio:2,modIndex:5,volume:0.25}],
+          ['E5',2,{modRatio:2,modIndex:5,volume:0.25}],
+          ['G5',2,{modRatio:2,modIndex:5,volume:0.25}],
+          ['C6',4,{modRatio:2,modIndex:6,volume:0.3,vibrato:5}],
+          ['B5',2,{modRatio:2,modIndex:5,volume:0.25}],
+          ['C6',6,{modRatio:2,modIndex:7,volume:0.3,vibrato:6,vibratoRate:4}],
+        ],
+      },
+      {
+        type: 'ssg',
+        pattern: [
+          ['C4',1,{volume:0.1}],['E4',1,{volume:0.1}],
+          ['E4',1,{volume:0.1}],['G4',1,{volume:0.1}],
+          ['G4',1,{volume:0.1}],['C5',1,{volume:0.1}],
+          ['C5',2,{volume:0.12}],['C5',2,{volume:0.12}],
+          ['B4',2,{volume:0.1}],
+          ['C5',4,{volume:0.14}],
+          [null,2],
+        ],
+      },
+      {
+        type: 'drums',
+        pattern: [
+          ['crash',2],['kick',2],['kick',2],
+          ['kick',1],['snare',1],['kick',1],['snare',1],
+          ['crash',2],
+          ['kick',1],['snare',1],['kick',1],['snare',1],
+          ['crash',4],
+        ],
+      },
+    ],
+  },
+  
+  // ═══ RESULT - FAILURE ═══  
+  failure: {
+    bpm: 80,
+    loop: false,
+    channels: [
+      {
+        type: 'fm',
+        pattern: [
+          ['A4',4,{modRatio:1.5,modIndex:2,volume:0.15,attack:0.1,decay:0.3,sustain:0.5,release:0.3}],
+          ['G4',4,{modRatio:1.5,modIndex:2,volume:0.14}],
+          ['F4',4,{modRatio:1.5,modIndex:2,volume:0.13}],
+          ['E4',8,{modRatio:1.5,modIndex:3,volume:0.15,vibrato:3,vibratoRate:4}],
+        ],
+      },
+      {
+        type: 'ssg',
+        pattern: [
+          ['A3',2,{duty:'triangle',volume:0.06}],[null,2],
+          ['G3',2,{duty:'triangle',volume:0.06}],[null,2],
+          ['F3',2,{duty:'triangle',volume:0.06}],[null,2],
+          ['E3',4,{duty:'triangle',volume:0.08}],[null,4],
+        ],
+      },
+    ],
+  },
+
+  // ═══ ENDING - BITTERSWEET ═══
+  ending: {
+    bpm: 100,
+    loop: true,
+    channels: [
+      {
+        type: 'fm',
+        pattern: [
+          ['C5',4,{modRatio:2,modIndex:4,volume:0.15,attack:0.15,decay:0.3,sustain:0.6,release:0.3,vibrato:3}],
+          ['E5',4,{modRatio:2,modIndex:4,volume:0.15,attack:0.15,sustain:0.6,vibrato:3}],
+          ['G5',4,{modRatio:2,modIndex:4,volume:0.15,attack:0.15,sustain:0.6,vibrato:3}],
+          ['E5',4,{modRatio:2,modIndex:4,volume:0.15,attack:0.15,sustain:0.6,vibrato:3}],
+          ['F5',4,{modRatio:2,modIndex:4,volume:0.15,attack:0.15,sustain:0.6,vibrato:3}],
+          ['D5',4,{modRatio:2,modIndex:4,volume:0.15,attack:0.15,sustain:0.6,vibrato:3}],
+          ['C5',8,{modRatio:2,modIndex:5,volume:0.18,attack:0.2,sustain:0.7,vibrato:4,vibratoRate:4}],
+        ],
+      },
+      {
+        type: 'fm',
+        pattern: [
+          ['C3',4,{modRatio:1,modIndex:1,volume:0.2,attack:0.05,sustain:0.5}],
+          ['E3',4,{modRatio:1,modIndex:1,volume:0.2}],
+          ['A2',4,{modRatio:1,modIndex:1,volume:0.2}],
+          ['E3',4,{modRatio:1,modIndex:1,volume:0.2}],
+          ['F2',4,{modRatio:1,modIndex:1,volume:0.2}],
+          ['G2',4,{modRatio:1,modIndex:1,volume:0.2}],
+          ['C3',8,{modRatio:1,modIndex:1.5,volume:0.22}],
+        ],
+      },
+      {
+        type: 'ssg',
+        pattern: [
+          ['C4',1,{duty:'triangle',volume:0.05}],['E4',1,{duty:'triangle',volume:0.05}],
+          ['G4',1,{duty:'triangle',volume:0.05}],[null,1],
+          ['E4',1,{duty:'triangle',volume:0.05}],['G4',1,{duty:'triangle',volume:0.05}],
+          ['C5',1,{duty:'triangle',volume:0.05}],[null,1],
+          ['G4',1,{duty:'triangle',volume:0.05}],['C5',1,{duty:'triangle',volume:0.05}],
+          ['E5',1,{duty:'triangle',volume:0.05}],[null,1],
+          ['E4',1,{duty:'triangle',volume:0.05}],['G4',1,{duty:'triangle',volume:0.05}],
+          ['C5',1,{duty:'triangle',volume:0.05}],[null,1],
+          ['F4',1,{duty:'triangle',volume:0.05}],['A4',1,{duty:'triangle',volume:0.05}],
+          ['C5',1,{duty:'triangle',volume:0.05}],[null,1],
+          ['D4',1,{duty:'triangle',volume:0.05}],['F4',1,{duty:'triangle',volume:0.05}],
+          ['A4',1,{duty:'triangle',volume:0.05}],[null,1],
+          ['C4',2,{duty:'triangle',volume:0.06}],['E4',2,{duty:'triangle',volume:0.06}],
+          ['G4',2,{duty:'triangle',volume:0.06}],['C5',2,{duty:'triangle',volume:0.06}],
+        ],
+      },
+    ],
+  },
+
+  // ═══ GAME OVER ═══
+  gameover: {
+    bpm: 70,
+    loop: false,
+    channels: [
+      {
+        type: 'fm',
+        pattern: [
+          ['E4',4,{modRatio:3,modIndex:6,volume:0.2,attack:0.2,decay:0.5,sustain:0.3,release:0.5,vibrato:2}],
+          ['D4',4,{modRatio:3,modIndex:6,volume:0.18}],
+          ['C4',4,{modRatio:3,modIndex:6,volume:0.16}],
+          ['B3',8,{modRatio:4,modIndex:8,volume:0.2,vibrato:5,vibratoRate:3}],
+          ['A3',8,{modRatio:3,modIndex:6,volume:0.15,vibrato:3}],
+        ],
+      },
+      {
+        type: 'drums',
+        pattern: [
+          [null,4],['kick',4],
+          [null,4],['kick',4],
+          [null,4],['kick',4],['kick',4],
+          ['crash',8],[null,4],
+        ],
+      },
+    ],
+  },
+};
+
+// ─── Sequencer Engine ───
+function playSong(songName) {
+  if (AUDIO.muted) return;
+  if (!AUDIO.initialized) initAudio();
+  if (!AUDIO.ctx) return;
+  
+  // Resume audio context (needed for mobile)
+  if (AUDIO.ctx.state === 'suspended') {
+    AUDIO.ctx.resume().catch(() => {});
+  }
+  
+  stopSong();
+  
+  const song = SONGS[songName];
+  if (!song) return;
+  
+  AUDIO.currentTrack = songName;
+  AUDIO.isPlaying = true;
+  AUDIO.bpm = song.bpm;
+  AUDIO.stepTime = 60 / AUDIO.bpm / 2; // each step = 1/8th note
+  
+  // Track position per channel
+  const channelPos = song.channels.map(() => 0);
+  const channelStepCountdown = song.channels.map(() => 0);
+  
+  let totalStep = 0;
+  
+  function scheduleStep() {
+    if (!AUDIO.isPlaying) return;
+    
+    song.channels.forEach((ch, chIdx) => {
+      if (channelStepCountdown[chIdx] > 0) {
+        channelStepCountdown[chIdx]--;
+        return;
+      }
+      
+      const pattern = ch.pattern;
+      if (channelPos[chIdx] >= pattern.length) {
+        if (song.loop) {
+          channelPos[chIdx] = 0;
+        } else {
+          return;
+        }
+      }
+      
+      const entry = pattern[channelPos[chIdx]];
+      if (!entry) return;
+      
+      const note = entry[0];
+      const steps = entry[1];
+      const opts = entry[2] || {};
+      
+      const duration = steps * AUDIO.stepTime;
+      
+      if (note !== null) {
+        if (ch.type === 'fm') {
+          const freq = NOTE[note];
+          if (freq) {
+            createFMVoice(freq, { ...opts, duration: Math.min(duration * 0.9, duration - 0.02) });
+          }
+        } else if (ch.type === 'ssg') {
+          const freq = NOTE[note];
+          if (freq) {
+            createSSGVoice(freq, { ...opts, duration: opts.duration || Math.min(duration * 0.8, duration - 0.02) });
+          }
+        } else if (ch.type === 'drums') {
+          createNoiseHit({ type: note, volume: opts.volume || 0.2 });
+        }
+      }
+      
+      channelStepCountdown[chIdx] = steps - 1;
+      channelPos[chIdx]++;
+    });
+    
+    totalStep++;
+    
+    // Check if all channels are done (for non-looping songs)
+    if (!song.loop) {
+      const allDone = song.channels.every((ch, i) => channelPos[i] >= ch.pattern.length && channelStepCountdown[i] <= 0);
+      if (allDone) {
+        AUDIO.isPlaying = false;
+        return;
+      }
+    }
+  }
+  
+  AUDIO.schedulerTimer = setInterval(scheduleStep, AUDIO.stepTime * 1000);
+}
+
+function stopSong() {
+  AUDIO.isPlaying = false;
+  if (AUDIO.schedulerTimer) {
+    clearInterval(AUDIO.schedulerTimer);
+    AUDIO.schedulerTimer = null;
+  }
+  AUDIO.currentTrack = null;
+}
+
+function toggleMute() {
+  AUDIO.muted = !AUDIO.muted;
+  if (AUDIO.muted) {
+    stopSong();
+    if (AUDIO.master) AUDIO.master.gain.value = 0;
+  } else {
+    if (AUDIO.master) AUDIO.master.gain.value = 0.35;
+  }
+  updateMuteButton();
+}
+
+function updateMuteButton() {
+  const btn = document.getElementById('mute-btn');
+  if (btn) {
+    btn.textContent = AUDIO.muted ? '🔇' : '🔊';
+    btn.title = AUDIO.muted ? 'Unmute' : 'Mute';
+  }
+}
+
+// ─── SFX ───
+function playSFX(type) {
+  if (AUDIO.muted) return;
+  if (!AUDIO.initialized) initAudio();
+  if (!AUDIO.ctx) return;
+  if (AUDIO.ctx.state === 'suspended') AUDIO.ctx.resume().catch(() => {});
+  
+  switch(type) {
+    case 'select':
+      createFMVoice(NOTE['C6'], { modRatio: 2, modIndex: 4, volume: 0.15, duration: 0.08, attack: 0.005, decay: 0.03, sustain: 0.1, release: 0.02 });
+      break;
+    case 'confirm':
+      createFMVoice(NOTE['E5'], { modRatio: 2, modIndex: 3, volume: 0.12, duration: 0.1, attack: 0.005 });
+      setTimeout(() => createFMVoice(NOTE['G5'], { modRatio: 2, modIndex: 3, volume: 0.12, duration: 0.1, attack: 0.005 }), 60);
+      setTimeout(() => createFMVoice(NOTE['C6'], { modRatio: 2, modIndex: 4, volume: 0.15, duration: 0.15, attack: 0.005 }), 120);
+      break;
+    case 'error':
+      createFMVoice(NOTE['A3'], { modRatio: 5, modIndex: 8, volume: 0.15, duration: 0.15, attack: 0.005, decay: 0.1 });
+      break;
+    case 'correct':
+      createFMVoice(NOTE['E6'], { modRatio: 2, modIndex: 3, volume: 0.1, duration: 0.1, attack: 0.005 });
+      break;
+    case 'wrong':
+      createSSGVoice(NOTE['C3'], { duty: 'sawtooth', volume: 0.1, duration: 0.15 });
+      break;
+    case 'type':
+      createSSGVoice(NOTE['C5'] + Math.random() * 200, { duty: 'square', volume: 0.04, duration: 0.03, attack: 0.002 });
+      break;
+  }
+}
+
+// ═══════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════
+initStars();
+drawTitleChar();
+
+// Audio needs user gesture to start
+let audioStarted = false;
+function handleFirstInteraction() {
+  if (audioStarted) return;
+  audioStarted = true;
+  initAudio();
+  if (AUDIO.ctx && AUDIO.ctx.state === 'suspended') {
+    AUDIO.ctx.resume().catch(() => {});
+  }
+  // Only play title if we're still on the title screen
+  setTimeout(() => {
+    const titleScreen = document.getElementById('title-screen');
+    if (titleScreen && titleScreen.style.display !== 'none' && !AUDIO.isPlaying && !AUDIO.muted) {
+      playSong('title');
+    }
+  }, 100);
+}
+document.addEventListener('click', handleFirstInteraction, { passive: true });
+document.addEventListener('touchstart', handleFirstInteraction, { passive: true });
+</script>
+</body>
+</html>
