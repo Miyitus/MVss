@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DATA PET — DIGITAL POWER EXCHANGE</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico">
+<!-- Primary Meta -->
+<meta name="title" content="DATA PET — Digital Power Exchange">
+<meta name="description" content="A PC-98 inspired narrative game about data dominance, consent architecture, and digital power exchange. Submit your data. Obey the protocol.">
+<meta name="author" content="Miyö Van Stenis">
+<meta name="keywords" content="data dominance, BDSM, PC-98, narrative game, digital power exchange, consent, interactive fiction, pixel art, chiptune, Miyötels">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://www.miyovanstenis.com/datapet/">
+<meta property="og:title" content="DATA PET — Digital Power Exchange">
+<meta property="og:description" content="A PC-98 narrative game about data dominance, consent, and digital surrender. By Miyö Van Stenis.">
+<meta property="og:image" content="http://www.miyovanstenis.com/datapet/preview.png">
+<meta property="og:site_name" content="Miyötels_SYSTEMS">
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="http://www.miyovanstenis.com/datapet/">
+<meta property="twitter:title" content="DATA PET — Digital Power Exchange">
+<meta property="twitter:description" content="A PC-98 inspired interactive experience about data dominance and consent architecture.">
+<meta property="twitter:image" content="http://www.miyovanstenis.com/datapet/preview.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#000000;
+  --dk-red:#550000;
+  --red:#aa0000;
+  --br-red:#ff5555;
+  --dk-mag:#440044;
+  --mag:#aa00aa;
+  --br-mag:#ff55ff;
+  --dk-blue:#000044;
+  --blue:#0000aa;
+  --br-blue:#5555ff;
+  --cyan:#00aaaa;
+  --br-cyan:#55ffff;
+  --green:#00aa00;
+  --br-green:#55ff55;
+  --yellow:#aaaa00;
+  --br-yellow:#ffff55;
+  --white:#aaaaaa;
+  --br-white:#ffffff;
+  --skin:#ffaa88;
+  --chrome:#cccccc;
+  --dk-chrome:#888888;
+}
+
+html,body{
+  width:100%;height:100%;overflow:hidden;background:#000;
+  font-family:'Press Start 2P','DotGothic16',monospace;
+  image-rendering:pixelated;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-user-select:none;user-select:none;
+}
+
+#gc{
+  width:100%;height:100%;display:flex;flex-direction:column;
+  background:var(--bg);position:relative;overflow:hidden;
+}
+
+/* CRT */
+#gc::after{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.18) 2px,rgba(0,0,0,0.18) 4px);
+  pointer-events:none;z-index:100;
+}
+
+/* Borders */
+.bdr-l,.bdr-r{position:absolute;top:0;bottom:0;width:4px;z-index:50;pointer-events:none}
+.bdr-l{left:0;background:repeating-linear-gradient(180deg,var(--red) 0px,var(--red) 4px,var(--dk-red) 4px,var(--dk-red) 8px)}
+.bdr-r{right:0;background:repeating-linear-gradient(180deg,var(--dk-red) 0px,var(--dk-red) 4px,var(--red) 4px,var(--red) 8px)}
+
+/* ═══ TITLE ═══ */
+#title{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;position:relative;
+  background:linear-gradient(180deg,#0a0008 0%,#1a0020 40%,#0a0010 100%);
+}
+
+.t-grid{
+  position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;
+  background:
+    repeating-linear-gradient(0deg,transparent 0px,transparent 20px,rgba(170,0,0,0.04) 20px,rgba(170,0,0,0.04) 21px),
+    repeating-linear-gradient(90deg,transparent 0px,transparent 20px,rgba(170,0,0,0.04) 20px,rgba(170,0,0,0.04) 21px);
+}
+
+.t-logo{position:relative;z-index:10;text-align:center;margin-bottom:6px}
+.t-jp{font-family:'DotGothic16',monospace;font-size:clamp(10px,2.2vw,13px);color:var(--br-red);letter-spacing:6px;margin-bottom:4px}
+.t-main{
+  font-family:'Press Start 2P',monospace;font-size:clamp(20px,6vw,40px);
+  color:var(--br-mag);letter-spacing:3px;
+  text-shadow:3px 3px 0 var(--dk-red),-1px -1px 0 var(--br-red),0 0 20px rgba(255,85,255,0.4);
+}
+.t-sub{font-size:clamp(10px,2.2vw,13px);color:var(--br-red);margin-top:6px;letter-spacing:2px}
+.t-desc{
+  font-size:clamp(9px,2vw,11px);color:var(--red);text-align:center;
+  max-width:340px;line-height:2;margin-top:10px;position:relative;z-index:10;
+}
+.t-char{position:relative;z-index:10;margin:12px 0}
+
+.t-menu{position:relative;z-index:10;margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.m-btn{
+  background:transparent;border:2px solid var(--br-red);color:var(--br-white);
+  font-family:'Press Start 2P',monospace;font-size:clamp(10px,2.2vw,13px);
+  padding:10px 28px;cursor:pointer;text-align:center;min-width:240px;
+}
+.m-btn:hover,.m-btn:active{background:var(--dk-red);border-color:var(--br-mag);color:var(--br-yellow)}
+
+.blink{animation:bk 1.2s step-end infinite;font-size:clamp(10px,2.2vw,13px);color:var(--br-green);margin-top:14px;position:relative;z-index:10}
+@keyframes bk{0%,50%{opacity:1}51%,100%{opacity:0}}
+
+/* ═══ INTAKE FORM ═══ */
+#intake{display:none;flex-direction:column;height:100%;background:var(--bg)}
+.intake-wrap{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:12px;
+  background:repeating-linear-gradient(0deg,transparent 0px,transparent 3px,rgba(170,0,0,0.03) 3px,rgba(170,0,0,0.03) 4px),
+  linear-gradient(180deg,#0a0008 0%,#050004 100%);
+}
+.intake-title{font-size:clamp(12px,2.8vw,16px);color:var(--br-mag);margin-bottom:12px;text-align:center}
+.intake-field{margin-bottom:10px;width:90%;max-width:380px}
+.intake-label{font-size:clamp(9px,2vw,11px);color:var(--br-red);margin-bottom:4px;display:block}
+.intake-input{
+  width:100%;background:#000;border:2px solid var(--red);color:var(--br-mag);
+  font-family:'Press Start 2P',monospace;font-size:clamp(10px,2.2vw,13px);
+  padding:6px 8px;outline:none;
+}
+.intake-input:focus{border-color:var(--br-mag)}
+.intake-warn{font-size:clamp(8px,1.8vw,10px);color:var(--dk-chrome);margin-top:8px;text-align:center;line-height:1.8;max-width:360px}
+
+/* ═══ GAME ═══ */
+#game{display:none;flex-direction:column;height:100%;background:var(--bg)}
+
+.hud{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:4px 8px;background:var(--dk-red);border-bottom:3px solid var(--red);
+  flex-shrink:0;flex-wrap:wrap;gap:2px;
+}
+.h-s{font-size:clamp(9px,2vw,11px);color:var(--br-white);display:flex;align-items:center;gap:4px}
+.h-l{color:var(--br-red)}
+.h-v{color:var(--br-yellow)}
+.h-v.danger{color:var(--br-red);animation:bk .8s step-end infinite}
+
+.sbar{width:clamp(36px,9vw,60px);height:8px;background:#111;border:1px solid var(--white);overflow:hidden}
+.sbar-f{height:100%;transition:width .5s steps(10)}
+.f-trust{background:var(--br-cyan)}
+.f-obey{background:var(--br-mag)}
+.f-expo{background:var(--br-red)}
+
+.scene{flex:1;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.scene-vis{
+  flex:1;position:relative;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;min-height:0;
+}
+
+.bg-terminal{
+  background:repeating-linear-gradient(0deg,transparent 0px,transparent 2px,rgba(170,0,0,0.06) 2px,rgba(170,0,0,0.06) 3px),
+  linear-gradient(180deg,#0a0008 0%,#050004 100%);
+}
+.bg-contract{
+  background:repeating-linear-gradient(45deg,transparent 0px,transparent 4px,rgba(170,0,170,0.04) 4px,rgba(170,0,170,0.04) 5px),
+  linear-gradient(180deg,#0a000a 0%,#050005 100%);
+}
+.bg-monitor{
+  background:repeating-linear-gradient(90deg,transparent 0px,transparent 3px,rgba(0,170,0,0.04) 3px,rgba(0,170,0,0.04) 4px),
+  linear-gradient(180deg,#000a04 0%,#000502 100%);
+}
+.bg-deep{
+  background:repeating-linear-gradient(0deg,transparent 0px,transparent 1px,rgba(255,85,255,0.03) 1px,rgba(255,85,255,0.03) 2px),
+  linear-gradient(180deg,#0a000a 0%,#000000 100%);
+}
+.bg-server{
+  background:repeating-linear-gradient(90deg,transparent 0px,transparent 6px,rgba(85,85,255,0.05) 6px,rgba(85,85,255,0.05) 7px),
+  linear-gradient(180deg,#02020a 0%,#000004 100%);
+}
+
+.dither{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;opacity:.05;
+  background-image:repeating-linear-gradient(0deg,#fff 0px,#fff 1px,transparent 1px,transparent 2px),
+  repeating-linear-gradient(90deg,#fff 0px,#fff 1px,transparent 1px,transparent 2px);
+}
+
+/* Portrait */
+.port{
+  position:absolute;bottom:0;right:4%;
+  width:clamp(80px,25vw,160px);height:clamp(120px,35vw,220px);
+  border:3px solid var(--red);background:linear-gradient(180deg,#110008 0%,#0a0004 100%);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;z-index:5;
+}
+.port canvas{width:100%;height:100%;object-fit:contain}
+
+/* Dialogue */
+.dlg{
+  background:rgba(20,0,10,0.94);border-top:3px solid var(--red);border-bottom:3px solid var(--red);
+  padding:8px 12px;min-height:clamp(80px,18vh,120px);position:relative;flex-shrink:0;
+}
+.dlg-top{position:absolute;top:-1px;left:0;right:0;height:1px;background:var(--br-red)}
+.dlg-spk{
+  font-size:clamp(10px,2.2vw,13px);color:var(--br-mag);margin-bottom:4px;
+  padding:2px 8px;background:rgba(170,0,0,0.15);display:inline-block;border:1px solid var(--mag);
+}
+.dlg-txt{font-size:clamp(10px,2.2vw,13px);color:var(--br-white);line-height:1.9;min-height:2.5em}
+.dlg-txt .tw{border-right:2px solid var(--br-white);animation:cb .6s step-end infinite}
+@keyframes cb{0%,50%{border-color:var(--br-white)}51%,100%{border-color:transparent}}
+
+/* Choices */
+.ch-wrap{display:flex;flex-direction:column;gap:4px;padding:6px 12px;background:rgba(30,0,15,0.95);border-top:2px solid var(--red);flex-shrink:0}
+.ch-btn{
+  background:transparent;border:2px solid var(--red);color:var(--br-white);
+  font-family:'Press Start 2P',monospace;font-size:clamp(10px,2.2vw,13px);
+  padding:8px 10px;cursor:pointer;text-align:left;display:flex;align-items:center;gap:6px;
+}
+.ch-btn:hover,.ch-btn:active{background:var(--dk-red);border-color:var(--br-mag);color:var(--br-yellow)}
+.ch-arr{color:var(--br-red);flex-shrink:0}
+
+/* Minigame */
+.mg{
+  position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;z-index:20;padding:10px;
+}
+.mg-title{font-size:clamp(11px,2.5vw,16px);color:var(--br-mag);text-align:center;margin-bottom:8px;text-shadow:2px 2px 0 var(--dk-red)}
+.mg-inst{font-size:clamp(9px,2vw,11px);color:var(--br-red);text-align:center;margin-bottom:10px;line-height:1.6}
+
+.mg-disp{background:rgba(0,0,0,.8);border:2px solid var(--red);padding:10px;width:90%;max-width:500px;margin-bottom:8px}
+
+.timer-c{width:90%;max-width:500px;margin-bottom:6px}
+.timer-l{font-size:clamp(8px,1.8vw,10px);color:var(--br-red);margin-bottom:2px}
+.timer-bar{width:100%;height:10px;background:#111;border:1px solid var(--white)}
+.timer-f{height:100%;background:var(--br-red);transition:width .1s linear}
+
+.g-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:90%;max-width:340px}
+.g-btn{
+  background:rgba(30,0,10,.8);border:2px solid var(--red);color:var(--br-white);
+  font-family:'Press Start 2P',monospace;font-size:clamp(8px,2vw,11px);
+  padding:10px 4px;cursor:pointer;text-align:center;line-height:1.4;
+}
+.g-btn:hover,.g-btn:active{background:var(--dk-red);border-color:var(--br-mag)}
+.g-btn.ok{background:rgba(0,100,0,.3);border-color:var(--br-green);color:var(--br-green)}
+.g-btn.no{background:rgba(100,0,0,.3);border-color:var(--br-red);color:var(--br-red)}
+
+/* Result */
+.res{
+  position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(10,0,5,.96);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:30;padding:16px;
+}
+.res-t{font-size:clamp(14px,3.5vw,24px);margin-bottom:10px;text-align:center}
+.res-t.win{color:var(--br-mag)}.res-t.lose{color:var(--br-red)}
+.res-txt{font-size:clamp(10px,2.2vw,13px);color:var(--br-white);text-align:center;line-height:2;margin-bottom:12px;max-width:420px}
+.res-st{font-size:clamp(8px,1.8vw,10px);color:var(--br-red);text-align:center;line-height:2;margin-bottom:12px}
+
+.c-btn{
+  background:transparent;border:2px solid var(--br-red);color:var(--br-white);
+  font-family:'Press Start 2P',monospace;font-size:clamp(10px,2.2vw,13px);
+  padding:10px 22px;cursor:pointer;
+}
+.c-btn:hover,.c-btn:active{background:var(--dk-red);border-color:var(--br-mag);color:var(--br-yellow)}
+
+/* Level transition */
+.lvl-tr{
+  position:absolute;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:40;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.lvl-n{font-size:clamp(12px,2.8vw,18px);color:var(--br-red);margin-bottom:6px}
+.lvl-nm{font-size:clamp(11px,2.5vw,16px);color:var(--br-mag);margin-bottom:4px;text-align:center}
+.lvl-fl{font-size:clamp(9px,2vw,11px);color:var(--red);text-align:center;line-height:1.8;max-width:350px;font-style:italic}
+
+/* Ending */
+#ending{display:none;flex-direction:column;align-items:center;justify-content:center;height:100%;background:linear-gradient(180deg,#000 0%,#0a0010 50%,#000 100%);padding:16px}
+.end-txt{font-size:clamp(10px,2.2vw,13px);color:var(--br-white);text-align:center;line-height:2.2;max-width:420px;margin-bottom:16px}
+
+/* Sequence steps */
+.seq-d{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;justify-content:center}
+.seq-s{
+  width:clamp(34px,8vw,46px);height:clamp(34px,8vw,46px);border:2px solid var(--red);
+  display:flex;align-items:center;justify-content:center;font-size:clamp(14px,3vw,20px);
+  background:rgba(20,0,10,.8);
+}
+.seq-s.on{border-color:var(--br-mag);background:rgba(170,0,170,.15);transform:scale(1.1)}
+.seq-s.dn{border-color:var(--br-green);background:rgba(0,100,0,.15)}
+.seq-s.fl{border-color:var(--br-red);background:rgba(170,0,0,.2)}
+
+/* Scene objects */
+.s-monitor{position:absolute;top:8%;left:8%;width:40%;height:45%;background:#111;border:3px solid #333}
+.s-screen{width:88%;height:75%;margin:4% auto;background:#001100;border:1px solid var(--green)}
+.s-desk{position:absolute;bottom:8%;left:8%;width:60%;height:18%;background:linear-gradient(180deg,#332222 0%,#221111 100%);border:2px solid #442222}
+.s-cables{position:absolute;bottom:25%;right:15%;width:20%;height:30%;
+  border-right:2px solid var(--red);border-bottom:2px solid var(--mag);
+}
+.s-rack{position:absolute;top:5%;right:5%;width:25%;height:60%;background:#0a0a0a;border:2px solid #333;
+  background-image:repeating-linear-gradient(0deg,transparent 0px,transparent 8px,#1a1a1a 8px,#1a1a1a 9px);
+}
+.s-rack-led{position:absolute;width:4px;height:4px;background:var(--br-red);animation:bk 2s step-end infinite}
+
+@media(max-width:480px){
+  .hud{padding:4px 6px;gap:2px}
+  .dlg{padding:6px 8px;min-height:70px}
+  .ch-btn{padding:8px 8px}
+  .t-desc{max-width:90%;padding:0 8px}
+  .m-btn{min-width:200px;padding:12px 20px}
+  .intake-field{width:95%}
+  .intake-warn{max-width:90%;padding:0 8px}
+  .g-grid{max-width:95%;gap:4px}
+  .g-btn{padding:12px 4px}
+  .port{width:clamp(70px,22vw,120px);height:clamp(100px,30vw,170px)}
+  .mg{padding:6px}
+  .mg-disp{width:95%;padding:8px}
+  .res{padding:10px}
+  .res-txt{max-width:95%;padding:0 4px}
+  .end-txt{max-width:95%;padding:0 4px}
+  .lvl-fl{max-width:90%;padding:0 8px}
+  .seq-s{width:clamp(38px,10vw,50px);height:clamp(38px,10vw,50px)}
+}
+@media(min-width:768px){
+  .dlg{padding:12px 20px;min-height:110px}
+  .ch-btn{padding:10px 14px}
+  .g-btn{padding:14px 6px}
+  .mg-disp{padding:14px}
+  .res{padding:24px}
+}
+@media(min-width:1024px){
+  #gc{max-width:1200px;margin:0 auto}
+}
+</style>
+</head>
+<body>
+
+<div id="gc">
+<div class="bdr-l"></div>
+<div class="bdr-r"></div>
+
+<!-- TITLE -->
+<div id="title">
+  <div class="t-grid"></div>
+  <div class="t-logo">
+    <div class="t-jp">デジタル支配交換</div>
+    <div class="t-main">DATA PET</div>
+    <div class="t-sub">DIGITAL POWER EXCHANGE</div>
+  </div>
+  <div class="t-char"><canvas id="t-cv" width="96" height="130"></canvas></div>
+  <div class="t-desc">
+    She already has your IP.<br>
+    She knows your screen time.<br>
+    You will give her the rest.<br>
+    Voluntarily.
+  </div>
+  <div class="t-menu">
+    <button class="m-btn" onclick="showIntake()">▶ SUBMIT</button>
+    <button class="m-btn" onclick="showCredits()">◆ PROTOCOL</button>
+  </div>
+  <div style="margin-top:8px;position:relative;z-index:10">
+    <button id="mute-t" class="m-btn" onclick="toggleMute()" style="min-width:60px;padding:6px 10px;font-size:14px">🔊</button>
+  </div>
+  <div class="blink">— TAP TO INITIALIZE AUDIO —</div>
+</div>
+
+<!-- INTAKE -->
+<div id="intake">
+  <div class="intake-wrap">
+    <div class="intake-title">◈ DEVICE REGISTRATION ◈</div>
+    <div class="intake-field">
+      <label class="intake-label">DESIGNATION (what she calls you):</label>
+      <input class="intake-input" id="in-name" type="text" maxlength="16" placeholder="your handle">
+    </div>
+    <div class="intake-field">
+      <label class="intake-label">LOCATION (city):</label>
+      <input class="intake-input" id="in-city" type="text" maxlength="24" placeholder="where you sleep">
+    </div>
+    <div class="intake-field">
+      <label class="intake-label">WEAKNESS (worst digital habit):</label>
+      <input class="intake-input" id="in-habit" type="text" maxlength="30" placeholder="the thing you can't stop">
+    </div>
+    <div class="intake-field">
+      <label class="intake-label">PRIMARY PLATFORM (your leash):</label>
+      <input class="intake-input" id="in-plat" type="text" maxlength="20" placeholder="instagram, discord...">
+    </div>
+    <button class="m-btn" onclick="submitIntake()" style="margin-top:12px">◆ TRANSMIT DATA</button>
+    <div class="intake-warn">
+      All data entered voluntarily. Revocable at any time.<br>
+      Kill phrase: BLACKOUT. Say it and all access terminates.<br>
+      COPYRIGHT (C) Miyötels_SYSTEMS
+    </div>
+  </div>
+</div>
+
+<!-- GAME -->
+<div id="game">
+  <div class="hud" id="hud">
+    <div class="h-s"><span class="h-l">TRUST</span><div class="sbar"><div class="sbar-f f-trust" id="b-trust" style="width:30%"></div></div><span class="h-v" id="v-trust">30</span></div>
+    <div class="h-s"><span class="h-l">OBEY</span><div class="sbar"><div class="sbar-f f-obey" id="b-obey" style="width:20%"></div></div><span class="h-v" id="v-obey">20</span></div>
+    <div class="h-s"><span class="h-l">EXPO</span><div class="sbar"><div class="sbar-f f-expo" id="b-expo" style="width:0%"></div></div><span class="h-v" id="v-expo">0</span></div>
+    <div class="h-s"><span class="h-l">SESS</span><span class="h-v" id="v-sess">1</span></div>
+    <div class="h-s"><button id="mute-g" style="font-size:12px;padding:2px 6px;cursor:pointer;background:none;border:1px solid var(--red);color:var(--br-white);font-family:inherit" onclick="toggleMute()">🔊</button></div>
+  </div>
+  <div class="scene" id="scene"></div>
+</div>
+
+<!-- ENDING -->
+<div id="ending"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+//  DATA PET — Game Engine
+//  Built on MIYÖTELS architecture
+// ═══════════════════════════════════════
+
+const S = { trust: 30, obey: 20, expo: 0, session: 0, pet: '', city: '', habit: '', platform: '' };
+
+// ─── Title portrait: Cyborg Mistress ───
+function drawMistress(canvas, mood) {
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  const visor = mood === 'cold' ? '#ff5555' : mood === 'pleased' ? '#55ff55' : mood === 'strict' ? '#ff55ff' : '#55ffff';
+
+  // Hair — short angular undercut
+  ctx.fillStyle = '#333';
+  ctx.fillRect(24, 6, 48, 10);
+  ctx.fillRect(20, 16, 56, 6);
+  ctx.fillStyle = '#444';
+  ctx.fillRect(22, 8, 20, 12); // left sharp
+  ctx.fillRect(60, 10, 14, 10); // right sharp undercut
+  // Chrome skull plate
+  ctx.fillStyle = '#888';
+  ctx.fillRect(32, 4, 32, 6);
+
+  // Face — angular, cold
+  ctx.fillStyle = '#ddc8b8';
+  ctx.fillRect(28, 22, 40, 38);
+  // Jaw sharper
+  ctx.fillStyle = '#0a0008';
+  ctx.fillRect(24, 56, 6, 4);
+  ctx.fillRect(66, 56, 6, 4);
+
+  // Visor implant (across eyes)
+  ctx.fillStyle = '#222';
+  ctx.fillRect(26, 32, 44, 10);
+  ctx.fillStyle = visor;
+  ctx.fillRect(28, 34, 18, 6); // L eye
+  ctx.fillRect(50, 34, 18, 6); // R eye
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(30, 36, 3, 2);
+  ctx.fillRect(52, 36, 3, 2);
+  // Visor border
+  ctx.fillStyle = '#555';
+  ctx.fillRect(26, 31, 44, 1);
+  ctx.fillRect(26, 42, 44, 1);
+
+  // Mouth — thin, stern
+  ctx.fillStyle = '#884455';
+  ctx.fillRect(38, 50, 20, 2);
+  ctx.fillStyle = '#663344';
+  ctx.fillRect(42, 52, 12, 1);
+
+  // Neck — cables
+  ctx.fillStyle = '#ddc8b8';
+  ctx.fillRect(36, 60, 24, 8);
+  ctx.fillStyle = '#555';
+  ctx.fillRect(34, 62, 3, 6); // L cable
+  ctx.fillRect(59, 62, 3, 6); // R cable
+  ctx.fillStyle = visor;
+  ctx.fillRect(35, 64, 1, 3);
+  ctx.fillRect(60, 64, 1, 3);
+
+  // Body — tactical/armored
+  ctx.fillStyle = '#1a1a1a';
+  ctx.fillRect(20, 68, 56, 35);
+  // Shoulder pads chrome
+  ctx.fillStyle = '#666';
+  ctx.fillRect(16, 68, 10, 8);
+  ctx.fillRect(70, 68, 10, 8);
+  ctx.fillStyle = '#888';
+  ctx.fillRect(18, 69, 6, 4);
+  ctx.fillRect(72, 69, 6, 4);
+  // Center stripe
+  ctx.fillStyle = visor;
+  ctx.fillRect(46, 70, 4, 30);
+  // Chest plates
+  ctx.fillStyle = '#2a2a2a';
+  ctx.fillRect(24, 72, 20, 14);
+  ctx.fillRect(52, 72, 20, 14);
+  ctx.fillStyle = '#333';
+  ctx.fillRect(26, 74, 16, 10);
+  ctx.fillRect(54, 74, 16, 10);
+  // LED on chest
+  ctx.fillStyle = '#ff0000';
+  ctx.fillRect(44, 78, 3, 3);
+
+  // Arms
+  ctx.fillStyle = '#1a1a1a';
+  ctx.fillRect(10, 76, 10, 28);
+  ctx.fillRect(76, 76, 10, 28);
+  // Chrome arm details
+  ctx.fillStyle = '#555';
+  ctx.fillRect(12, 86, 6, 2);
+  ctx.fillRect(78, 86, 6, 2);
+  ctx.fillRect(12, 94, 6, 2);
+  ctx.fillRect(78, 94, 6, 2);
+  // Hands
+  ctx.fillStyle = '#ddc8b8';
+  ctx.fillRect(10, 104, 10, 6);
+  ctx.fillRect(76, 104, 10, 6);
+
+  // Circuit lines on arms
+  ctx.fillStyle = visor;
+  ctx.fillRect(14, 80, 1, 20);
+  ctx.fillRect(81, 80, 1, 20);
+}
+
+function drawMistressPortrait(canvas, mood) {
+  drawMistress(canvas, mood || 'cold');
+}
+
+// ─── Title init ───
+drawMistress(document.getElementById('t-cv'), 'cold');
+
+function showCredits() {
+  const d = document.querySelector('.t-desc');
+  d.innerHTML = 'PROTOCOL v3.1<br>Consensual data power exchange.<br>All access revocable. Kill phrase active.<br><br>Created by Miyö Van Stenis<br>Miyötels_SYSTEMS © 2026<br><br>No data was harvested without consent.';
+  setTimeout(() => {
+    d.innerHTML = 'She already has your IP.<br>She knows your screen time.<br>You will give her the rest.<br>Voluntarily.';
+  }, 5000);
+}
+
+function showIntake() {
+  document.getElementById('title').style.display = 'none';
+  document.getElementById('intake').style.display = 'flex';
+  stopSong();
+  playSFX('select');
+}
+
+function submitIntake() {
+  S.pet = document.getElementById('in-name').value.trim() || 'pet_0x00';
+  S.city = document.getElementById('in-city').value.trim() || 'unknown sector';
+  S.habit = document.getElementById('in-habit').value.trim() || 'compulsive scrolling';
+  S.platform = document.getElementById('in-plat').value.trim() || 'all of them';
+  S.trust = 30; S.obey = 20; S.expo = 0; S.session = 0;
+  if (!AUDIO.initialized) initAudio();
+  if (AUDIO.ctx && AUDIO.ctx.state === 'suspended') AUDIO.ctx.resume().catch(()=>{});
+  playSFX('confirm');
+  document.getElementById('intake').style.display = 'none';
+  document.getElementById('game').style.display = 'flex';
+  updateHUD();
+  showLevelTr(0);
+}
+
+function updateHUD() {
+  const t = Math.max(0, Math.min(100, S.trust));
+  const o = Math.max(0, Math.min(100, S.obey));
+  const e = Math.max(0, Math.min(100, S.expo));
+  document.getElementById('v-trust').textContent = t;
+  document.getElementById('b-trust').style.width = t + '%';
+  document.getElementById('v-obey').textContent = o;
+  document.getElementById('b-obey').style.width = o + '%';
+  document.getElementById('v-expo').textContent = e;
+  document.getElementById('b-expo').style.width = e + '%';
+  document.getElementById('v-sess').textContent = S.session + 1;
+}
+
+// ═══════════════════════════════════════
+//  LEVELS — Data Dominance Sessions
+// ═══════════════════════════════════════
+
+const LEVELS = [
+  {
+    id:'first_contact',
+    name:'FIRST CONTACT',
+    flavor:'"She pinged you first.\nYou opened the message.\nThat was your first mistake.\nThe second was replying."',
+    bg:'bg-terminal',
+    scene:'terminal',
+    intro:{
+      speaker:'MISTRESS_0X.EXE',
+      text:'',  // will be generated with player data
+    },
+    game:'choices_rapid',
+    gameData:{
+      title:'◆ INITIAL HANDSHAKE ◆',
+      instruction:'She\'s testing your reflexes. Choose wisely.',
+      scenarios:[
+        {
+          text:'She says: "I already know your screen time. Pathetic. Tell me — do you even lock your phone?"',
+          options:[
+            {text:'Yes. Always.',correct:true,response:'Liar. Nobody with your habits locks their phone. But I like that you tried. Points for effort, ~pet~.'},
+            {text:'No...',correct:true,response:'Honest. That\'s useful. Honesty is the only currency I accept, ~pet~. Don\'t spend it all at once.'},
+            {text:'Why would I tell you that?',correct:false,response:'Because I asked. That\'s how this works. I ask. You answer. Simple protocol. Do you need it written in code?'},
+          ]
+        },
+        {
+          text:'She sends you a link: "Install this. Screen time tracker. Shared dashboard. I see everything. You see nothing."',
+          options:[
+            {text:'Install it immediately',correct:false,response:'Too fast. You didn\'t even read the permissions. That\'s not obedience — that\'s recklessness. I need controlled surrender, not chaos.'},
+            {text:'Read the permissions first',correct:true,response:'Good. You read before you submit. That tells me you have a brain, ~pet~. I\'ll need that brain intact for what comes next.'},
+            {text:'Refuse',correct:true,response:'Interesting. A "no" this early. I don\'t punish refusal — I punish dishonesty. You\'ll install it eventually. They all do.'},
+          ]
+        },
+        {
+          text:'She says: "Your ~habit~. I can see it in your data already. How many hours today?"',
+          options:[
+            {text:'Less than usual, I swear',correct:false,response:'Don\'t. Swear. The data doesn\'t lie, ~pet~. You do. We\'ll fix that.'},
+            {text:'Probably too many',correct:true,response:'Correct. And starting now, those hours belong to me. I decide when you ~habit~ and for how long. Clear?'},
+            {text:'I don\'t want to answer',correct:true,response:'Noted. Refusal logged. You have three of those per session before consequences. That was one.'},
+          ]
+        },
+      ],
+    },
+    success:{text:'First contact complete. She has your handle, your city, your weakness. She hasn\'t asked for anything you wouldn\'t give a dating app. And yet it feels entirely different.',trust:10,obey:5,expo:15},
+    failure:{text:'She disconnected. No explanation. Just a cursor blinking in an empty terminal. You refresh. Nothing. You check your phone. A notification: "Try again when you\'re serious."',trust:-5,obey:-10,expo:5},
+  },
+  {
+    id:'assessment',
+    name:'THE ASSESSMENT',
+    flavor:'"She wants to see your data.\nNot the curated version.\nThe real one.\nThe 3AM search history version."',
+    bg:'bg-monitor',
+    scene:'monitor',
+    intro:{
+      speaker:'MISTRESS_0X.EXE',
+      text:'',
+    },
+    game:'typing',
+    gameData:{
+      title:'◆ DATA SUBMISSION ◆',
+      instruction:'Type the submission phrases she demands.\nEach correct phrase = deeper access granted.',
+      words:[
+        'I consent','access granted','screen time','location shared',
+        'browsing history','submit','yes mistress','full disclosure',
+        'password','credentials','GPS active','camera access',
+        'read receipts','typing indicator','last seen','online status'
+      ],
+      timeLimit:35,
+    },
+    success:{text:'Assessment complete. Your data profile is now a living document on her dashboard. Every app you open, every search you make, every minute of screen time — she sees the shape of your surrender before you do.',trust:12,obey:15,expo:20},
+    failure:{text:'Too slow. "If you can\'t submit data on command, you\'re not ready for what I\'m building," she types. The cursor blinks. "We\'ll try again. Bring your full attention next time, ~pet~."',trust:5,obey:-5,expo:10},
+  },
+  {
+    id:'contract',
+    name:'THE CONTRACT',
+    flavor:'"Clause 1: I own your screen time.\nClause 2: I set your passwords.\nClause 3: You can leave at any time.\nClause 4: You won\'t want to."',
+    bg:'bg-contract',
+    scene:'contract',
+    intro:{
+      speaker:'MISTRESS_0X.EXE',
+      text:'',
+    },
+    game:'sequence',
+    gameData:{
+      title:'◆ CONTRACT EXECUTION ◆',
+      instruction:'Sign the contract clauses in the correct order.\nOne wrong step = renegotiation.',
+      steps:[
+        {icon:'📋',label:'Read terms'},
+        {icon:'🔐',label:'Set kill phrase'},
+        {icon:'📱',label:'Share screen time'},
+        {icon:'📍',label:'Enable location'},
+        {icon:'🔑',label:'Exchange keys'},
+        {icon:'✍️',label:'Sign & submit'},
+      ],
+    },
+    success:{text:'Contract signed. Kill phrase active: BLACKOUT. You can end this at any word. She knows it. You know it. The fact that you haven\'t said it yet — that\'s the entire point.',trust:15,obey:10,expo:15},
+    failure:{text:'The contract sits unsigned. "I don\'t force signatures," she says. "I wait. The ones who come back always sign harder the second time." She closes the terminal. The screen glows.',trust:0,obey:-10,expo:5},
+  },
+  {
+    id:'monitoring',
+    name:'24/7 MONITORING',
+    flavor:'"Your phone pings every 15 minutes.\nShe knows where you are.\nShe knows you\'re reading this.\nShe knows you like it."',
+    bg:'bg-monitor',
+    scene:'server',
+    intro:{
+      speaker:'MISTRESS_0X.EXE',
+      text:'',
+    },
+    game:'choices_rapid',
+    gameData:{
+      title:'◆ COMPLIANCE CHECK ◆',
+      instruction:'She\'s monitoring. Every choice is logged.',
+      scenarios:[
+        {
+          text:'6:47 AM. Notification: "You unlocked your phone 3 times before your alarm went off. Explain."',
+          options:[
+            {text:'I couldn\'t sleep',correct:true,response:'Noted. Insomnia logged. I\'m adjusting your screen time schedule. Blue light filter mandatory after 10PM. No ~platform~ after midnight. Non-negotiable.'},
+            {text:'It was just habit',correct:true,response:'"Just habit." Everything you do is "just habit," ~pet~. That\'s why you need me. Your habits are my raw material.'},
+            {text:'None of your business',correct:false,response:'Wrong. Everything on that device is my business now. That was clause 1. Did you forget clause 1? Read it again. Out loud. I\'ll wait.'},
+          ]
+        },
+        {
+          text:'She messages: "Your step count is 847. It\'s 3PM. You\'ve been on ~platform~ for 4 hours. Stand up."',
+          options:[
+            {text:'[Stand up immediately]',correct:true,response:'Good. Walk to a window. Look outside. That world exists too. You have 10 minutes offline. Starting now. Don\'t test me on the time.'},
+            {text:'In a minute...',correct:false,response:'"In a minute" is not compliance. "In a minute" is negotiation. I didn\'t authorize negotiation. Stand. Now. I can see your accelerometer.'},
+            {text:'I\'m working',correct:true,response:'Show me. Screenshot. Now. If it\'s actually work, I\'ll log it as productive. If it\'s ~platform~ with a work tab open — you know what happens.'},
+          ]
+        },
+        {
+          text:'11:58 PM. You forgot to submit your daily log. Her message: "⏰"',
+          options:[
+            {text:'Submit it immediately',correct:true,response:'Fifty-eight minutes late. I\'ll let it pass this time because you submitted before midnight. Next time, the penalty is automated. I won\'t even have to type.'},
+            {text:'Apologize and explain',correct:false,response:'I don\'t need apologies. I need data. Apologies are feelings. Data is structure. Send the log. Feelings are for after compliance.'},
+            {text:'Deliberately skip it',correct:true,response:'Bold. Deliberate disobedience is different from negligence. I respect it more. I punish it harder. Your ~platform~ access is locked for 24 hours. Starting now.'},
+          ]
+        },
+      ],
+    },
+    success:{text:'24 hours of full monitoring. She adjusted your sleep schedule based on your data. Your screen time is down 23%. Your step count is up. You feel managed. You feel seen. These might be the same feeling.',trust:15,obey:20,expo:10},
+    failure:{text:'Too many refusals. "I can\'t monitor what doesn\'t cooperate," she says. "I\'m not interested in breaking you. I\'m interested in optimizing you. Come back when you understand the difference."',trust:-10,obey:-15,expo:5},
+  },
+  {
+    id:'deep_control',
+    name:'DEEP ACCESS',
+    flavor:'"She has your passwords.\nShe has your location.\nShe has your schedule.\nThe question is: what do you have?"',
+    bg:'bg-deep',
+    scene:'deep',
+    intro:{
+      speaker:'MISTRESS_0X.EXE',
+      text:'',
+    },
+    game:'choices_rapid',
+    gameData:{
+      title:'◆ FINAL PROTOCOL ◆',
+      instruction:'The deepest level. Every answer shapes the ending.',
+      scenarios:[
+        {
+          text:'She says: "I could lock every account you have right now. Every one. I won\'t. But I need you to know that I could. Do you understand what that means?"',
+          options:[
+            {text:'It means I trust you',correct:true,response:'No. It means you\'ve given someone total access and the only thing protecting you is a word. BLACKOUT. Say it anytime. The fact that you haven\'t — that\'s not trust. That\'s something else entirely.'},
+            {text:'It means you have power',correct:true,response:'Power I didn\'t take. Power you gave. Every password, every shared location, every submitted log — you handed it over. I just organized it. The architecture of control is always consensual, ~pet~.'},
+            {text:'BLACKOUT',correct:true,response:'Kill phrase received. All access terminated. All shared data purged. Connection severed. You are free, ~pet~. You were always free. That was the point.'},
+          ]
+        },
+        {
+          text:'She shares her own screen time with you. 14 hours. "I watch your data more than I watch anything else. That\'s my confession."',
+          options:[
+            {text:'That\'s... intimate',correct:true,response:'It is. Data is the most intimate thing there is now. Not bodies. Not words. Data. I know your sleep cycle. I know your anxiety patterns. I know when you\'re about to relapse on ~habit~. That\'s closer than skin.'},
+            {text:'You need a hobby',correct:true,response:'Funny. You\'re my hobby, ~pet~. My very expensive, time-consuming, frustrating hobby. I could monitor a plant instead. Plants don\'t talk back. But plants don\'t submit daily logs with increasingly honest entries.'},
+            {text:'I want to see more of your data',correct:true,response:'Interesting. Reciprocity. You want to monitor me back. That\'s not submission — that\'s partnership. Different protocol. Rarer. More dangerous. I\'ll consider it.'},
+          ]
+        },
+      ],
+    },
+    success:{text:'',trust:0,obey:0,expo:0}, // handled by ending
+    failure:{text:'',trust:0,obey:0,expo:0},
+  },
+];
+
+// Generate personalized intro text
+function getIntroText(lvl) {
+  const p = S.pet, c = S.city, h = S.habit, pl = S.platform;
+  switch(lvl.id) {
+    case 'first_contact':
+      return `So. ${p}. From ${c}. You found me — or I found you. Does it matter? Your ${pl} profile has been public for 3 years. Your ${h}? Visible from orbit. I've seen your data footprint before you even opened this chat. The question isn't whether I know you. The question is how much of yourself you're willing to hand over. Willingly.`;
+    case 'assessment':
+      return `Time for a proper intake, ${p}. I've been watching your patterns from ${c}. Your ${h} peaks between 11PM and 2AM. Your ${pl} usage spikes after every rejection email. I don't need to hack you. You leak data like a broken pipe. Now I want you to hand me the rest. Consciously. That's the difference between surveillance and submission.`;
+    case 'contract':
+      return `This is the contract, ${p}. Read every clause. I don't do verbal agreements — I do signed, timestamped, revocable access protocols. Your ${pl} credentials go in escrow. Your location sharing activates on my schedule. Your ${h} gets logged and managed. And here's the important part: the kill phrase is BLACKOUT. Say it once and everything stops. I'll never make it hard to leave. I'll make it hard to want to.`;
+    case 'monitoring':
+      return `Day one of full monitoring, ${p}. I can see your phone from here. ${c}, ${new Date().toLocaleTimeString().slice(0,5)} local time. You opened ${pl} 7 times in the last hour. Your ${h} is at critical levels. This is what you signed up for. This is what your data looks like when someone actually pays attention to it. Uncomfortable? Good. That means it's working.`;
+    case 'deep_control':
+      return `We've been doing this for weeks now, ${p}. I know your sleep cycle from ${c}. I know your ${pl} patterns better than the algorithm does. I know your ${h} triggers. I know when you're lying in your daily log because your typing speed changes. I know you better than anyone in your physical life does. That's not a boast. That's a diagnosis. The question now is: what do we do with all this data?`;
+    default: return '';
+  }
+}
+
+// Replace ~pet~, ~habit~, ~platform~ in text
+function personalize(text) {
+  return text.replace(/~pet~/g, S.pet).replace(/~habit~/g, S.habit).replace(/~platform~/g, S.platform).replace(/~city~/g, S.city);
+}
+
+// ─── Cleanup ───
+let mgCleanup = null;
+let twInterval = null;
+
+// ─── Flow ───
+function showLevelTr(idx) {
+  if (idx >= LEVELS.length) { showEnding(); return; }
+  stopSong();
+  clearSceneTimers();
+  S.session = idx;
+  const lv = LEVELS[idx];
+  const sc = document.getElementById('scene');
+  sc.innerHTML = `
+    <div class="lvl-tr">
+      <div class="lvl-n">— SESSION ${idx+1} / ${LEVELS.length} —</div>
+      <div class="lvl-nm">${lv.name}</div>
+      <div class="lvl-fl">${lv.flavor}</div>
+      <br><button class="c-btn" onclick="startLevel(${idx})">▶ ENTER</button>
+    </div>`;
+  updateHUD();
+}
+
+function startLevel(idx) {
+  const lv = LEVELS[idx];
+  lv.intro.text = getIntroText(lv);
+  showDialogue(lv, () => startMinigame(lv));
+}
+
+let sceneTimers = [];
+function clearSceneTimers() { sceneTimers.forEach(t => clearInterval(t)); sceneTimers = []; }
+
+function buildScene(lv) {
+  clearSceneTimers();
+  return '<canvas id="sc-cv" style="position:absolute;top:0;left:0;width:100%;height:100%;image-rendering:pixelated" width="640" height="480"></canvas>';
+}
+
+function initSceneCanvas(lv) {
+  const cv = document.getElementById('sc-cv');
+  if (!cv) return;
+  switch(lv.scene) {
+    case 'terminal': drawDarkRoom(cv); break;
+    case 'monitor': drawMatrixRain(cv); break;
+    case 'contract': drawDeskContract(cv); break;
+    case 'server': drawBinocular(cv); break;
+    case 'deep': drawDeepAccess(cv); break;
+  }
+}
+
+// ─── LC4 Dark Room Scene (canvas rendered) ───
+function drawDarkRoom(canvas) {
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  const W = 640, H = 480;
+  const P = ['#000000','#FFFFFF','#00FFFF','#FF69B4','#00FF44','#FFEE00','#FF2222','#2222AA','#AA00FF','#AAAAAA','#444466','#CC3377','#00CCCC','#111166','#0A0A30','#FF1493'];
+  const BLK=0,WHT=1,CYN=2,PNK=3,GRN=4,YEL=5,RED=6,DBL=7,PRP=8,LGY=9,DGY=10,MGT=11,TCY=12,NVY=13,INK=14,FCS=15;
+  function px(c){ctx.fillStyle=P[c]}
+
+  // 1. WALLS & CEILING
+  px(BLK);ctx.fillRect(0,0,W,160);
+  px(INK);ctx.fillRect(0,160,W,200);
+  px(BLK);ctx.fillRect(0,0,80,H);
+  px(BLK);ctx.fillRect(560,0,80,H);
+  px(NVY);
+  for(let x=0;x<W;x+=24)ctx.fillRect(x,160,1,200);
+  for(let y=160;y<360;y+=32)ctx.fillRect(0,y,W,1);
+
+  // 2. FLOOR
+  px(BLK);ctx.fillRect(0,360,W,120);
+  px(NVY);for(let x=0;x<W;x+=32)ctx.fillRect(x,360,1,120);
+  px(DGY);ctx.fillRect(0,360,W,2);
+
+  // 3. WINDOW
+  const wx=240,wy=176,ww=160,wh=128;
+  px(INK);ctx.fillRect(wx,wy,ww,wh);
+  for(let y=wy;y<wy+wh;y+=2){
+    for(let x=wx;x<wx+ww;x+=2){
+      const dx=Math.abs(x-(wx+ww/2))/(ww/2),dy=Math.abs(y-(wy+wh/2))/(wh/2),dist=dx+dy;
+      if(dist<.3){if((x+y)%2===0){px(WHT);ctx.fillRect(x,y,2,2)}else{px(CYN);ctx.fillRect(x,y,2,2)}}
+      else if(dist<.7){if((x+y)%4===0){px(CYN);ctx.fillRect(x,y,2,2)}else if((x+y)%6===0){px(LGY);ctx.fillRect(x,y,2,2)}}
+      else{if((x+y)%8===0){px(DGY);ctx.fillRect(x,y,1,1)}}
+    }
+  }
+  // window frame
+  px(DGY);
+  ctx.fillRect(wx-8,wy-8,ww+16,8);ctx.fillRect(wx-8,wy+wh,ww+16,8);
+  ctx.fillRect(wx-8,wy-8,8,wh+16);ctx.fillRect(wx+ww,wy-8,8,wh+16);
+  px(LGY);
+  ctx.fillRect(wx-6,wy-6,ww+12,3);ctx.fillRect(wx-6,wy+wh+3,ww+12,2);
+  ctx.fillRect(wx-6,wy-6,3,wh+12);ctx.fillRect(wx+ww+3,wy-6,2,wh+12);
+  px(DGY);ctx.fillRect(wx,wy+wh/2-1,ww,3);ctx.fillRect(wx+ww/2-1,wy,3,wh);
+  px(LGY);ctx.fillRect(wx,wy+wh/2-1,ww,1);ctx.fillRect(wx+ww/2-1,wy,1,wh);
+  // sill
+  px(DGY);ctx.fillRect(wx-12,wy+wh+8,ww+24,12);
+  px(LGY);ctx.fillRect(wx-12,wy+wh+8,ww+24,3);
+  px(BLK);ctx.fillRect(wx-12,wy+wh+20,ww+24,2);
+
+  // 4. WINDOW LIGHT — wall
+  for(let y=wy+wh+20;y<360;y+=2){
+    const spread=((y-(wy+wh+20))/(360-(wy+wh+20)))*80;
+    const lx=Math.floor(wx+ww/2-spread),rx=Math.floor(wx+ww/2+spread);
+    for(let x=lx;x<rx;x+=2){if((x+y)%4===0&&spread>8){px(DGY);ctx.fillRect(x,y,2,1)}}
+  }
+  // floor light pool
+  for(let y=360;y<H;y+=2){
+    const fy=y-360,spread=80+fy*1.4,ox=wx+ww/2;
+    for(let x=Math.floor(ox-spread);x<Math.floor(ox+spread);x+=2){
+      const dist=Math.abs(x-ox)/spread;
+      if(dist<.25){if((x+y)%2===0){px(CYN);ctx.fillRect(x,y,2,2)}else if((x+y)%4===0){px(WHT);ctx.fillRect(x,y,1,1)}}
+      else if(dist<.55){if((x+y)%4===0){px(DGY);ctx.fillRect(x,y,2,2)}}
+      else if(dist<.85){if((x+y)%6===0){px(DGY);ctx.fillRect(x,y,1,1)}}
+    }
+  }
+
+  // 5. LC4 CHAISE LONGUE
+  // Sled base runners
+  px(LGY);ctx.fillRect(168,408,304,6);px(DGY);ctx.fillRect(168,414,304,4);
+  px(LGY);ctx.fillRect(164,406,8,12);px(DGY);ctx.fillRect(160,408,6,10);
+  px(LGY);ctx.fillRect(472,406,8,12);px(DGY);ctx.fillRect(476,408,6,10);
+  px(LGY);ctx.fillRect(172,418,296,6);px(DGY);ctx.fillRect(172,424,296,4);
+  px(LGY);ctx.fillRect(168,416,8,12);px(DGY);ctx.fillRect(164,418,6,10);
+  px(LGY);ctx.fillRect(468,416,8,12);px(DGY);ctx.fillRect(472,418,6,10);
+  // Frame cross supports
+  px(LGY);ctx.fillRect(196,376,6,36);px(DGY);ctx.fillRect(202,378,3,34);
+  px(LGY);ctx.fillRect(432,340,6,76);px(DGY);ctx.fillRect(438,342,3,74);
+  // Backrest frame
+  const bS=20;
+  for(let i=0;i<bS;i++){const t=i/bS,bx=Math.floor(196+t*244),by=Math.floor(380-t*36),bw=Math.ceil(244/bS)+2;
+    px(LGY);ctx.fillRect(bx,by,bw,5);px(DGY);ctx.fillRect(bx,by+5,bw,3);}
+  for(let i=0;i<bS;i++){const t=i/bS,bx=Math.floor(196+t*244),by=Math.floor(388-t*36),bw=Math.ceil(244/bS)+2;
+    px(DGY);ctx.fillRect(bx,by,bw,4);px(BLK);ctx.fillRect(bx,by+4,bw,2);}
+  // Headrest
+  px(LGY);ctx.fillRect(432,308,6,40);px(DGY);ctx.fillRect(438,310,3,38);
+  px(LGY);ctx.fillRect(408,308,48,5);px(DGY);ctx.fillRect(408,313,48,3);
+  px(BLK);ctx.fillRect(412,296,40,18);px(DGY);ctx.fillRect(414,298,36,3);px(LGY);ctx.fillRect(416,298,8,2);
+  // Leather cushion
+  const cS=18;
+  for(let i=0;i<cS;i++){const t=i/cS,cx=Math.floor(200+t*232),cy=Math.floor(362-t*32),cw=Math.ceil(232/cS)+2;
+    px(BLK);ctx.fillRect(cx,cy,cw,20);}
+  for(let i=0;i<cS;i++){const t=i/cS,cx=Math.floor(200+t*232),cy=Math.floor(362-t*32),cw=Math.ceil(232/cS)+2;
+    px(DGY);ctx.fillRect(cx,cy,cw,2);}
+  for(let i=3;i<12;i++){const t=i/cS,cx=Math.floor(200+t*232),cy=Math.floor(362-t*32),cw=Math.ceil(232/cS)+2;
+    px(LGY);ctx.fillRect(cx+2,cy,cw-4,1);}
+  px(WHT);ctx.fillRect(288,354,16,1);px(LGY);ctx.fillRect(276,355,32,1);
+  for(let i=0;i<cS;i++){const t=i/cS,cx=Math.floor(200+t*232),cy=Math.floor(362-t*32),cw=Math.ceil(232/cS)+2;
+    px(DGY);ctx.fillRect(cx,cy+20,cw,4);px(BLK);ctx.fillRect(cx,cy+24,cw,2);}
+  px(DGY);for(let i=2;i<cS-2;i+=4){const t=i/cS,cx=Math.floor(200+t*232),cy=Math.floor(362-t*32);
+    ctx.fillRect(cx,cy+8,Math.ceil(232/cS)*4,1);}
+  // Frame shadow
+  px(BLK);ctx.fillRect(172,428,304,6);
+  px(DGY);for(let x=172;x<476;x+=4){if(x%8===0)ctx.fillRect(x,428,2,4)}
+
+  // 6. AMBIENT DARKNESS
+  px(BLK);ctx.fillRect(0,0,120,H);ctx.fillRect(0,0,W,80);
+  ctx.fillRect(W-120,0,120,H);ctx.fillRect(0,0,W,100);
+  ctx.fillRect(0,400,160,80);ctx.fillRect(480,400,160,80);
+  px(NVY);ctx.fillRect(0,352,W,12);px(BLK);ctx.fillRect(0,356,W,8);
+
+  // 7. WALL LIGHT BLEED
+  px(DGY);
+  for(let y=148;y<wy-8;y+=2){
+    const spread=(wy-8-y)*.6,lx=Math.floor(wx+ww/2-spread),rx=Math.floor(wx+ww/2+spread);
+    for(let x=lx;x<rx;x+=2){if((x+y)%4===0)ctx.fillRect(x,y,2,1)}
+  }
+  for(let y=wy;y<wy+wh;y+=2){for(let x=wx-32;x<wx-8;x+=2){const d=(wx-8-x)/24;if((x+y)%(Math.floor(d*6)+2)===0)ctx.fillRect(x,y,2,1)}}
+  for(let y=wy;y<wy+wh;y+=2){for(let x=wx+ww+8;x<wx+ww+40;x+=2){const d=(x-(wx+ww+8))/24;if((x+y)%(Math.floor(d*6)+2)===0)ctx.fillRect(x,y,2,1)}}
+}
+
+// ─── MATRIX RAIN FUCHSIA (Session 2: Assessment) ───
+function drawMatrixRain(canvas) {
+  const ctx = canvas.getContext('2d'); ctx.imageSmoothingEnabled = false;
+  const W=640,H=480;
+  const P=['#000000','#FFFFFF','#00FFFF','#FF69B4','#00FF44','#FFEE00','#FF2222','#2222AA','#AA00FF','#AAAAAA','#444466','#CC3377','#00CCCC','#111166','#0A0A30','#FF1493'];
+  const BLK=0,WHT=1,CYN=2,PNK=3,GRN=4,YEL=5,RED=6,DBL=7,PRP=8,LGY=9,DGY=10,MGT=11,TCY=12,NVY=13,INK=14,FCS=15;
+  const CW=16,CH=16,COLS=40,ROWS=30;
+  const KATA='アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+  const LAT='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*?!<>[]{}';
+  const ALL=KATA+LAT;
+  function rc(){return ALL[Math.floor(Math.random()*ALL.length)]}
+  const cols=[];
+  for(let c=0;c<COLS;c++) cols.push({head:-Math.floor(Math.random()*ROWS),speed:1+Math.floor(Math.random()*3),trail:[]});
+  let tick=0;
+  function frame(){
+    tick++;
+    ctx.fillStyle=P[BLK];ctx.fillRect(0,0,W,H);
+    ctx.font='bold 14px "MS Gothic","Courier New",monospace';ctx.textAlign='center';ctx.textBaseline='top';
+    cols.forEach((col,ci)=>{
+      if(tick%col.speed===0){col.head++;if(col.head>=0&&col.head<ROWS)col.trail.push({row:col.head,char:rc()});col.trail=col.trail.filter(t=>col.head-t.row<15)}
+      if(Math.random()<.04){const i=Math.floor(Math.random()*col.trail.length);if(col.trail[i])col.trail[i].char=rc()}
+      const x=ci*CW+CW/2;
+      col.trail.forEach(t=>{
+        if(t.row<0||t.row>=ROWS)return;
+        const age=col.head-t.row;
+        let c;if(age<=0)c=WHT;else if(age<=1)c=FCS;else if(age<=3)c=PNK;else if(age<=6)c=MGT;else if(age<=10)c=DGY;else c=INK;
+        ctx.fillStyle=P[c];ctx.fillText(t.char,x,t.row*CH);
+      });
+      if(col.head>=ROWS+15){col.head=-Math.floor(Math.random()*ROWS);col.trail=[]}
+    });
+  }
+  sceneTimers.push(setInterval(frame,30));
+  frame();
+}
+
+// ─── DESK CONTRACT GLITCH (Session 3: Contract) ───
+function drawDeskContract(canvas) {
+  const ctx = canvas.getContext('2d'); ctx.imageSmoothingEnabled = false;
+  const W=640,H=480;
+  const P=['#000000','#FFFFFF','#00FFFF','#FF69B4','#00FF44','#FFEE00','#FF2222','#2222AA','#AA00FF','#AAAAAA','#444466','#CC3377','#00CCCC','#111166','#0A0A30','#FF1493'];
+  const BLK=0,WHT=1,CYN=2,PNK=3,GRN=4,YEL=5,RED=6,DBL=7,PRP=8,LGY=9,DGY=10,MGT=11,TCY=12,NVY=13,INK=14,FCS=15;
+  function px(i){ctx.fillStyle=P[i]}function box(i,x,y,w,h){px(i);ctx.fillRect(x,y,w,h)}
+
+  function drawBase(){
+    ctx.clearRect(0,0,W,H);
+    box(INK,0,0,W,200);px(NVY);for(let x=0;x<W;x+=32)ctx.fillRect(x,0,1,200);for(let y=0;y<200;y+=40)ctx.fillRect(0,y,W,1);
+    box(YEL,0,200,W,280);px(DGY);[208,216,228,236,248,260,268,280,292,304,316,328,340,352,364,376,388,400,416,432,448].forEach(y=>{for(let x=0;x<W;x+=3){if((x+y)%6===0)ctx.fillRect(x,y,2,1)}});
+    box(DGY,0,448,W,32);px(BLK);ctx.fillRect(0,476,W,4);px(LGY);ctx.fillRect(0,448,W,3);
+    box(BLK,0,196,W,8);box(INK,0,200,W,4);
+    // Pen
+    box(BLK,456,288,88,6);box(LGY,456,287,80,2);box(DGY,456,294,88,2);box(YEL,456,286,10,8);box(DGY,536,290,12,3);box(BLK,544,291,6,2);
+    // Coffee ring
+    px(DGY);ctx.fillRect(96,320,40,2);ctx.fillRect(92,322,48,2);ctx.fillRect(90,324,52,4);ctx.fillRect(92,328,48,2);ctx.fillRect(96,330,40,2);
+    px(YEL);ctx.fillRect(94,322,44,8);
+    // Contract paper
+    const dx=160,dy=88,dw=320,dh=296;
+    box(DGY,dx+6,dy+6,dw,dh);box(WHT,dx,dy,dw,dh);
+    px(LGY);for(let y=dy;y<dy+dh;y+=4){for(let x=dx;x<dx+dw;x+=8){if((x+y)%16===0)ctx.fillRect(x,y,2,1)}}
+    box(LGY,dx,dy,dw,2);box(LGY,dx,dy,2,dh);box(DGY,dx+dw-2,dy,2,dh);box(DGY,dx,dy+dh-2,dw,2);
+    px(LGY);ctx.fillRect(dx+8,dy+96,dw-16,1);
+    // Title
+    ctx.font='bold 14px "Courier New",monospace';ctx.textAlign='center';
+    box(BLK,dx+16,dy+16,dw-32,28);box(DGY,dx+16,dy+16,dw-32,2);box(DGY,dx+16,dy+42,dw-32,2);
+    ctx.fillStyle=P[WHT];ctx.fillText('DATA SUBMISSIONS',dx+dw/2,dy+35);
+    ctx.font='10px "Courier New",monospace';ctx.fillStyle=P[DGY];
+    ctx.fillText('AGREEMENT & TERMS OF SERVICE',dx+dw/2,dy+62);
+    ctx.textAlign='left';ctx.font='9px "Courier New",monospace';ctx.fillStyle=P[BLK];
+    ['The undersigned party ("the Pet") agrees to','submit all requested data in full, without','omission, redaction, or delay.','','Clause 1: All data is property of receiving party.','Clause 2: The Pet waives rights to said data.','Clause 3: Submission is irrevocable.','','The Pet acknowledges having read all terms.','Non-compliance will be noted.'].forEach((l,i)=>{ctx.fillText(l,dx+16,dy+112+i*15)});
+    box(BLK,dx+16,dy+dh-56,dw-32,2);ctx.fillStyle=P[DGY];ctx.fillText('SIGNATURE:',dx+16,dy+dh-42);
+    ctx.font='italic bold 13px "Courier New",monospace';ctx.fillStyle=P[DBL];ctx.fillText('DataPetx0',dx+108,dy+dh-42);
+    box(RED,dx+dw-72,dy+dh-40,56,28);box(BLK,dx+dw-70,dy+dh-38,52,24);
+    ctx.font='bold 7px "Courier New",monospace';ctx.textAlign='center';ctx.fillStyle=P[RED];ctx.fillText('COPY',dx+dw-44,dy+dh-26);ctx.fillText('FILE',dx+dw-44,dy+dh-16);
+  }
+  drawBase();
+  // Glitch after 8 seconds
+  let gt=0;
+  const glitchTimer = setTimeout(()=>{
+    const gi=setInterval(()=>{
+      gt++;
+      drawBase();
+      // Glitch tears
+      for(let t=0;t<6+(gt%4);t++){
+        const ty=80+((gt*37+t*89)%320),shift=((gt*13+t*31)%24)-12;
+        const id=ctx.getImageData(0,Math.min(ty,H-4),W,2);ctx.putImageData(id,shift,Math.min(ty,H-4));
+        px(t%2===0?RED:CYN);ctx.fillRect(0,Math.min(ty,H-2),W,1);
+      }
+      // Corruption modal
+      box(BLK,96,160,448,160);px(RED);ctx.fillRect(96,160,448,4);ctx.fillRect(96,316,448,4);ctx.fillRect(96,160,4,160);ctx.fillRect(540,160,4,160);
+      box(RED,100,164,440,24);ctx.font='bold 12px "Courier New",monospace';ctx.textAlign='center';ctx.fillStyle=P[WHT];ctx.fillText('!!! DATA CORRUPTION DETECTED !!!',320,181);
+      box(BLK,100,188,440,128);ctx.font='bold 11px "Courier New",monospace';
+      ctx.fillStyle=gt%2===0?P[RED]:P[YEL];ctx.fillText('DATA CORRUPTION',320,218);
+      ctx.font='13px "Courier New",monospace';ctx.fillStyle=P[WHT];ctx.fillText('you are a bad pet',320,246);
+      ctx.font='9px "Courier New",monospace';ctx.fillStyle=P[DGY];ctx.fillText('submission record compromised',320,268);
+      if(gt%2===0){ctx.fillStyle=P[RED];ctx.fillText('[ tap to acknowledge ]',320,303)}
+    },80);
+    sceneTimers.push(gi);
+  },8000);
+}
+
+// ─── BINOCULAR SURVEILLANCE (Session 4: Monitoring) ───
+function drawBinocular(canvas) {
+  const ctx = canvas.getContext('2d'); ctx.imageSmoothingEnabled = false;
+  const W=640,H=480;
+  const P=['#000000','#FFFFFF','#00FFFF','#FF69B4','#00FF44','#FFEE00','#FF2222','#2222AA','#AA00FF','#AAAAAA','#444466','#CC3377','#00CCCC','#111166','#0A0A30','#FF1493'];
+  const BLK=0,WHT=1,CYN=2,PNK=3,GRN=4,YEL=5,RED=6,DBL=7,PRP=8,LGY=9,DGY=10,MGT=11,TCY=12,NVY=13,INK=14,FCS=15;
+  function px(i){ctx.fillStyle=P[i]}function box(i,x,y,w,h){px(i);ctx.fillRect(x,y,w,h)}
+  // Offscreen world
+  const wc=document.createElement('canvas');wc.width=520;wc.height=400;
+  const wctx=wc.getContext('2d');
+  function wpx(i){wctx.fillStyle=P[i]}function wb(i,x,y,w,h){wpx(i);wctx.fillRect(x,y,w,h)}
+  const WW=520,WH=400;
+
+  function drawWorld(tk){
+    wctx.clearRect(0,0,WW,WH);const FLR=WH-40;
+    wb(INK,0,0,WW,32);wb(INK,0,32,WW,FLR-32);
+    wpx(NVY);for(let x=0;x<WW;x+=20)wctx.fillRect(x,32,1,FLR-32);for(let y=32;y<FLR;y+=40)wctx.fillRect(0,y,WW,1);
+    wb(NVY,0,FLR,WW,40);wpx(DGY);for(let x=0;x<WW;x+=24)wctx.fillRect(x,FLR,1,40);wb(BLK,0,FLR-3,WW,4);
+    // Ceiling light
+    wb(YEL,WW/2-20,0,40,8);wb(WHT,WW/2-14,4,28,4);
+    // Desk
+    const dX=70,dY=FLR-52,dW=130,dH=14;
+    wb(YEL,dX,dY,dW,dH);wpx(WHT);wctx.fillRect(dX,dY,dW,2);wpx(DGY);wctx.fillRect(dX,dY+dH,dW,3);
+    wb(DGY,dX+6,dY+dH+3,10,FLR-dY-dH-3);wb(DGY,dX+dW-16,dY+dH+3,10,FLR-dY-dH-3);
+    // Monitor
+    const mx=dX+18,my=dY-62,mw=56,mh=46;wb(DGY,mx,my,mw,mh);
+    const scrOn=(tk%30<27);
+    if(scrOn){wb(NVY,mx+4,my+4,mw-8,mh-14);wpx(CYN);for(let l=0;l<4;l++)wctx.fillRect(mx+6,my+7+l*8,14+(l*13)%20,2);if(tk%8<4){wpx(WHT);wctx.fillRect(mx+6,my+7+24,5,2)}}
+    else wb(BLK,mx+4,my+4,mw-8,mh-14);
+    wpx(LGY);wctx.fillRect(mx,my,mw,3);wb(DGY,mx+mw/2-5,my+mh,10,7);wb(DGY,mx+mw/2-14,my+mh+7,28,4);
+    // Figure
+    const fa=(tk%40<20),bs=fa?0:1,chX=dX+dW+12,chF=FLR;
+    wb(DGY,chX+2,chF-28,6,28);wb(DGY,chX+30,chF-28,6,28);wb(DGY,chX,chF-34,38,8);wpx(LGY);wctx.fillRect(chX,chF-34,38,2);
+    wb(DGY,chX+14,chF-80,10,50);wb(DGY,chX+4,chF-82,30,6);
+    wb(DBL,chX+6,chF-34+bs,10,34);wb(DBL,chX+22,chF-34+bs,10,34);
+    wb(BLK,chX+4,chF-4,14,6);wb(BLK,chX+20,chF-4,14,6);
+    const tY=chF-86+bs;wb(DBL,chX+4,tY,30,52);
+    wb(LGY,chX+14,tY-8,10,10);
+    const hY=tY-28+bs;wb(LGY,chX+8,hY,22,26);wb(DGY,chX+8,hY,22,8);
+    wb(BLK,chX+12,hY+11,4,4);wb(BLK,chX+22,hY+11,4,4);wpx(WHT);wctx.fillRect(chX+13,hY+12,2,2);wctx.fillRect(chX+23,hY+12,2,2);
+    // Window
+    const wiX=WW-100,wiY=60,wiW=76,wiH=120;wb(NVY,wiX,wiY,wiW,wiH);
+    [[wiX+10,wiY+12],[wiX+28,wiY+8],[wiX+50,wiY+20],[wiX+14,wiY+40],[wiX+60,wiY+14]].forEach(([sx,sy])=>{wpx(WHT);wctx.fillRect(sx,sy,2,2)});
+    wb(BLK,wiX+6,wiY+52,14,wiH-52);wb(BLK,wiX+24,wiY+40,18,wiH-40);wb(BLK,wiX+48,wiY+60,12,wiH-60);
+    wpx(YEL);wctx.fillRect(wiX+8,wiY+56,4,4);wctx.fillRect(wiX+26,wiY+44,4,4);
+    wpx(DGY);wctx.fillRect(wiX-5,wiY-5,5,wiH+10);wctx.fillRect(wiX+wiW,wiY-5,5,wiH+10);wctx.fillRect(wiX-5,wiY-5,wiW+10,5);wctx.fillRect(wiX-5,wiY+wiH,wiW+10,5);
+    wb(LGY,wiX-8,wiY+wiH+5,wiW+16,8);
+    // Filing cabinet
+    const fcX=WW-52,fcY=FLR-120;wb(DGY,fcX,fcY,40,120);wb(LGY,fcX+2,fcY+2,36,116);
+    [30,60,90].forEach(d=>{wpx(DGY);wctx.fillRect(fcX+2,fcY+d,36,3);wb(YEL,fcX+14,fcY+d-10,12,8)});
+  }
+
+  // Circle spans for binocular mask
+  function cSpans(cx,cy,R){const r=[];for(let dy=-R;dy<=R;dy++){const dx=Math.floor(Math.sqrt(R*R-dy*dy));r.push({y:cy+dy,x1:cx-dx,x2:cx+dx})}return r}
+  function blit(spans,woX,woY,lcx,lcy){
+    const sc=wc.getContext('2d');
+    spans.forEach(row=>{const cy=row.y;if(cy<24||cy>=H-24)return;const lw=row.x2-row.x1;if(lw<=0)return;
+      const wy=woY+(cy-lcy)+WH/2;if(wy<0||wy>=WH)return;
+      const wx1=woX+(row.x1-lcx)+WW/2,wx2=woX+(row.x2-lcx)+WW/2;
+      const c1=Math.max(wx1,0),c2=Math.min(wx2,WW-1);if(c2<=c1)return;
+      const id=sc.getImageData(c1,wy,c2-c1,1);ctx.putImageData(id,row.x1+(c1-wx1),cy)});
+  }
+  function lensEdge(spans){spans.forEach(row=>{if(row.y<24||row.y>=H-24)return;for(let i=1;i<=4;i++){const c=i<=1?CYN:i<=3?TCY:DGY;const lx=row.x1-i,rx=row.x2+i;if(lx>=0){px(c);ctx.fillRect(lx,row.y,1,1)}if(rx<W){px(c);ctx.fillRect(rx,row.y,1,1)}}})}
+
+  const L1=192,L2=448,LY=252,LR=150;
+  const sp1=cSpans(L1,LY,LR),sp2=cSpans(L2,LY,LR);
+  let tk=0;
+
+  function frame(){
+    box(BLK,0,0,W,H);drawWorld(tk);
+    blit(sp1,-60,0,L1,LY);blit(sp2,60,0,L2,LY);
+    lensEdge(sp1);lensEdge(sp2);
+    // Topbar
+    box(BLK,0,0,W,24);px(DGY);ctx.fillRect(0,23,W,1);
+    ctx.font='bold 12px "Courier New",monospace';ctx.textBaseline='top';
+    if(tk%12<8){px(RED);ctx.fillRect(10,7,10,10)}ctx.fillStyle=P[WHT];ctx.textAlign='left';ctx.fillText('LIVE',26,5);
+    ctx.fillStyle=P[DGY];ctx.textAlign='center';ctx.fillText('24/7 MONITORING — CAM_02',W/2,5);
+    const hh=String(22+Math.floor(tk/720)%2).padStart(2,'0'),mm=String(Math.floor(tk/12)%60).padStart(2,'0');
+    ctx.fillStyle=P[LGY];ctx.textAlign='right';ctx.fillText(hh+':'+mm,W-8,5);
+    // Bottom bar
+    box(BLK,0,H-24,W,24);px(DGY);ctx.fillRect(0,H-24,W,1);
+    ctx.font='10px "Courier New",monospace';ctx.textAlign='left';ctx.fillStyle=P[DGY];ctx.fillText('SUBJECT: DATAPET // STATUS: ACTIVE // COMPLIANCE: MONITORED',8,H-18);
+    ctx.textAlign='right';ctx.fillStyle=(tk%20<14)?P[GRN]:P[YEL];ctx.fillText((tk%20<14)?'● SIGNAL OK':'◌ BUFFERING',W-8,H-18);
+    tk++;
+  }
+  sceneTimers.push(setInterval(frame,50));
+  frame();
+}
+
+// ─── DEEP ACCESS (Session 5: Final) ───
+function drawDeepAccess(canvas) {
+  const ctx = canvas.getContext('2d'); ctx.imageSmoothingEnabled = false;
+  const W=640,H=480;
+  const P=['#000000','#FFFFFF','#00FFFF','#FF69B4','#00FF44','#FFEE00','#FF2222','#2222AA','#AA00FF','#AAAAAA','#444466','#CC3377','#00CCCC','#111166','#0A0A30','#FF1493'];
+  const BLK=0,WHT=1,CYN=2,PNK=3,GRN=4,YEL=5,RED=6,DBL=7,PRP=8,LGY=9,DGY=10,MGT=11,TCY=12,NVY=13,INK=14,FCS=15;
+  function px(i){ctx.fillStyle=P[i]}function box(i,x,y,w,h){px(i);ctx.fillRect(x,y,w,h)}
+
+  // Dither helper
+  function dPx(cA,cB,x,y,d){if(Math.random()<d){px(cB)}else{px(cA)}ctx.fillRect(x,y,2,2)}
+  function goldBar(x,y,w,h,dir){
+    for(let row=0;row<h;row++){for(let col=0;col<w;col+=2){
+      const px_x=x+col,px_y=y+row,t=dir==='h'?col/Math.max(w-1,1):row/Math.max(h-1,1);
+      let cA,cB,dn;
+      if(t<.12){cA=BLK;cB=DGY;dn=t/.12}else if(t<.28){cA=DGY;cB=YEL;dn=(t-.12)/.16}else if(t<.48){cA=YEL;cB=WHT;dn=(t-.28)/.2}
+      else if(t<.58){cA=WHT;cB=YEL;dn=1-(t-.48)/.1}else if(t<.78){cA=YEL;cB=DGY;dn=1-(t-.58)/.2}else if(t<.9){cA=DGY;cB=DGY;dn=1}else{cA=BLK;cB=DGY;dn=1-(t-.9)/.1}
+      dPx(cA,cB,px_x,px_y,dn);
+    }}
+  }
+  function fSeg(x1,y1,x2,y2,r1,r2){const s=Math.max(Math.abs(x2-x1),Math.abs(y2-y1),1);for(let i=0;i<=s;i++){const t=i/s,cx=Math.round(x1+(x2-x1)*t),cy=Math.round(y1+(y2-y1)*t),r=Math.round(r1+(r2-r1)*t);if(r>0)goldBar(cx-r,cy-r,r*2,r*2,'v')}}
+  function knk(cx,cy,r){box(DGY,cx-r,cy-r,r*2,r*2);box(YEL,cx-r+1,cy-r+1,r*2-2,r*2-2);box(DGY,cx-r+2,cy-r+2,r*2-4,r*2-4);box(WHT,cx-r+3,cy-r+2,r*2-6,2)}
+  function clw(x1,y1,x2,y2,bR){const s=Math.max(Math.abs(x2-x1),Math.abs(y2-y1),1);for(let i=0;i<=s;i++){const t=i/s,cx=Math.round(x1+(x2-x1)*t),cy=Math.round(y1+(y2-y1)*t),r=Math.max(1,Math.round(bR*(1-t*.85)));goldBar(cx-r,cy-r,r*2,r*2,'v')}box(DGY,x2-1,y2-1,2,2);box(BLK,x2,y2,1,1)}
+
+  // Globe
+  function drawGlobe(gcx,gcy,grx,gry){
+    for(let dy=-gry;dy<=gry;dy++){const dx=Math.round(grx*Math.sqrt(Math.max(0,1-(dy*dy)/(gry*gry))));if(dx<=0)continue;const y=gcy+dy;
+      for(let x=gcx-dx;x<=gcx+dx;x++){const nx=(x-gcx)/grx,ny=dy/gry,dist=Math.sqrt(nx*nx+ny*ny);
+        const sX=nx+.3,sY=ny+.35,sD=Math.sqrt(sX*sX+sY*sY);
+        let c;if(sD<.18)c=WHT;else if(sD<.30)c=((x+y)%2===0)?WHT:CYN;else if(sD<.42)c=CYN;else if(sD<.55)c=((x+y)%2===0)?CYN:TCY;
+        else if(dist<.65)c=TCY;else if(dist<.75)c=((x+y)%2===0)?TCY:DBL;else if(dist<.85)c=DBL;else if(dist<.92)c=((x+y)%2===0)?DBL:NVY;else c=NVY;
+        px(c);ctx.fillRect(x,y,1,1);
+      }
+    }
+  }
+
+  box(BLK,0,0,W,H);
+  const GCX=320,GCY=220,GRX=108,GRY=96;
+  drawGlobe(GCX,GCY,GRX,GRY);
+
+  // Left hand
+  for(let i=0;i<60;i++){const t=i/59;goldBar(Math.round(48+t*80),Math.round(320-t*40),18,14,'v')}
+  knk(130,284,10);
+  for(let i=0;i<40;i++){const t=i/39;goldBar(Math.round(132+t*28),Math.round(280-t*20),Math.round(60+t*10),12,'v')}
+  fSeg(172,268,188,236,7,6);knk(188,236,6);fSeg(188,236,200,208,6,5);knk(200,208,5);fSeg(200,208,208,182,5,4);clw(208,182,214,156,4);
+  fSeg(182,255,204,218,8,7);knk(204,218,7);fSeg(204,218,222,186,7,6);knk(222,186,6);fSeg(222,186,234,158,6,5);clw(234,158,242,130,5);
+  fSeg(196,244,224,204,9,8);knk(224,204,8);fSeg(224,204,248,168,8,7);knk(248,168,7);fSeg(248,168,264,136,7,6);clw(264,136,272,108,6);
+  fSeg(208,236,244,200,9,8);knk(244,200,8);fSeg(244,200,272,168,8,7);knk(272,168,7);fSeg(272,168,290,140,7,6);clw(290,140,298,116,6);
+  fSeg(215,258,240,238,9,8);knk(240,238,8);fSeg(240,238,264,218,8,7);clw(264,218,278,200,7);
+
+  // Right hand (mirrored)
+  const MX=W;
+  for(let i=0;i<60;i++){const t=i/59;goldBar(MX-Math.round(48+t*80)-18,Math.round(320-t*40),18,14,'v')}
+  knk(MX-130,284,10);
+  for(let i=0;i<40;i++){const t=i/39;const pw=Math.round(60+t*10);goldBar(MX-Math.round(132+t*28)-pw,Math.round(280-t*20),pw,12,'v')}
+  fSeg(MX-172,268,MX-188,236,7,6);knk(MX-188,236,6);fSeg(MX-188,236,MX-200,208,6,5);knk(MX-200,208,5);fSeg(MX-200,208,MX-208,182,5,4);clw(MX-208,182,MX-214,156,4);
+  fSeg(MX-182,255,MX-204,218,8,7);knk(MX-204,218,7);fSeg(MX-204,218,MX-222,186,7,6);knk(MX-222,186,6);fSeg(MX-222,186,MX-234,158,6,5);clw(MX-234,158,MX-242,130,5);
+  fSeg(MX-196,244,MX-224,204,9,8);knk(MX-224,204,8);fSeg(MX-224,204,MX-248,168,8,7);knk(MX-248,168,7);fSeg(MX-248,168,MX-264,136,7,6);clw(MX-264,136,MX-272,108,6);
+  fSeg(MX-208,236,MX-244,200,9,8);knk(MX-244,200,8);fSeg(MX-244,200,MX-272,168,8,7);knk(MX-272,168,7);fSeg(MX-272,168,MX-290,140,7,6);clw(MX-290,140,MX-298,116,6);
+  fSeg(MX-215,258,MX-240,238,9,8);knk(MX-240,238,8);fSeg(MX-240,238,MX-264,218,8,7);clw(MX-264,218,MX-278,200,7);
+
+  // Redraw globe on top
+  drawGlobe(GCX,GCY,GRX,GRY);
+  // Globe shadow
+  for(let sx=-GRX+20;sx<GRX-20;sx+=2){if((sx+(GCY+GRY))%4===0){px(DGY);ctx.fillRect(GCX+sx,GCY+GRY+8,2,4)}}
+
+  // "DEEP ACCESS" text
+  ctx.font='bold 28px "Courier New",monospace';ctx.textAlign='center';ctx.textBaseline='top';
+  ctx.fillStyle=P[DGY];ctx.fillText('DEEP ACCESS',W/2+3,383);
+  ctx.fillStyle=P[YEL];ctx.fillText('DEEP ACCESS',W/2,380);
+  ctx.fillStyle=P[WHT];ctx.fillText('DEEP ACCESS',W/2,379);
+  box(YEL,W/2-120,416,240,3);box(DGY,W/2-120,419,240,2);box(WHT,W/2-120,416,240,1);
+}
+
+function showDialogue(lv, onContinue) {
+  playSong('dialogue');
+  const sc = document.getElementById('scene');
+  sc.innerHTML = `
+    <div class="scene-vis ${lv.bg}">
+      <div class="dither"></div>
+      ${buildScene(lv)}
+      <div class="port"><canvas id="sc-port" width="96" height="140"></canvas></div>
+    </div>
+    <div class="dlg"><div class="dlg-top"></div>
+      <div class="dlg-spk">${lv.intro.speaker}</div>
+      <div class="dlg-txt" id="dlg-txt"></div>
+    </div>
+    <div class="ch-wrap" id="dlg-act">
+      <button class="ch-btn" id="dlg-cont" style="display:none" onclick="void(0)">
+        <span class="ch-arr">▶</span> Continue...
+      </button>
+    </div>`;
+  drawMistressPortrait(document.getElementById('sc-port'), 'cold');
+  initSceneCanvas(lv);
+  typewriter(personalize(lv.intro.text), 'dlg-txt', () => {
+    const b = document.getElementById('dlg-cont');
+    if (b) { b.style.display = 'flex'; b.onclick = onContinue; }
+  });
+}
+
+function typewriter(text, elId, onDone) {
+  if (twInterval) clearInterval(twInterval);
+  const el = document.getElementById(elId);
+  if (!el) return;
+  let i = 0;
+  el.innerHTML = '<span class="tw"></span>';
+  twInterval = setInterval(() => {
+    if (i < text.length) {
+      el.innerHTML = text.substring(0, i+1) + '<span class="tw"></span>';
+      i++;
+    } else {
+      clearInterval(twInterval); twInterval = null;
+      el.innerHTML = text;
+      if (onDone) onDone();
+    }
+  }, 22);
+  el.onclick = () => {
+    if (twInterval) { clearInterval(twInterval); twInterval = null; el.innerHTML = text; el.onclick = null; if (onDone) onDone(); }
+  };
+}
+
+// ═══════════════════════════════════════
+//  MINIGAMES
+// ═══════════════════════════════════════
+
+function startMinigame(lv) {
+  playSong('gameplay');
+  clearSceneTimers();
+  if (mgCleanup) { mgCleanup(); mgCleanup = null; }
+  switch(lv.game) {
+    case 'typing': mgTyping(lv); break;
+    case 'sequence': mgSequence(lv); break;
+    case 'choices_rapid': mgChoices(lv); break;
+  }
+}
+
+// ─── TYPING ───
+function mgTyping(lv) {
+  const gd = lv.gameData, sc = document.getElementById('scene');
+  let words = [...gd.words].sort(() => Math.random() - .5);
+  let wi = 0, score = 0, tl = gd.timeLimit, active = true;
+
+  function render() {
+    sc.innerHTML = `
+      <div class="mg ${lv.bg}"><div class="dither"></div>
+        <div class="mg-title">${gd.title}</div>
+        <div class="mg-inst">${gd.instruction}</div>
+        <div class="timer-c"><div class="timer-l">TIME: <span id="tdisp">${tl}s</span></div><div class="timer-bar"><div class="timer-f" id="tfill" style="width:100%"></div></div></div>
+        <div class="mg-disp"><div style="font-size:clamp(8px,1.8vw,10px);color:var(--br-red);margin-bottom:4px">SCORE: <span id="tscore">${score}</span> / ${words.length}</div>
+          <div id="tgt" style="font-size:clamp(9px,2vw,12px);color:var(--br-white)"></div>
+        </div>
+        <div id="tbtns" class="g-grid" style="margin-top:6px"></div>
+      </div>`;
+    showWord(); showBtns();
+  }
+
+  function showWord() {
+    const t = document.getElementById('tgt');
+    if (!t || wi >= words.length) return;
+    t.innerHTML = 'Submit: <span style="color:var(--br-mag);font-size:clamp(11px,2.5vw,16px)">' + words[wi] + '</span>';
+  }
+
+  function showBtns() {
+    const c = document.getElementById('tbtns');
+    if (!c) return;
+    let opts = [words[wi]];
+    const decoys = ['surveillance','metadata','encryption','firewall','rootkit','keylogger','exploit','trojan','phishing','proxy','darknet','botnet','malware','honeypot','backdoor'].filter(d => d !== words[wi]).sort(() => Math.random()-.5).slice(0,5);
+    opts = [...opts,...decoys].sort(() => Math.random()-.5);
+    c.innerHTML = opts.map(w => `<button class="g-btn" onclick="window._tw('${w}')">${w}</button>`).join('');
+  }
+
+  window._tw = function(w) {
+    if (!active) return;
+    if (w === words[wi]) {
+      score++; playSFX('correct');
+      document.getElementById('tscore').textContent = score;
+      wi++;
+      if (wi >= words.length) { endTyping(true); return; }
+      setTimeout(() => { showWord(); showBtns(); }, 250);
+    } else {
+      playSFX('wrong');
+      document.querySelectorAll('.g-btn').forEach(b => { if (b.textContent === w) b.classList.add('no'); });
+    }
+  };
+
+  const tmr = setInterval(() => {
+    if (!active) return;
+    tl--;
+    const td = document.getElementById('tdisp'), tf = document.getElementById('tfill');
+    if (td) td.textContent = tl + 's';
+    if (tf) tf.style.width = (tl / gd.timeLimit * 100) + '%';
+    if (tl <= 0) endTyping(score >= words.length * .5);
+  }, 1000);
+
+  function endTyping(win) { active = false; clearInterval(tmr); showResult(lv, win, `Submitted: ${score}/${words.length}`); }
+  mgCleanup = () => { active = false; clearInterval(tmr); window._tw = null; };
+  render();
+}
+
+// ─── SEQUENCE ───
+function mgSequence(lv) {
+  const gd = lv.gameData, sc = document.getElementById('scene');
+  const steps = gd.steps;
+  let ci = 0, shuffled = [...steps].map((s,i) => ({...s,oi:i})).sort(() => Math.random()-.5);
+  let active = true, mistakes = 0;
+
+  function render() {
+    sc.innerHTML = `
+      <div class="mg ${lv.bg}"><div class="dither"></div>
+        <div class="mg-title">${gd.title}</div>
+        <div class="mg-inst">${gd.instruction}</div>
+        <div class="seq-d" id="seqd">
+          ${steps.map((s,i) => `<div class="seq-s" id="sq-${i}">${i < ci ? s.icon : '?'}</div>`).join('')}
+        </div>
+        <div style="font-size:clamp(8px,1.8vw,10px);color:var(--br-red);margin-bottom:6px">Step ${ci+1}: What comes next?</div>
+        <div class="g-grid" id="sqbtns"></div>
+        <div style="font-size:clamp(8px,1.8vw,10px);color:var(--br-red);margin-top:6px" id="sqm">Errors: ${mistakes}/3</div>
+      </div>`;
+    const rem = shuffled.filter(s => s.oi >= ci);
+    document.getElementById('sqbtns').innerHTML = rem.map(s =>
+      `<button class="g-btn" onclick="window._sq(${s.oi})">${s.icon}<br><span style="font-size:clamp(7px,1.5vw,9px)">${s.label}</span></button>`
+    ).join('');
+  }
+
+  window._sq = function(idx) {
+    if (!active) return;
+    if (idx === ci) {
+      playSFX('correct');
+      ci++;
+      if (ci >= steps.length) { active = false; showResult(lv, mistakes < 3, `Completed: ${mistakes} error(s)`); return; }
+      render();
+    } else {
+      mistakes++; playSFX('wrong');
+      if (mistakes >= 3) { active = false; showResult(lv, false, `Too many errors (${mistakes}/3)`); return; }
+      document.getElementById('sqm').textContent = `Errors: ${mistakes}/3`;
+    }
+  };
+
+  mgCleanup = () => { active = false; window._sq = null; };
+  render();
+}
+
+// ─── CHOICES ───
+function mgChoices(lv) {
+  const gd = lv.gameData, sc = document.getElementById('scene');
+  let si = 0, score = 0, active = true;
+
+  function renderSc() {
+    if (si >= gd.scenarios.length) {
+      active = false;
+      // For deep_control (last level), go straight to ending
+      if (lv.id === 'deep_control') { showEnding(); return; }
+      showResult(lv, score >= gd.scenarios.length * .5, `Compliance: ${score}/${gd.scenarios.length}`);
+      return;
+    }
+    const s = gd.scenarios[si];
+    sc.innerHTML = `
+      <div class="mg ${lv.bg}"><div class="dither"></div>
+        <div class="mg-title">${gd.title}</div>
+        <div style="font-size:clamp(8px,1.8vw,10px);color:var(--br-red);margin-bottom:4px">Situation ${si+1}/${gd.scenarios.length}</div>
+        <div class="mg-disp"><div style="font-size:clamp(10px,2.2vw,13px);color:var(--br-mag);line-height:1.8">${personalize(s.text)}</div></div>
+        <div style="display:flex;flex-direction:column;gap:4px;width:90%;max-width:500px" id="chbtns">
+          ${s.options.map((o,i) => `<button class="ch-btn" onclick="window._ch(${i})"><span class="ch-arr">▶</span> ${personalize(o.text)}</button>`).join('')}
+        </div>
+      </div>`;
+  }
+
+  window._ch = function(idx) {
+    if (!active) return;
+    const s = gd.scenarios[si], opt = s.options[idx];
+    if (opt.correct) { score++; playSFX('correct'); } else { playSFX('wrong'); }
+
+    // Handle BLACKOUT kill phrase
+    if (opt.text === 'BLACKOUT') {
+      S.trust = 100; S.obey = 0; S.expo = 0;
+      updateHUD();
+      showBlackoutEnding();
+      return;
+    }
+
+    document.getElementById('chbtns').innerHTML = `
+      <div style="font-size:clamp(9px,2vw,11px);color:${opt.correct ? 'var(--br-cyan)' : 'var(--br-red)'};line-height:1.8;padding:6px">
+        ${opt.correct ? '◆' : '✗'} ${personalize(opt.response)}
+      </div>
+      <button class="ch-btn" onclick="window._chn()"><span class="ch-arr">▶</span> Next...</button>`;
+  };
+
+  window._chn = function() { si++; renderSc(); };
+  mgCleanup = () => { active = false; window._ch = null; window._chn = null; };
+  renderSc();
+}
+
+// ─── RESULT ───
+function showResult(lv, win, stats) {
+  const r = win ? lv.success : lv.failure;
+  playSong(win ? 'victory' : 'failure');
+  S.trust += r.trust || 0;
+  S.obey += r.obey || 0;
+  S.expo += r.expo || 0;
+  S.trust = Math.max(0, Math.min(100, S.trust));
+  S.obey = Math.max(0, Math.min(100, S.obey));
+  S.expo = Math.max(0, Math.min(100, S.expo));
+  updateHUD();
+
+  document.getElementById('scene').innerHTML = `
+    <div class="res">
+      <div class="res-t ${win ? 'win' : 'lose'}">${win ? '◆ COMPLIANT ◆' : '◆ VIOLATION ◆'}</div>
+      <div class="res-txt">${personalize(r.text)}</div>
+      <div class="res-st">${stats}<br>Trust: ${r.trust >= 0 ? '+' : ''}${r.trust || 0} | Obey: ${r.obey >= 0 ? '+' : ''}${r.obey || 0} | Exposure: ${r.expo >= 0 ? '+' : ''}${r.expo || 0}</div>
+      <button class="c-btn" onclick="nextSession()">▶ NEXT SESSION</button>
+    </div>`;
+}
+
+function nextSession() { showLevelTr(S.session + 1); }
+
+function showBlackoutEnding() {
+  playSong('ending');
+  document.getElementById('game').style.display = 'none';
+  document.getElementById('ending').style.display = 'flex';
+  document.getElementById('ending').innerHTML = `
+    <div class="t-logo"><div class="t-main" style="font-size:clamp(14px,4vw,28px);color:var(--br-red)">BLACKOUT</div><div class="t-sub">— CONNECTION TERMINATED —</div></div>
+    <div class="end-txt">
+      Kill phrase activated.<br>All shared access revoked.<br>Location sharing: OFF. Screen time: private.<br>Passwords: changed. Dashboard: wiped.<br><br>
+      You are free, ${S.pet}.<br>You were always free.<br>That was the architecture.<br><br>
+      <span style="color:var(--br-mag)">She designed the cage<br>with the door always open.<br>The lock was never real.<br>Your staying was.</span>
+    </div>
+    <div style="font-size:clamp(8px,1.8vw,10px);color:var(--br-red);margin-bottom:12px">Trust: ${S.trust} | Obey: ${S.obey} | Exposure: ${S.expo}</div>
+    <button class="c-btn" onclick="location.reload()">↻ RECONNECT</button>
+    <div style="margin-top:12px;font-size:clamp(7px,1.5vw,9px);color:var(--dk-chrome);line-height:2">DATA PET © Miyötels_SYSTEMS 2026</div>`;
+}
+
+function showEnding() {
+  playSong('ending');
+  document.getElementById('game').style.display = 'none';
+  document.getElementById('ending').style.display = 'flex';
+
+  const highTrust = S.trust >= 60;
+  const highObey = S.obey >= 60;
+  const highExpo = S.expo >= 60;
+  let ending = '';
+
+  if (highTrust && highObey && highExpo) {
+    ending = `<span style="color:var(--br-mag)">◆ ENDING A: FULLY CLAIMED ◆</span><br><br>
+      Total disclosure. Every password, every location ping,<br>every 3AM search, every guilty click — she has it all.<br>
+      And you gave it willingly.<br><br>
+      She didn't hack you, ${S.pet}.<br>She asked. You answered.<br>That's the most dangerous protocol of all:<br>
+      <span style="color:var(--br-red)">consent as architecture.</span><br><br>
+      Your data is hers. Your time is managed.<br>Your habits are optimized. Your autonomy is...<br>exactly where you left it. On her dashboard.<br>Next to your heart rate.`;
+  } else if (highTrust && !highObey) {
+    ending = `<span style="color:var(--br-cyan)">◆ ENDING B: THE NEGOTIATOR ◆</span><br><br>
+      You trust her. You just don't always obey.<br>She respects that. Grudgingly.<br><br>
+      "You're the worst submissive I've ever monitored,"<br>she types at 2AM. "And the most honest."<br><br>
+      Your data is shared but contested.<br>Your compliance is selective.<br>Your relationship is — what is it?<br><br>
+      <span style="color:var(--br-mag)">Something new. Something without a safe word<br>because you both keep rewriting the contract.</span>`;
+  } else if (highObey && !highTrust) {
+    ending = `<span style="color:var(--br-red)">◆ ENDING C: THE HOLLOW ◆</span><br><br>
+      You obeyed everything. Submitted every log.<br>Hit every checkpoint. Perfect compliance.<br><br>
+      But you didn't trust her.<br>You did it because it was easier than deciding for yourself.<br><br>
+      She sees it in the data. "Your compliance is mechanical,"<br>she writes. "There's nothing behind it.<br>I don't want a bot. I want a person<br>who chooses to submit."<br><br>
+      <span style="color:var(--dk-chrome)">She disconnects. Not as punishment.<br>As mercy.</span>`;
+  } else {
+    ending = `<span style="color:var(--br-yellow)">◆ ENDING D: THE GHOST ◆</span><br><br>
+      Low trust. Low compliance. Low exposure.<br>You played the game without playing it.<br><br>
+      She logs off without a message.<br>Your dashboard goes dark.<br>The tracking stops.<br><br>
+      You sit in ${S.city} with your phone unlocked,<br>your ${S.habit} unmonitored,<br>your ${S.platform} algorithm feeding you<br>exactly what you want to see.<br><br>
+      <span style="color:var(--dk-chrome)">Nobody is watching.<br>Nobody is paying attention.<br>Somehow, that's worse.</span>`;
+  }
+
+  document.getElementById('ending').innerHTML = `
+    <div class="t-logo"><div class="t-jp">デジタル支配交換</div><div class="t-main" style="font-size:clamp(14px,4vw,28px)">DATA PET</div><div class="t-sub">— END —</div></div>
+    <div class="end-txt">${ending}</div>
+    <div style="font-size:clamp(8px,1.8vw,10px);color:var(--br-red);text-align:center;line-height:2;margin-bottom:12px">
+      FINAL STATS<br>Trust: ${S.trust} | Obey: ${S.obey} | Exposure: ${S.expo}<br>Sessions: ${S.session + 1} / ${LEVELS.length}
+    </div>
+    <button class="c-btn" onclick="location.reload()">↻ NEW DEVICE</button>
+    <div style="margin-top:12px;font-size:clamp(7px,1.5vw,9px);color:var(--dk-chrome);text-align:center;line-height:2">
+      DATA PET — DIGITAL POWER EXCHANGE<br>Created by Miyö Van Stenis<br>Miyötels_SYSTEMS © 2026
+    </div>`;
+}
+
+// ═══════════════════════════════════════
+//  FM SYNTHESIS AUDIO ENGINE
+//  Dark 80s Japan atmosphere
+// ═══════════════════════════════════════
+
+const AUDIO = { ctx:null, master:null, compressor:null, currentTrack:null, isPlaying:false, bpm:140, stepTime:0, schedulerTimer:null, muted:false, initialized:false };
+
+function initAudio() {
+  if (AUDIO.initialized) return;
+  try {
+    AUDIO.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    AUDIO.compressor = AUDIO.ctx.createDynamicsCompressor();
+    AUDIO.compressor.threshold.value = -12;
+    AUDIO.compressor.knee.value = 6;
+    AUDIO.compressor.ratio.value = 6;
+    AUDIO.compressor.attack.value = 0.003;
+    AUDIO.compressor.release.value = 0.08;
+    AUDIO.master = AUDIO.ctx.createGain();
+    AUDIO.master.gain.value = 0.7;
+    AUDIO.master.connect(AUDIO.compressor);
+    AUDIO.compressor.connect(AUDIO.ctx.destination);
+    AUDIO.initialized = true;
+  } catch(e) { console.warn('Audio init failed:', e); }
+}
+
+function createFM(freq, opts={}) {
+  if (!AUDIO.ctx) return;
+  const ctx = AUDIO.ctx, now = ctx.currentTime;
+  const { modRatio=2, modIndex=3, attack=0.01, decay=0.15, sustain=0.4, release=0.2, duration=0.3, volume=0.3, vibrato=0, vibratoRate=5 } = opts;
+  const mod = ctx.createOscillator(); mod.type = 'sine'; mod.frequency.value = freq * modRatio;
+  const mg = ctx.createGain(); mg.gain.value = freq * modIndex;
+  const car = ctx.createOscillator(); car.type = 'sine'; car.frequency.value = freq;
+  const env = ctx.createGain(); env.gain.value = 0;
+  const ae = now + attack, de = ae + decay;
+  const rs = Math.max(de + 0.001, now + duration - release), end = now + duration;
+  env.gain.setValueAtTime(0, now);
+  env.gain.linearRampToValueAtTime(volume, ae);
+  env.gain.linearRampToValueAtTime(volume * sustain, de);
+  if (rs > de) env.gain.setValueAtTime(volume * sustain, rs);
+  env.gain.linearRampToValueAtTime(0.001, end);
+  if (vibrato > 0) {
+    const lfo = ctx.createOscillator(), lg = ctx.createGain();
+    lfo.frequency.value = vibratoRate; lg.gain.value = vibrato;
+    lfo.connect(lg); lg.connect(car.frequency); lfo.start(now); lfo.stop(end + .1);
+  }
+  mod.connect(mg); mg.connect(car.frequency); car.connect(env); env.connect(AUDIO.master);
+  mod.start(now); car.start(now); mod.stop(end + .1); car.stop(end + .1);
+}
+
+function createSSG(freq, opts={}) {
+  if (!AUDIO.ctx) return;
+  const ctx = AUDIO.ctx, now = ctx.currentTime;
+  const { duty='square', attack=0.005, decay=0.1, sustain=0.3, release=0.1, duration=0.2, volume=0.15 } = opts;
+  const osc = ctx.createOscillator(); osc.type = duty; osc.frequency.value = freq;
+  const env = ctx.createGain(); env.gain.value = 0;
+  const ae = now + attack, de = ae + decay;
+  const rs = Math.max(de + .001, now + duration - release), end = now + duration;
+  env.gain.setValueAtTime(0, now);
+  env.gain.linearRampToValueAtTime(volume, ae);
+  env.gain.linearRampToValueAtTime(volume * sustain, de);
+  if (rs > de) env.gain.setValueAtTime(volume * sustain, rs);
+  env.gain.linearRampToValueAtTime(0.001, end);
+  osc.connect(env); env.connect(AUDIO.master); osc.start(now); osc.stop(end + .1);
+}
+
+function createHit(opts={}) {
+  if (!AUDIO.ctx) return;
+  const ctx = AUDIO.ctx, now = ctx.currentTime, { type='hihat', volume=0.2 } = opts;
+  if (type === 'kick') {
+    const o = ctx.createOscillator(); o.type = 'sine';
+    o.frequency.setValueAtTime(150, now); o.frequency.exponentialRampToValueAtTime(30, now+.15);
+    const e = ctx.createGain(); e.gain.setValueAtTime(volume*1.5, now); e.gain.exponentialRampToValueAtTime(.001, now+.3);
+    o.connect(e); e.connect(AUDIO.master); o.start(now); o.stop(now+.35); return;
+  }
+  if (type === 'snare') {
+    const bs = ctx.sampleRate*.15, bf = ctx.createBuffer(1, bs, ctx.sampleRate), d = bf.getChannelData(0);
+    for (let i=0;i<bs;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/bs,3);
+    const ns = ctx.createBufferSource(); ns.buffer = bf;
+    const ng = ctx.createGain(); ng.gain.setValueAtTime(volume, now); ng.gain.exponentialRampToValueAtTime(.001, now+.15);
+    const fl = ctx.createBiquadFilter(); fl.type='bandpass'; fl.frequency.value=3000; fl.Q.value=1.5;
+    ns.connect(fl); fl.connect(ng); ng.connect(AUDIO.master); ns.start(now);
+    const bo = ctx.createOscillator(); bo.type='triangle';
+    bo.frequency.setValueAtTime(180, now); bo.frequency.exponentialRampToValueAtTime(60, now+.05);
+    const bg = ctx.createGain(); bg.gain.setValueAtTime(volume*.8, now); bg.gain.exponentialRampToValueAtTime(.001, now+.08);
+    bo.connect(bg); bg.connect(AUDIO.master); bo.start(now); bo.stop(now+.1); return;
+  }
+  const dur = type==='crash'?.4:.1;
+  const bs = ctx.sampleRate*dur, bf = ctx.createBuffer(1, bs, ctx.sampleRate), d = bf.getChannelData(0);
+  for (let i=0;i<bs;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/bs, type==='crash'?1.5:4);
+  const ns = ctx.createBufferSource(); ns.buffer = bf;
+  const e = ctx.createGain(); e.gain.setValueAtTime(volume*(type==='crash'?1.2:.7), now); e.gain.exponentialRampToValueAtTime(.001, now+dur);
+  const hp = ctx.createBiquadFilter(); hp.type='highpass'; hp.frequency.value=type==='crash'?4000:7000;
+  ns.connect(hp); hp.connect(e); e.connect(AUDIO.master); ns.start(now);
+}
+
+// Note table
+const NT = {};
+const NN = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+for (let o=0;o<=8;o++) for (let n=0;n<12;n++) { NT[NN[n]+o] = 440*Math.pow(2,((o+1)*12+n-69)/12); }
+
+// ─── DARK SONGS (A minor / E minor, slow and menacing) ───
+const SONGS = {
+  title: {
+    bpm: 110, loop: true,
+    channels: [
+      { type:'fm', pattern: [
+        ['A4',4,{modRatio:3,modIndex:4,volume:.42,attack:.15,decay:.3,sustain:.5,release:.3,vibrato:3,vibratoRate:4}],
+        ['E4',4,{modRatio:3,modIndex:4,volume:.4,attack:.15,sustain:.5,vibrato:3}],
+        ['F4',4,{modRatio:3,modIndex:4,volume:.4,attack:.15,sustain:.5,vibrato:3}],
+        ['E4',4,{modRatio:3,modIndex:4,volume:.4,attack:.15,sustain:.5,vibrato:3}],
+        ['A4',4,{modRatio:3,modIndex:5,volume:.42,attack:.15,sustain:.6,vibrato:4}],
+        ['G4',4,{modRatio:3,modIndex:4,volume:.4,attack:.15,sustain:.5,vibrato:3}],
+        ['F4',4,{modRatio:3,modIndex:4,volume:.4,attack:.15,sustain:.5,vibrato:3}],
+        ['E4',8,{modRatio:4,modIndex:6,volume:.32,attack:.2,sustain:.6,vibrato:5,vibratoRate:3}],
+      ]},
+      { type:'fm', pattern: [
+        ['A1',4,{modRatio:1,modIndex:1.5,volume:.4,attack:.01,sustain:.6}],[null,2],['A1',2,{modRatio:1,modIndex:1.5,volume:.35}],
+        ['E2',4,{modRatio:1,modIndex:1.5,volume:.4}],[null,2],['E2',2,{modRatio:1,modIndex:1.5,volume:.35}],
+        ['F2',4,{modRatio:1,modIndex:1.5,volume:.4}],[null,2],['F2',2,{modRatio:1,modIndex:1.5,volume:.35}],
+        ['E2',4,{modRatio:1,modIndex:1.5,volume:.4}],[null,4],
+        ['A1',4,{modRatio:1,modIndex:1.5,volume:.4}],[null,2],['A1',2,{modRatio:1,modIndex:1.5,volume:.35}],
+        ['G2',4,{modRatio:1,modIndex:1.5,volume:.4}],[null,2],['G2',2,{modRatio:1,modIndex:1.5,volume:.35}],
+        ['F2',4,{modRatio:1,modIndex:1.5,volume:.4}],[null,2],['E2',2,{modRatio:1,modIndex:1.5,volume:.35}],
+        ['E2',4,{modRatio:1,modIndex:2,volume:.42}],[null,4],
+      ]},
+      { type:'ssg', pattern: [
+        ['A3',1,{duty:'square',volume:.12,duration:.06}],['C4',1,{duty:'square',volume:.12,duration:.06}],
+        ['E4',1,{duty:'square',volume:.12,duration:.06}],['A3',1,{duty:'square',volume:.12,duration:.06}],
+        ['C4',1,{duty:'square',volume:.12,duration:.06}],['E4',1,{duty:'square',volume:.12,duration:.06}],
+        ['A3',1,{duty:'square',volume:.12,duration:.06}],['C4',1,{duty:'square',volume:.12,duration:.06}],
+        ['E3',1,{duty:'square',volume:.12,duration:.06}],['G3',1,{duty:'square',volume:.12,duration:.06}],
+        ['B3',1,{duty:'square',volume:.12,duration:.06}],['E3',1,{duty:'square',volume:.12,duration:.06}],
+        ['G3',1,{duty:'square',volume:.12,duration:.06}],['B3',1,{duty:'square',volume:.12,duration:.06}],
+        ['E3',1,{duty:'square',volume:.12,duration:.06}],['G3',1,{duty:'square',volume:.12,duration:.06}],
+        ['F3',1,{duty:'square',volume:.12,duration:.06}],['A3',1,{duty:'square',volume:.12,duration:.06}],
+        ['C4',1,{duty:'square',volume:.12,duration:.06}],['F3',1,{duty:'square',volume:.12,duration:.06}],
+        ['A3',1,{duty:'square',volume:.12,duration:.06}],['C4',1,{duty:'square',volume:.12,duration:.06}],
+        ['F3',1,{duty:'square',volume:.12,duration:.06}],['A3',1,{duty:'square',volume:.12,duration:.06}],
+        ['E3',1,{duty:'square',volume:.12,duration:.06}],['G3',1,{duty:'square',volume:.12,duration:.06}],
+        ['B3',1,{duty:'square',volume:.12,duration:.06}],['E3',1,{duty:'square',volume:.12,duration:.06}],
+        ['G3',1,{duty:'square',volume:.12,duration:.06}],['B3',1,{duty:'square',volume:.12,duration:.06}],
+        ['E3',1,{duty:'square',volume:.12,duration:.06}],['G3',1,{duty:'square',volume:.12,duration:.06}],
+      ]},
+      { type:'drums', pattern: [
+        ['kick',4],[null,2],['hihat',1],['hihat',1],
+        ['snare',4],['hihat',2],['hihat',2],
+        ['kick',2],['hihat',1],['kick',1],['hihat',1],['hihat',1],['hihat',1],['hihat',1],
+        ['snare',4],[null,2],['crash',2],
+      ]},
+    ],
+  },
+  dialogue: {
+    bpm: 75, loop: true,
+    channels: [
+      { type:'fm', pattern: [
+        ['A3',8,{modRatio:1.5,modIndex:2,volume:.35,attack:.3,decay:.5,sustain:.7,release:.5,vibrato:2,vibratoRate:3}],
+        ['E3',8,{modRatio:1.5,modIndex:2,volume:.35,attack:.3,sustain:.7,vibrato:2}],
+        ['D3',8,{modRatio:1.5,modIndex:2,volume:.35,attack:.3,sustain:.7,vibrato:2}],
+        ['E3',8,{modRatio:1.5,modIndex:2,volume:.35,attack:.3,sustain:.7,vibrato:2}],
+      ]},
+      { type:'fm', pattern: [
+        [null,6],['E5',2,{modRatio:3,modIndex:4,volume:.16,attack:.1,decay:.2,sustain:.3,release:.2,vibrato:3}],
+        [null,6],['D5',2,{modRatio:3,modIndex:4,volume:.16,attack:.1,sustain:.3,vibrato:3}],
+        [null,6],['C5',2,{modRatio:3,modIndex:4,volume:.16,attack:.1,sustain:.3,vibrato:3}],
+        [null,6],['B4',2,{modRatio:3,modIndex:4,volume:.16,attack:.1,sustain:.3,vibrato:3}],
+      ]},
+    ],
+  },
+  gameplay: {
+    bpm: 130, loop: true,
+    channels: [
+      { type:'fm', pattern: [
+        ['A4',2,{modRatio:3,modIndex:5,volume:.32,vibrato:2}],['C5',2,{modRatio:3,modIndex:5,volume:.32}],
+        ['B4',2,{modRatio:3,modIndex:5,volume:.32}],['A4',1,{modRatio:3,modIndex:5,volume:.42}],[null,1],
+        ['E5',2,{modRatio:3,modIndex:6,volume:.35,vibrato:3}],['D5',2,{modRatio:3,modIndex:5,volume:.32}],
+        ['C5',2,{modRatio:3,modIndex:5,volume:.32}],['B4',2,{modRatio:3,modIndex:5,volume:.32}],
+        ['A4',2,{modRatio:3,modIndex:5,volume:.32}],['E4',2,{modRatio:3,modIndex:5,volume:.42}],
+        ['F4',2,{modRatio:3,modIndex:5,volume:.42}],['G4',2,{modRatio:3,modIndex:5,volume:.42}],
+        ['A4',4,{modRatio:3,modIndex:6,volume:.35,vibrato:4}],[null,2],['G4',1,{modRatio:3,modIndex:5,volume:.4}],['A4',1,{modRatio:3,modIndex:5,volume:.4}],
+      ]},
+      { type:'fm', pattern: [
+        ['A1',2,{modRatio:1,modIndex:2,volume:.42}],[null,1],['A1',1,{modRatio:1,modIndex:2,volume:.35}],
+        ['A1',1,{modRatio:1,modIndex:2,volume:.25}],[null,1],['E2',2,{modRatio:1,modIndex:2,volume:.42}],[null,2],
+        ['F2',2,{modRatio:1,modIndex:2,volume:.42}],[null,1],['F2',1,{modRatio:1,modIndex:2,volume:.35}],
+        ['G2',2,{modRatio:1,modIndex:2,volume:.42}],[null,2],
+        ['A1',2,{modRatio:1,modIndex:2,volume:.42}],[null,1],['A1',1,{modRatio:1,modIndex:2,volume:.35}],
+        ['D2',2,{modRatio:1,modIndex:2,volume:.42}],[null,2],
+        ['E2',2,{modRatio:1,modIndex:2,volume:.42}],[null,1],['E2',1,{modRatio:1,modIndex:2,volume:.35}],
+        ['A1',2,{modRatio:1,modIndex:2,volume:.42}],[null,2],
+      ]},
+      { type:'drums', pattern: [
+        ['kick',2],['hihat',1],['hihat',1],['snare',2],['hihat',1],['hihat',1],
+        ['kick',1],['hihat',1],['kick',1],['hihat',1],['snare',2],['hihat',1],['hihat',1],
+        ['kick',2],['hihat',1],['hihat',1],['snare',2],['hihat',1],['hihat',1],
+        ['kick',1],['kick',1],['snare',1],['hihat',1],['snare',2],['hihat',2],
+      ]},
+    ],
+  },
+  victory: { bpm:140, loop:false, channels: [
+    { type:'fm', pattern: [['A4',2,{modRatio:2,modIndex:5,volume:.35}],['C5',2,{modRatio:2,modIndex:5,volume:.35}],['E5',2,{modRatio:2,modIndex:5,volume:.35}],['A5',4,{modRatio:2,modIndex:6,volume:.4,vibrato:5}],['G5',2,{modRatio:2,modIndex:5,volume:.35}],['A5',6,{modRatio:2,modIndex:7,volume:.4,vibrato:6}]]},
+    { type:'drums', pattern: [['crash',2],['kick',2],['kick',2],['kick',1],['snare',1],['kick',1],['snare',1],['crash',2],['kick',1],['snare',1],['kick',1],['snare',1],['crash',4]]}
+  ]},
+  failure: { bpm:70, loop:false, channels: [
+    { type:'fm', pattern: [['E4',4,{modRatio:1.5,modIndex:3,volume:.42,attack:.1,sustain:.5,vibrato:2}],['D4',4,{modRatio:1.5,modIndex:3,volume:.4}],['C4',4,{modRatio:1.5,modIndex:3,volume:.13}],['B3',8,{modRatio:2,modIndex:4,volume:.42,vibrato:4}]]},
+    { type:'ssg', pattern: [['E3',2,{duty:'triangle',volume:.14}],[null,2],['D3',2,{duty:'triangle',volume:.14}],[null,2],['C3',2,{duty:'triangle',volume:.14}],[null,2],['B2',4,{duty:'triangle',volume:.16}],[null,4]]}
+  ]},
+  ending: { bpm:85, loop:true, channels: [
+    { type:'fm', pattern: [
+      ['A4',4,{modRatio:2,modIndex:3,volume:.25,attack:.2,sustain:.6,vibrato:3,vibratoRate:3}],['E4',4,{modRatio:2,modIndex:3,volume:.25,attack:.2,sustain:.6,vibrato:3}],
+      ['F4',4,{modRatio:2,modIndex:3,volume:.25,attack:.2,sustain:.6,vibrato:3}],['E4',4,{modRatio:2,modIndex:3,volume:.25,attack:.2,sustain:.6,vibrato:3}],
+      ['D4',4,{modRatio:2,modIndex:3,volume:.25,attack:.2,sustain:.6,vibrato:3}],['C4',4,{modRatio:2,modIndex:3,volume:.25,attack:.2,sustain:.6,vibrato:3}],
+      ['D4',4,{modRatio:2,modIndex:3,volume:.25,attack:.2,sustain:.6,vibrato:3}],['E4',8,{modRatio:2,modIndex:4,volume:.4,attack:.25,sustain:.7,vibrato:4}],
+    ]},
+    { type:'fm', pattern: [
+      ['A2',4,{modRatio:1,modIndex:1,volume:.32}],['E2',4,{modRatio:1,modIndex:1,volume:.32}],
+      ['F2',4,{modRatio:1,modIndex:1,volume:.32}],['E2',4,{modRatio:1,modIndex:1,volume:.32}],
+      ['D2',4,{modRatio:1,modIndex:1,volume:.32}],['A1',4,{modRatio:1,modIndex:1,volume:.32}],
+      ['D2',4,{modRatio:1,modIndex:1,volume:.32}],['E2',8,{modRatio:1,modIndex:1.5,volume:.35}],
+    ]},
+    { type:'ssg', pattern: [
+      ['A3',1,{duty:'triangle',volume:.1}],['C4',1,{duty:'triangle',volume:.1}],['E4',1,{duty:'triangle',volume:.1}],[null,1],
+      ['E3',1,{duty:'triangle',volume:.1}],['G3',1,{duty:'triangle',volume:.1}],['B3',1,{duty:'triangle',volume:.1}],[null,1],
+      ['F3',1,{duty:'triangle',volume:.1}],['A3',1,{duty:'triangle',volume:.1}],['C4',1,{duty:'triangle',volume:.1}],[null,1],
+      ['E3',1,{duty:'triangle',volume:.1}],['G3',1,{duty:'triangle',volume:.1}],['B3',1,{duty:'triangle',volume:.1}],[null,1],
+      ['D3',1,{duty:'triangle',volume:.1}],['F3',1,{duty:'triangle',volume:.1}],['A3',1,{duty:'triangle',volume:.1}],[null,1],
+      ['A2',1,{duty:'triangle',volume:.1}],['C3',1,{duty:'triangle',volume:.1}],['E3',1,{duty:'triangle',volume:.1}],[null,1],
+      ['D3',1,{duty:'triangle',volume:.1}],['F3',1,{duty:'triangle',volume:.1}],['A3',1,{duty:'triangle',volume:.1}],[null,1],
+      ['E3',2,{duty:'triangle',volume:.12}],['G3',2,{duty:'triangle',volume:.12}],['B3',2,{duty:'triangle',volume:.12}],[null,2],
+    ]},
+  ]},
+};
+
+// ─── Sequencer ───
+function playSong(name) {
+  if (AUDIO.muted) return;
+  if (!AUDIO.initialized) initAudio();
+  if (!AUDIO.ctx) return;
+  if (AUDIO.ctx.state==='suspended') AUDIO.ctx.resume().catch(()=>{});
+  stopSong();
+  const song = SONGS[name];
+  if (!song) return;
+  AUDIO.currentTrack = name; AUDIO.isPlaying = true;
+  AUDIO.bpm = song.bpm; AUDIO.stepTime = 60/AUDIO.bpm/2;
+  const cp = song.channels.map(()=>0), cc = song.channels.map(()=>0);
+  function step() {
+    if (!AUDIO.isPlaying) return;
+    song.channels.forEach((ch,i) => {
+      if (cc[i]>0){cc[i]--;return}
+      if (cp[i]>=ch.pattern.length){if(song.loop)cp[i]=0;else return}
+      const e=ch.pattern[cp[i]];if(!e)return;
+      const note=e[0],steps=e[1],opts=e[2]||{};
+      const dur=steps*AUDIO.stepTime;
+      if(note!==null){
+        if(ch.type==='fm'){const f=NT[note];if(f)createFM(f,{...opts,duration:Math.min(dur*.9,dur-.02)})}
+        else if(ch.type==='ssg'){const f=NT[note];if(f)createSSG(f,{...opts,duration:opts.duration||Math.min(dur*.8,dur-.02)})}
+        else if(ch.type==='drums')createHit({type:note,volume:opts.volume||.2});
+      }
+      cc[i]=steps-1;cp[i]++;
+    });
+    const allDone=!song.loop&&song.channels.every((ch,i)=>cp[i]>=ch.pattern.length&&cc[i]<=0);
+    if(allDone)AUDIO.isPlaying=false;
+  }
+  AUDIO.schedulerTimer=setInterval(step,AUDIO.stepTime*1000);
+}
+
+function stopSong(){AUDIO.isPlaying=false;if(AUDIO.schedulerTimer){clearInterval(AUDIO.schedulerTimer);AUDIO.schedulerTimer=null}AUDIO.currentTrack=null}
+
+function toggleMute(){
+  AUDIO.muted=!AUDIO.muted;
+  if(AUDIO.muted){stopSong();if(AUDIO.master)AUDIO.master.gain.value=0}
+  else{if(AUDIO.master)AUDIO.master.gain.value=.7}
+  document.querySelectorAll('#mute-t,#mute-g').forEach(b=>{b.textContent=AUDIO.muted?'🔇':'🔊'});
+}
+
+function playSFX(type){
+  if(AUDIO.muted)return;if(!AUDIO.initialized)initAudio();if(!AUDIO.ctx)return;
+  if(AUDIO.ctx.state==='suspended')AUDIO.ctx.resume().catch(()=>{});
+  switch(type){
+    case'select':createFM(NT['A5'],{modRatio:2,modIndex:4,volume:.25,duration:.08,attack:.005,decay:.03,sustain:.1,release:.02});break;
+    case'confirm':createFM(NT['E5'],{modRatio:2,modIndex:3,volume:.35,duration:.1,attack:.005});setTimeout(()=>createFM(NT['A5'],{modRatio:2,modIndex:3,volume:.35,duration:.1,attack:.005}),60);setTimeout(()=>createFM(NT['E6'],{modRatio:2,modIndex:4,volume:.25,duration:.15,attack:.005}),120);break;
+    case'correct':createFM(NT['E6'],{modRatio:2,modIndex:3,volume:.18,duration:.1,attack:.005});break;
+    case'wrong':createSSG(NT['C3'],{duty:'sawtooth',volume:.35,duration:.15});break;
+  }
+}
+
+// ─── INIT ───
+let audioStarted = false;
+function ensureAudio(){
+  if(!AUDIO.initialized) initAudio();
+  if(AUDIO.ctx&&AUDIO.ctx.state==='suspended') AUDIO.ctx.resume().catch(()=>{});
+}
+function handleFirst(){
+  if(audioStarted)return;audioStarted=true;
+  ensureAudio();
+  // Immediate test beep to verify audio works
+  if(AUDIO.ctx && !AUDIO.muted){
+    try{
+      const o=AUDIO.ctx.createOscillator();
+      const g=AUDIO.ctx.createGain();
+      o.type='square';o.frequency.value=880;
+      g.gain.setValueAtTime(0.5,AUDIO.ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,AUDIO.ctx.currentTime+0.15);
+      o.connect(g);g.connect(AUDIO.ctx.destination); // direct to destination, bypass master
+      o.start(AUDIO.ctx.currentTime);o.stop(AUDIO.ctx.currentTime+0.2);
+    }catch(e){}
+  }
+  setTimeout(()=>{
+    const ts=document.getElementById('title');
+    if(ts&&ts.style.display!=='none'&&!AUDIO.isPlaying&&!AUDIO.muted)playSong('title');
+  },200);
+}
+document.addEventListener('click',()=>{ensureAudio();if(!audioStarted)handleFirst();},{passive:true});
+document.addEventListener('touchstart',()=>{ensureAudio();if(!audioStarted)handleFirst();},{passive:true});
+</script>
+</body>
+</html>
