@@ -38,7 +38,7 @@
       "id": "embark",
       "title": "COST CA24129 — EMBARK",
       "year": 2026,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "Action Groups : WG2 / WG5",
       "collaborators": [
         "WG leads"
@@ -72,7 +72,7 @@
       "id": "virtue",
       "title": "COST CA25117 — VirTUE",
       "year": 2026,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "COST Action",
       "collaborators": [
         "Plessiet",
@@ -129,12 +129,15 @@
       "collaborators": [],
       "desc": "",
       "weight": 600,
+      "size": 14,
+      "fontSize": 16,
+      "image": "node-1785835424904-826.jpg",
       "pos": {
-        "x": 79.11959212865585,
-        "y": 910.860595703125
+        "x": 114.11959212865585,
+        "y": 902.860595703125
       },
-      "x": 79.11959212865585,
-      "y": 910.860595703125
+      "x": 114.11959212865585,
+      "y": 902.860595703125
     },
     {
       "id": "node-1785859175119-534",
@@ -148,30 +151,32 @@
       "desc": "Debout de l’autoformation en informatique : atelier de mon père à Guatire ; installation de systèmes d’exploitation et exploration des terminaux\n\nMon apprentissage des technologies a commencé en 1995, à six ans, avec un premier ordinateur, un IBM 300 qui circulait dans ma famille avant d'arriver entre mes mains. Vers onze ans, j'explorais les terminaux — CMD, PowerShell, environnement Linux — et je découvrais qu'une instruction, une contrainte ou une erreur de protocole pouvait devenir un matériau esthétique.\n\nMéthode d'apprentissage autodirigée et par projet : acquérir une compétence à mesure qu'un travail l'exige, et la consolider en la mettant immédiatement en pratique. J'ai commencé à développer VQD sans savoir piloter un drone, réalisé Miyö's War Room sans avoir jamais utilisé Unity, et conçu la State Machine pour La Tumba et Immigrant Dungeon sans connaître le C#.",
       "weight": 600,
       "size": 14,
+      "fontSize": 16,
+      "image": "node-1785859175119-534.jpg",
       "pos": {
-        "x": 364.4720255533854,
+        "x": 365.64383951822913,
         "y": 486.1304626464844
       },
-      "x": 364.4720255533854,
+      "x": 365.64383951822913,
       "y": 486.1304626464844
     },
     {
       "id": "node-1785859257391-280",
       "title": "École de peinture et d'arts appliqués ",
-      "year": 2004,
+      "year": 2002,
       "type": "Études formelles",
       "institution": "Centre d’éducation artistique pour la jeunesse Andrés Eloy Blanco - CEA",
       "collaborators": [
         "Domingo Martinez"
       ],
-      "desc": "2001 - 2004\n\nÉcole de peinture et d'arts appliqués au Centre d’éducation artistique pour la jeunesse Andrés Eloy Blanco - CEA",
-      "weight": 600,
+      "desc": "2002 - 2005\n\nÉcole de peinture et d'arts appliqués au Centre d’éducation artistique pour la jeunesse Andrés Eloy Blanco - CEA",
+      "weight": 500,
       "pos": {
-        "x": 712.5123181465344,
-        "y": 727.8635864257812
+        "x": 897.6923076923076,
+        "y": 711.5
       },
-      "x": 712.5123181465344,
-      "y": 727.8635864257812
+      "x": 897.6923076923076,
+      "y": 711.5
     },
     {
       "id": "node-1785859342855-11",
@@ -181,13 +186,13 @@
       "institution": "Unidad Educativa Manuelita Saenz",
       "collaborators": [],
       "desc": "2001 - 2006",
-      "weight": 600,
+      "weight": 500,
       "pos": {
-        "x": 868.047571426783,
-        "y": 657.7662963867188
+        "x": 961.3601324619392,
+        "y": 641.7282104492188
       },
-      "x": 868.047571426783,
-      "y": 657.7662963867188
+      "x": 961.3601324619392,
+      "y": 641.7282104492188
     },
     {
       "id": "node-1785859481288-595",
@@ -199,12 +204,14 @@
       "desc": "2006 - 2012\nDiplôme en Arts plastiques, Filière : Technique Mixtes\n\nUNEARTE — Universidad Nacional Experimental de las Artes, Caracas",
       "weight": 600,
       "size": 14,
+      "fontSize": 16,
+      "image": "node-1785859481288-595.jpg",
       "pos": {
-        "x": 1407.8888659354968,
-        "y": 649.5693359375
+        "x": 1448.7130846854968,
+        "y": 617.4931030273438
       },
-      "x": 1407.8888659354968,
-      "y": 649.5693359375
+      "x": 1448.7130846854968,
+      "y": 617.4931030273438
     },
     {
       "id": "node-1785859578096-869",
@@ -218,6 +225,7 @@
       "desc": "2012 - 2014\n\nAccompagnement critique et recherche-création en arts contemporains : mentorat artistique individuel avec la curatrice Helena Acosta.",
       "weight": 600,
       "size": 14,
+      "fontSize": 16,
       "pos": {
         "x": 1964.1838848407453,
         "y": 356.91650390625
@@ -313,7 +321,7 @@
       "id": "node-1785860561988-435",
       "title": " Time-Based Media Conservation Training in Europe: Current Provision and Future Needs ",
       "year": 2026,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "COST EMBARK",
       "collaborators": [],
       "desc": "Training School",
@@ -552,7 +560,7 @@
       "id": "node-1785863598864-799",
       "title": "Développement de The Wrong.Router",
       "year": 2019,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "The Wrong Biennale",
       "collaborators": [
         "Mathias Struble",
@@ -571,7 +579,7 @@
       "id": "node-1785863766840-870",
       "title": "MVS Developer : développeuse et technologue créative",
       "year": 2018,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "",
       "collaborators": [
         "Internet"
@@ -589,7 +597,7 @@
       "id": "node-1785863859832-647",
       "title": "Negatif+",
       "year": 2018,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "Negatif+",
       "collaborators": [],
       "desc": "graphiste (2018-2019)",
@@ -636,7 +644,7 @@
       "id": "node-1785925061641-896",
       "title": "Beautiful Interfaces : Human Made",
       "year": 2027,
-      "type": "Curatoriat",
+      "type": "Pratique curatoriale",
       "institution": "Beautiful Interfaces",
       "collaborators": [
         "COST EMBARK"
@@ -1092,7 +1100,7 @@
       "id": "node-1785932789467-121",
       "title": "Counsil Member du The Wrong Biennale",
       "year": 2018,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "",
       "collaborators": [],
       "desc": "« Le routeur n'est pas un outil neutre. C'est un poste frontière. En le déconnectant d'Internet, nous lui rendons sa fonction première : mettre en relation des corps dans un espace donné, sans tiers extracteur. »\n\nJ'entame dès 2018 les premiers échanges avec David Quiles Guilló pour préparer la 4e édition de la biennale. La Wrong fonctionne comme une constellation décentralisée : des commissaires indépendants proposent des pavillons hébergés dans des espaces numériques variés, tandis que des ambassades physiques s'installent dans des institutions partenaires. C'est l'affinité entre cette philosophie de la décentralisation et celle de Beautiful Interfaces qui motive l'invitation.\n\nInvitée comme Council Member — rôle qui engage l'orientation stratégique de la biennale, au-delà du commissariat d'un pavillon — je propose de développer une infrastructure, matérielle et logicielle, capable de diffuser les œuvres sans dépendance à internet. La proposition naît d'une observation : une biennale décentralisée dans sa philosophie reste dépendante d'infrastructures centralisées — serveurs, connexions stables, navigateurs. Je conçois le dispositif en 2018 pour cette raison, bien avant qu'il devienne vital. Il le devient début 2020 : quand la pandémie ferme les espaces physiques dans le monde entier, à la fin même de l'édition, une exposition qui fonctionne sans lieu et sans réseau cesse d'être une hypothèse théorique.\n\nMais l'échelle change tout par rapport à The Privacy Paradox. Là où cinq routeurs flashés à la main suffisaient, il en faut ici 300, capables de fonctionner sans maintenance. Occupy.here était trop instable, et flasher 300 TP-Link MR3020 était impossible. Le point de départ imposait une réécriture complète de l'architecture, pas une adaptation des outils existants.",
@@ -1191,7 +1199,7 @@
       "id": "node-1785933323604-663",
       "title": "REPUBLICA COLAPSADA Vol. 2",
       "year": 2017,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "Baby Castle Gallery",
       "collaborators": [
         "Violette Bulé",
@@ -1209,7 +1217,7 @@
       "id": "node-1785933410143-672",
       "title": "Assistante d'atelier et chargée de communication — Atelier Asdrúbal Colmenárez",
       "year": 2015,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "",
       "collaborators": [],
       "desc": "2015-2017\n\nPremier emploi stable après mon arrivée en France. J'assure la coordination des activités de l'atelier, la communication institutionnelle et la visibilité des projets, la conception des supports graphiques, le suivi des relations avec les galeries, les institutions et les partenaires, ainsi que la gestion des archives visuelles et de la documentation des œuvres.\n\nAsdrúbal Colmenárez (1936-2025) est un artiste vénézuélien installé à Paris depuis mai 1968, invité une première fois à représenter le Venezuela à la Biennale de Paris en 1969, et professeur d'art contemporain à l'Université de Vincennes à partir de 1973. Il appartient à la vague d'artistes latino-américains arrivés à Paris dans les années 1960 qui ont diffusé l'art cinétique : Cruz-Diez, Le Parc, Soto, Sobrino, Demarco. C'est la génération d'exil qui précède la mienne de cinquante ans. Mon premier employeur français est vénézuélien, et le passage par la diaspora comme premier marché du travail est une condition ordinaire de l'exil que je n'avais pas anticipée.\n\nLe travail lui-même ne relève pas de la création. Il relève de tout ce qui la rend visible et transmissible : classer, documenter, décrire, entretenir des relations avec des institutions qui décident de ce qui existe. J'ai appris là que la documentation d'une œuvre n'est pas un travail administratif accessoire mais la condition de sa survie. Une pièce mal documentée disparaît, même quand elle est conservée.",
@@ -1240,7 +1248,7 @@
       "id": "node-1785933528339-319",
       "title": "Beautiful Interfaces: The Privacy Paradox",
       "year": 2017,
-      "type": "Curatoriat",
+      "type": "Pratique curatoriale",
       "institution": "",
       "collaborators": [
         "Helena Acosta"
@@ -1311,7 +1319,9 @@
       "type": "Évenements marquants (historiques et personnels)",
       "institution": "",
       "collaborators": [],
-      "desc": "Arrivée au pouvoir d'Hugo Chávez",
+      "desc": "Gabriel García Márquez, a raconté dans un article publié en février 1999 son expérience à bord d'un avion de la Force aérienne vénézuélienne. Ce vol, qui reliait La Havane à Caracas, a eu lieu deux semaines avant la prise de fonction de Hugo Chávez en janvier 1999, et quelques jours après sa rencontre avec Fidel Castro à Cuba.\n\nDans ce récit intitulé \"El enigma de los dos Chávez\", García Márquez décrit sa stupéfaction. Avant ce voyage, il partageait l'image d'un \"déspoté\" que les médias renvoyaient de l'ancien militaire putschiste. Mais au fil de la conversation, il découvre un homme différent, un \"narrateur naturel\" à la mémoire prodigieuse, habité par les figures de Bolívar et de son propre aïeul, le colonel Pedro Pérez Delgado.\n\nL'écrivain colombien souligne un paradoxe fascinant : le futur président, qui avait pu critiquer le régime cubain par le passé, se retrouve à bord de cet avion après avoir été reçu à La Havane par Fidel Castro. Cette rencontre avec les présidents Castro et Pastrana (de Colombie) marque le début d'une relation complexe et historique.\n\nGarcía Márquez conclut son texte en avouant avoir voyagé avec deux hommes en un seul :\n\n\"L'un à qui la chance obstinée offrait l'opportunité de sauver son pays. Et l'autre, un illusionniste, qui pourrait passer à l'histoire comme un despote de plus.\"\n\nCette double vision résume l'énigme de Chávez : un homme au passé de conspirateur, mais aussi un leader charismatique porté par un destin qu'il croyait providentiel.\n\nLe lendemain de ce vol, Chávez se préparait à entrer dans l'histoire. Le 6 décembre 1998, il avait remporté l'élection présidentielle avec une majorité écrasante, devenant le président du Venezuela. Cette date, et le voyage raconté par García Márquez, marquent le point de bascule entre le \"militant clandestin\" et le \"chef d'État\", entre le \"golpiste\" et le \"démocrate élu\".\n\n---\nGarcía Márquez, G. (1999, febrero). El enigma de los dos Chávez. Revista de Frente. https://www.revistadefrente.cl/el-enigma-de-los-dos-chavez-por-gabriel-garcia-marquez/\n---",
+      "weight": 600,
+      "image": "node-1785934810516-967.jpg",
       "pos": {
         "x": 508.72057166466345,
         "y": 630.8748168945312
@@ -1326,29 +1336,32 @@
       "type": "Évenements marquants (historiques et personnels)",
       "institution": "",
       "collaborators": [],
-      "desc": "Événement personnel : réorientation vers l'art, à l'initiative de ma mère, après une formation initiale tournée vers l'ingénierie informatique",
+      "desc": "Réorientation vers l'art, à l'initiative de ma mère, après une formation initiale tournée vers l'ingénierie informatique",
       "pos": {
-        "x": 743.9465222480969,
+        "x": 735.1984753730969,
         "y": 299.6894989013672
       },
-      "x": 743.9465222480969,
+      "x": 735.1984753730969,
       "y": 299.6894989013672
     },
     {
       "id": "node-1785935093255-166",
-      "title": " Découverte de l'œuvre El Muro de Bruselas ",
+      "title": " Découverte de l'œuvre Mural de Bruselas ",
       "year": 2005,
       "type": "Évenements marquants (historiques et personnels)",
       "institution": "Galeria de Arte Nacional, Carcas",
       "collaborators": [],
-      "desc": "Événement personnel :  Découverte de l'œuvre El Muro de Bruselas de Jesús Soto",
-      "weight": 500,
+      "desc": "Lors de ma dernière année de lycée, le Musée d'Art Contemporain de Caracas et sa bibliothèque sont devenus mon principal lieu de formation intellectuelle autonome. J'y ai découvert des auteurs comme Hakim Bey, ainsi que les écrits de María Elena Ramos sur l'immatérialité, qui m'ont conduite à Jean Baudrillard et à l'œuvre de Jesús Soto.\n\nLe Mural de Bruselas (1958) fixe pour moi une première définition de l'image virtuelle. La vibration optique n'appartient pas à la surface de fer et de lames peintes, elle se produit dans le déplacement du corps qui regarde. L'œuvre reste inerte tant que personne ne bouge devant elle. Dix ans plus tard, je retrouve ce principe dans mes environnements en réalité virtuelle, où la position de l'utilisateur détermine ce qui apparaît. Soto devient une référence permanente de ma compréhension des relations entre matérialité, virtualité et perception.\n\nJesús Rafael Soto (Ciudad Bolívar, 1923 – Paris, 2005). Formé à l'École des arts plastiques de Caracas, installé à Paris en 1950. Il participe en 1955 à l'exposition Le Mouvement chez Denise René, qui marque la naissance historique de l'art cinétique. Le Mural de Bruselas est réalisé pour le pavillon vénézuélien de l'Exposition universelle de Bruxelles (Expo 58) et se trouve aujourd'hui à la Galería de Arte Nacional de Caracas. À partir de 1967, ses Penetrables font entrer le spectateur à l'intérieur de l'œuvr",
+      "weight": 600,
+      "size": 9,
+      "fontSize": 12,
+      "image": "node-1785935093255-166.jpg",
       "pos": {
-        "x": 759.1479257436898,
-        "y": 559.0143432617188
+        "x": 798.5141977163461,
+        "y": 551.7242431640625
       },
-      "x": 759.1479257436898,
-      "y": 559.0143432617188
+      "x": 798.5141977163461,
+      "y": 551.7242431640625
     },
     {
       "id": "node-1785935293391-558",
@@ -1359,27 +1372,29 @@
       "collaborators": [],
       "desc": "Participation au XVIe Festival mondial de la Jeunesse et des Étudiants (Caracas, Venezuela). \n\nPremière immersion dans des réseaux de mouvements de gauche et libertaires. Une conférence consacrée au concept de T.A.Z. (Temporary Autonomous Zone) de Hakim Bey a profondément nourri ma pensée critique et influencera par la suite mon approche de l'art, de la technologie et de l'activisme",
       "weight": 500,
+      "size": 10,
+      "fontSize": 12,
       "pos": {
-        "x": 851.4478525015023,
-        "y": 499.4417419433594
+        "x": 867.4859384390023,
+        "y": 445.495361328125
       },
-      "x": 851.4478525015023,
-      "y": 499.4417419433594
+      "x": 867.4859384390023,
+      "y": 445.495361328125
     },
     {
       "id": "node-1785935456520-323",
       "title": "Asistante à la production - Rubik Producciones",
       "year": 2009,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "Rubik Producciones",
       "collaborators": [],
       "desc": "2009-2010\n\nRubik Producciones, assistante à la réalisation (début)",
       "pos": {
-        "x": 1053.2147091596555,
-        "y": 1196.4293823242188
+        "x": 1056.1307247846555,
+        "y": 1194.9713745117188
       },
-      "x": 1053.2147091596555,
-      "y": 1196.4293823242188
+      "x": 1056.1307247846555,
+      "y": 1194.9713745117188
     },
     {
       "id": "node-1785936180090-941",
@@ -1391,44 +1406,51 @@
       "desc": "Rencontre avec Helena Acosta pendant la Résidence ARTE PROCESO - Débout du méntorat avec Helena Acosta",
       "weight": 600,
       "size": 14,
+      "fontSize": 14,
       "pos": {
-        "x": 1355.5427965995593,
-        "y": 515.7942708333334
+        "x": 1354.0847887870593,
+        "y": 499.75618489583337
       },
-      "x": 1355.5427965995593,
-      "y": 515.7942708333334
+      "x": 1354.0847887870593,
+      "y": 499.75618489583337
     },
     {
       "id": "node-1785936318630-484",
       "title": "Crèation DeOrigenBélico® (DOB)",
       "year": 2010,
-      "type": "Curatoriat",
+      "type": "Pratique curatoriale",
       "institution": "Idependente ",
       "collaborators": [],
       "desc": "2010-2016\nCréation et direction de DeOrigenBélico® (DOB) : radio de minuit devenue plateforme de streaming et chaîne d'art numérique latino-américain\n\nEn 2010, au Venezuela, l'art numérique n'avait presque aucun espace. Ma propre formation à l'UNEARTE laissait peu de place au Net.Art et aux pratiques interactives, et les institutions ne le reconnaissaient pas comme un champ légitime. J'ai créé DeOrigenBélico® pour ouvrir cet espace manquant, depuis l'extérieur du cadre académique.\n\nLe nom, De Origen Bélico, disait la position : un projet né de la pénurie, qui faisait de la création d'un espace pour la technologie et l'expérimental une forme de lutte, dans l'esprit de la T.A.Z. de Hakim Bey. Ses premières manifestations étaient des transmissions radio, une sorte de radio de minuit où j'invitais mes camarades de l'université à parler d'art numérique, d'art sonore, de philosophie ou de poésie, avant de passer au live streaming vidéo.",
       "weight": 600,
+      "size": 15,
+      "fontSize": 14,
+      "image": "node-1785936318630-484.png",
       "pos": {
-        "x": 1071.038549178686,
-        "y": 699.9644165039062
+        "x": 1199.6705071864985,
+        "y": 646.7175903320312
       },
-      "x": 1071.038549178686,
-      "y": 699.9644165039062
+      "x": 1199.6705071864985,
+      "y": 646.7175903320312
     },
     {
       "id": "node-1785936389298-237",
       "title": "Recherche : Net.Art et Glitch art",
       "year": 2009,
       "type": "Création artistique & recherche-création",
-      "institution": "",
+      "institution": "UNEARTE",
       "collaborators": [],
-      "desc": "Premières œuvres net.art en ActionScript 2.0 : *_*.m.^^+ et {}",
+      "desc": "Premières œuvres net.art en ActionScript 2.0 : *_*.m.^^+ et {}\n\nMes premières expérimentations ont pris la forme de projets de Net.Art et de performance numérique, explorant les relations entre corps, l'interface et la machine.\n\nÀ l'UNEARTE, Vuk Ćosić, Alexei Shulgin et Jodi étaient connus sans être traités comme références structurantes. J'ai cherché la formation là où elle existait, sur le réseau, en écrivant directement aux artistes dont je lisais le travail. Rosa Menkman m'a accompagnée de manière informelle pendant plusieurs années. Elle m'envoyait des textes, Lev Manovich d'abord, The Glitch Moment(um) ensuite, et m'a invitée en 2011 au festival GLI.TC/H, ma première participation internationale.\n\nLa position construite pendant ces années tient toujours. L'erreur n'est pas un accident du système, c'est le moment où le système devient lisible. Clicks & Feedbacks provoque un fichier manquant et laisse chaque navigateur interpréter la panne à sa manière. We <3 Your Com-puter pousse la machine jusqu'à l'arrêt, en Pure Data avec un iPod touch en contrôleur OSC. Mon mémoire de licence, De la métaphore de l'ordinateur au substrat du code (2012), en tire le cadre théorique. La même hypothèse gouverne aujourd'hui le SafeWord Protocol d'Eroticissima, où l'interruption est un état prévu du système, documenté et versionné.\n\nGLI.TC/H, rassemblement consacré au glitch art, tenu à Chicago en 2010 puis en 2011 entre Chicago, Amsterdam et Birmingham, organisé par Nick Briz, Evan Meaney, Rosa Menkman et Jon Satrom. Rosa Menkman publie The Glitch Moment(um) en 2011 dans la collection Network Notebooks de l'Institute of Network Cultures.",
       "weight": 600,
+      "size": 12,
+      "fontSize": 14,
+      "image": "node-1785936389298-237.png",
       "pos": {
-        "x": 1003.9147213666868,
-        "y": 342.83392333984375
+        "x": 1119.0975216596555,
+        "y": 320.9637756347656
       },
-      "x": 1003.9147213666868,
-      "y": 342.83392333984375
+      "x": 1119.0975216596555,
+      "y": 320.9637756347656
     },
     {
       "id": "node-1785936457192-828",
@@ -1440,11 +1462,11 @@
       "desc": "Crise sociopolitique et censure au Venezuela",
       "weight": 500,
       "pos": {
-        "x": 1108.0350091396235,
-        "y": 904.92529296875
+        "x": 1185.3094232021235,
+        "y": 906.38330078125
       },
-      "x": 1108.0350091396235,
-      "y": 904.92529296875
+      "x": 1185.3094232021235,
+      "y": 906.38330078125
     },
     {
       "id": "node-1785936919799-406",
@@ -1455,27 +1477,27 @@
       "collaborators": [],
       "desc": "Ateliers de code en marge du programme officiel de l'UNEARTE, dans le seul espace de la faculté équipé d'ordinateurs",
       "pos": {
-        "x": 1123.881810897436,
-        "y": 572.320556640625
+        "x": 1231.7745110927485,
+        "y": 575.2365112304688
       },
-      "x": 1123.881810897436,
-      "y": 572.320556640625
+      "x": 1231.7745110927485,
+      "y": 575.2365112304688
     },
     {
       "id": "node-1785937006801-913",
       "title": "Assistante à la Réalisation - ARSIETE",
       "year": 2010,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "ARSIETE",
       "collaborators": [
         "Luis Armando Roche"
       ],
       "desc": "2010-2011\n\nARSIETE C. A., assistante à la réalisation et monteuse vidéo auprès de Luis Armando Roche (février 2011)",
       "pos": {
-        "x": 1137.156957381811,
+        "x": 1135.698949569311,
         "y": 1127.8654174804688
       },
-      "x": 1137.156957381811,
+      "x": 1135.698949569311,
       "y": 1127.8654174804688
     },
     {
@@ -1487,12 +1509,15 @@
       "collaborators": [],
       "desc": "Clicks & Feedbacks : le glitch comme processus créatif",
       "weight": 600,
+      "size": 12,
+      "fontSize": 14,
+      "image": "node-1785937117593-147.png",
       "pos": {
-        "x": 1312.7914663461536,
-        "y": 386.4705810546875
+        "x": 1311.3334585336536,
+        "y": 393.7606201171875
       },
-      "x": 1312.7914663461536,
-      "y": 386.4705810546875
+      "x": 1311.3334585336536,
+      "y": 393.7606201171875
     },
     {
       "id": "node-1785937226980-769",
@@ -1504,12 +1529,14 @@
         "Rosa Menkman. Jon Satrom. Nick Briz"
       ],
       "desc": "Gli.tc/h 2011, Chicago et Amsterdam. Commissariat : Rosa Menkman, Jon Satrom et Nick Briz",
+      "weight": 500,
+      "image": "node-1785937226980-769.jpg",
       "pos": {
-        "x": 1239.4596792367786,
-        "y": 274.0556640625
+        "x": 1240.9176870492786,
+        "y": 249.26950073242188
       },
-      "x": 1239.4596792367786,
-      "y": 274.0556640625
+      "x": 1240.9176870492786,
+      "y": 249.26950073242188
     },
     {
       "id": "node-1785937326023-427",
@@ -1519,12 +1546,14 @@
       "institution": "",
       "collaborators": [],
       "desc": "Doc.Art Interactive, Kiev. Commissariat : Irina Markova",
+      "weight": 500,
+      "image": "node-1785937326023-427.png",
       "pos": {
-        "x": 1278.2421499399036,
-        "y": 178.1791534423828
+        "x": 1265.1581655649036,
+        "y": 139.5609588623047
       },
-      "x": 1278.2421499399036,
-      "y": 178.1791534423828
+      "x": 1265.1581655649036,
+      "y": 139.5609588623047
     },
     {
       "id": "node-1785937373629-168",
@@ -1546,22 +1575,22 @@
       "id": "node-1785937461940-497",
       "title": "DOB : La Revuelta",
       "year": 2011,
-      "type": "Curatoriat",
+      "type": "Pratique curatoriale",
       "institution": "",
       "collaborators": [],
       "desc": "Curatrice de la première exposition d'art numérique au Venezuela : La Revuelta\n\nÀ l'Ateneo de Valencia, première exposition physique consacrée à l'art numérique dans le pays, avec vingt-cinq artistes. J'ai conçu pour elle un catalogue interactif sous Pure Data : un catalogue-synthétiseur où le public générait et enregistrait des sons en naviguant dans ses sections, à la fois outil éditorial, interface sonore et instrument performatif.",
       "pos": {
-        "x": 1263.423424353966,
-        "y": 765.2507934570312
+        "x": 1392.5221792367786,
+        "y": 752.1668090820312
       },
-      "x": 1263.423424353966,
-      "y": 765.2507934570312
+      "x": 1392.5221792367786,
+      "y": 752.1668090820312
     },
     {
       "id": "node-1785937552486-614",
       "title": "Graphiste - La Granja de Render",
       "year": 2012,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "La Granja de Render",
       "collaborators": [],
       "desc": "2011 - 2012\nLa Granja de Render, graphiste, web designer UX/UI et productrice",
@@ -1576,7 +1605,7 @@
       "id": "node-1785937619281-565",
       "title": "Direction artistique au Ministère de la Communication du Venezuela",
       "year": 2014,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "MiPPCI - Ministère de la Communication et de l'Information du Venezuela ",
       "collaborators": [],
       "desc": "2012-2014\n\nMiPPCI - Ministère de la Communication et de l'Information du Venezuela\n\nVice-ministère de la Stratégie de communication – Direction artistique",
@@ -1624,16 +1653,16 @@
       "id": "node-1785937978697-801",
       "title": "DOB : Velada Santa Lucia",
       "year": 2013,
-      "type": "Curatoriat",
+      "type": "Pratique curatoriale",
       "institution": "DeOrigenBélico",
       "collaborators": [],
       "desc": "DOB : Velada Santa Lucia. Maracaibo - Venezuela\n\nInstallation immersive réalisée avec Noxo Stremor et Valeria Castillo dans l'une des maisons participant au festival.",
       "pos": {
-        "x": 1700.5043319310898,
-        "y": 669.1044921875
+        "x": 1703.4203475560898,
+        "y": 667.646484375
       },
-      "x": 1700.5043319310898,
-      "y": 669.1044921875
+      "x": 1703.4203475560898,
+      "y": 667.646484375
     },
     {
       "id": "node-1785938705697-823",
@@ -1647,11 +1676,11 @@
       "desc": "The Material Glitch — Vancouver",
       "weight": 500,
       "pos": {
-        "x": 1366.0584215995593,
-        "y": 125.10736846923828
+        "x": 1368.9744372245593,
+        "y": 91.57315063476562
       },
-      "x": 1366.0584215995593,
-      "y": 125.10736846923828
+      "x": 1368.9744372245593,
+      "y": 91.57315063476562
     },
     {
       "id": "node-1785938836201-336",
@@ -1678,11 +1707,11 @@
       "collaborators": [],
       "desc": "S.P.A.M.M. — Biennale Transnumériques, Bruxelles",
       "pos": {
-        "x": 1429.8097643729968,
-        "y": 43.04976272583008
+        "x": 1426.8937487479968,
+        "y": 28.469669342041016
       },
-      "x": 1429.8097643729968,
-      "y": 43.04976272583008
+      "x": 1426.8937487479968,
+      "y": 28.469669342041016
     },
     {
       "id": "node-1785938961609-235",
@@ -1721,7 +1750,7 @@
       "id": "node-1785939234830-564",
       "title": "Lancement des soirées BYOB (Bring Your Own Beamer) à Caracas",
       "year": 2012,
-      "type": "Curatoriat",
+      "type": "Pratique curatoriale",
       "institution": "",
       "collaborators": [],
       "desc": "Lancement des soirées BYOB (Bring Your Own Beamer) à Caracas",
@@ -1755,7 +1784,7 @@
       "id": "node-1785939662163-847",
       "title": "Lancement de Beautiful Interfaces",
       "year": 2013,
-      "type": "Curatoriat",
+      "type": "Pratique curatoriale",
       "institution": "",
       "collaborators": [],
       "desc": "Ma pratique curatoriale naît d'une contrainte géographique et politique précise : au Venezuela au début des années 2010, il n'existe aucun espace institutionnel dédié à l'art numérique. Les musées ne programment pas ces pratiques, les galeries n'ont ni les compétences techniques ni l'intérêt critique pour les accueillir, et le contrôle des changes en vigueur depuis 2003 rend le matériel informatique difficile et coûteux. Travailler avec la technologie, là, c'est composer avec la rareté. Faute de lieu, je décide d'en fabriquer un.\n\nThe Deep in the Void est la première exposition curatoriale reconnue comme ayant eu lieu spécifiquement sur le deep web, présentée comme pavillon officiel de la première édition de The Wrong Biennale. Elle n'était accessible que via le réseau Tor, par un navigateur dédié. L'objectif est de déplacer l'art des interfaces hors de la « vision amicale » du web de surface, vers un espace où le design d'un site agréable n'est pas l'essentiel — où tout ce qui compte concerne l'information, les données et la manière de les protéger.\n\nJ'ai choisi quinze artistes pour présenter leur propre interprétation d'une « interface » dans cet environnement caché. Trois piliers structurent le projet : l'interface comme médiation, qui masque la dynamique complexe et parfois violente de l'internet ; la beauté au-delà du design ; et l'exploration du vide, le deep web comme vide politique, technique et symbolique face au web de surface.\n\nC'est ici que s'installe la méthode que je poursuis depuis : l'infrastructure de diffusion n'est pas le support de l'exposition, elle en est l'argument.",
@@ -1787,7 +1816,7 @@
       "id": "node-1785939844355-172",
       "title": "S.P.A.M.M. DULCE",
       "year": 2013,
-      "type": "Curatoriat",
+      "type": "Pratique curatoriale",
       "institution": "Museo de Arte Contemporáneo de Caracas",
       "collaborators": [
         "Helena Acosta",
@@ -1806,7 +1835,7 @@
       "id": "node-1785939953747-155",
       "title": "Programmation d'événements BYOB au MACC",
       "year": 2013,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "Museo de ARte Contemporaneo de Caracas",
       "collaborators": [],
       "desc": "Programmation d'événements BYOB au MACC",
@@ -1822,12 +1851,16 @@
       "id": "node-1785940056558-210",
       "title": "Beautiful Interfaces: The Deep in The Void",
       "year": 2014,
-      "type": "Curatoriat",
+      "type": "Pratique curatoriale",
       "institution": "The Wrong Biennale",
-      "collaborators": [],
-      "desc": "2013 - 2014\nBeautiful Interfaces: The Deep in The Void, The Wrong Biennale (2013-2014)",
+      "collaborators": [
+        "Internet"
+      ],
+      "desc": "2013 - 2014\nLe projet curatorial Beautiful Interfaces: The Deep in the Void, conçue uniquement pour le Deep Web, invitait les artistes à réinterpréter la notion d'interface dans des espaces numériques non accessibles au grand public, renforçant ma réflexion sur les zones invisibles, marginales et politiques d'Internet.\n\nPremière itération de Beautiful Interfaces, présentée comme pavillon officiel de la première édition de The Wrong. Pendant la première semaine, l'exposition n'existait que sur le réseau Tor, par consultation d'un site miroir .onion ou par téléchargement de l'intégralité du site comme catalogue numérique. Un miroir sur le web de surface a été ouvert ensuite pour élargir l'accès. Le protocole d'accès était le premier matériau curatorial. Je ne sélectionnais pas seulement des œuvres, je fixais les conditions techniques dans lesquelles elles pouvaient être atteintes, et par conséquent le public capable de les atteindre. Œuvres d'Esteban Ottaso, Manuel Fernandez, Intimidad Romero et Organ Armani. Documentation en ligne : https://miyitus.github.io/deepinthevoid/\n\nLa méthode revient dans les itérations suivantes. The Privacy Paradox (2016–2017) déplace l'exposition sur des routeurs Wi-Fi coupés d'Internet, Human Made (2026) la distribue comme paquet npm. En 2021, Annet Dekker intègre The Deep in the Void comme cas d'étude dans Curating Digital Art (Valiz).",
       "weight": 600,
       "size": 14,
+      "fontSize": 16,
+      "image": "node-1785940056558-210.png",
       "pos": {
         "x": 2035.6006328876203,
         "y": 500.61236572265625
@@ -1904,7 +1937,7 @@
       "id": "node-1785940679739-558",
       "title": "Fondation de La Meta es Desmontar la Simulación / Fin du Mentorat avec Helena Acosta",
       "year": 2014,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "",
       "collaborators": [
         "Helena Acosta",
@@ -2149,7 +2182,7 @@
       "id": "node-1785942976524-917",
       "title": "Fin de DeOrigenBélico®",
       "year": 2016,
-      "type": "Curatoriat",
+      "type": "Pratique curatoriale",
       "institution": "",
       "collaborators": [],
       "desc": "Six ans de plateforme s'arrêtent. DOB avait fonctionné simultanément comme lieu de recherche-création en ligne, projet curatorial indépendant et outil d'activisme culturel : radio de minuit, puis live streaming, puis expositions en ligne et physiques, puis interventions dans l'espace public.\n\nSur toute la durée du projet, j'administrais la plateforme, je sélectionnais et coordonnais les artistes, je négociais avec les lieux d'accueil et je produisais les textes critiques. C'est là que j'ai appris le métier dans ses contraintes concrètes : sélectionner, négocier avec une institution, assurer la médiation, porter une communication critique sans budget.\n\nDOB m'a valu un networking international précoce qui m'a permis d'être sélectionnée à la Rhizome Artbase du New Museum en 2012, puis d'établir des liens avec la scène glitch de Chicago et d'être invitée au festival Gli.tc/h. Dans son ensemble, la plateforme a été la matrice de ma méthodologie curatoriale, de Beautiful Interfaces jusqu'à mon rôle au sein de The Wrong.\n\nL'arrêt coïncide avec mon installation durable en France : la structure était née d'un contexte vénézuélien qu'elle ne pouvait plus habiter depuis l'exil.",
@@ -2165,7 +2198,7 @@
       "id": "node-1785943046681-386",
       "title": "Beautiful Interfaces: The Privacy Paradox",
       "year": 2016,
-      "type": "Curatoriat",
+      "type": "Pratique curatoriale",
       "institution": "Reverse Gallery",
       "collaborators": [],
       "desc": "Beautiful Interfaces: The Privacy Paradox, Reverse Gallery, New York. Co-commissariat avec Helena Acosta",
@@ -2748,7 +2781,7 @@
       "id": "2022-blast",
       "title": "Développeuse Unity 3D — Blast Paris",
       "year": 2022,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "Blast Paris",
       "collaborators": [],
       "desc": "2022 – 2024\n\nParis · FR",
@@ -2815,7 +2848,7 @@
       "id": "2022-restauration-bi",
       "title": "Restauration : Beautiful Interfaces — The Deep in the Void",
       "year": 2022,
-      "type": "Curatoriat",
+      "type": "Pratique curatoriale",
       "institution": "Pour The Broken Timeline",
       "collaborators": [],
       "desc": "2022\n\nNœud clé pour la candidature EMBARK : c'est une opération de conservation d'art né-numérique menée sur sa propre œuvre.",
@@ -2871,12 +2904,12 @@
       "desc": "Une architecture logicielle du consentement : au lieu d'ajouter des garde-fous à un système d'interaction existant, encoder le consentement dans la structure même du système, de sorte qu'une interaction non consentie ne soit pas interdite mais impossible.\n\nLe principe se lit dans la gestion réseau. Quand l'avatar A envoie une requête LoveTrigger à l'avatar B, la requête transite par le serveur avant d'atteindre B. La validation revient au serveur, qui confirme l'accord bilatéral avant d'envoyer l'instruction d'exécution aux deux clients simultanément. À aucun moment un client ne peut déclencher unilatéralement une interaction — l'architecture réseau rend ce déclenchement impossible, pas seulement interdit.\n\nC'est le déplacement décisif de ma recherche : le consentement cesse d'être une question d'interface ou de politique d'usage pour devenir une propriété de l'architecture. Ce que le SDK encode, il l'encode dans le code — invisible, non représenté. C'est cette invisibilité qui rendra nécessaire DBRAGA, chargée d'incarner dans l'espace ce que le code gouverne sans le montrer.",
       "weight": 600,
       "size": 14,
-      "x": 4354.393495217348,
-      "y": -762.8696899414062,
       "pos": {
         "x": 4354.393495217348,
         "y": -762.8696899414062
-      }
+      },
+      "x": 4354.393495217348,
+      "y": -762.8696899414062
     },
     {
       "id": "2024-eroticissima-p2",
@@ -2930,22 +2963,25 @@
       "id": "pf-artiste-auteure-2014",
       "title": "Activité artistique indépendante — artiste-auteure",
       "year": 2012,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "À l'international / en ligne",
       "collaborators": [],
       "desc": "2012 – en cours\n\nConception, développement et production d'œuvres de recherche-création dans les domaines de l'art numérique, des médias interactifs, de la réalité virtuelle, du jeu vidéo, de l'intelligence artificielle et des cultures en réseau.\n\nRéalisation d'installations, performances, environnements immersifs, œuvres en ligne et dispositifs interactifs. Développement de méthodologies de recherche à l'intersection de l'art contemporain, des médias numériques et des sciences humaines.\n\nGestion autonome de projets : recherche de financements, production, communication, diffusion et partenariats.",
+      "weight": 600,
+      "size": 14,
+      "fontSize": 16,
       "pos": {
-        "x": 1456.7128405448718,
-        "y": 1307.4910278320312
+        "x": 1539.8195299979968,
+        "y": 1294.3689575195312
       },
-      "x": 1456.7128405448718,
-      "y": 1307.4910278320312
+      "x": 1539.8195299979968,
+      "y": 1294.3689575195312
     },
     {
       "id": "pf-placement-produit",
       "title": "Atelier collectif — Placement Produit",
       "year": 2016,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "Aubervilliers, France",
       "collaborators": [],
       "desc": "2016-2017\n\nAtelier collectif d'artistes offrant à la fois un poste de travail et un voisinage de pratiques. Espace autogéré où le partage des moyens de production allait de pair avec une circulation constante de compétences entre artistes.",
@@ -2960,7 +2996,7 @@
       "id": "pf-le-wonder",
       "title": "Atelier collectif — Le Wonder",
       "year": 2018,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "Clichy, France",
       "collaborators": [],
       "desc": "2018 – fin 2019\n\nAtelier collectif autogéré, site de Clichy. Une activité de prestation a besoin d'un espace équipé et d'un milieu professionnel : j'ai longtemps résolu cette double exigence par les ateliers collectifs d'artistes.",
@@ -2975,7 +3011,7 @@
       "id": "pf-bureau-itinerant",
       "title": "Bureau itinérant — le réseau comme lieu de travail",
       "year": 2020,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "Sans adresse fixe",
       "collaborators": [],
       "desc": "La pandémie a fermé la configuration des ateliers collectifs. Mon bureau est alors devenu itinérant : sans adresse fixe, je travaille depuis les lieux que les projets imposent, et l'infrastructure s'est déplacée du local vers le réseau.\n\nSans ancrage local, c'est le réseau qui est devenu mon lieu de travail effectif.",
@@ -2990,7 +3026,7 @@
       "id": "pf-clients-mvs",
       "title": "Commandes MVS Developer — clients internationaux",
       "year": 2018,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "Art, jeu vidéo, XR, média, publicité",
       "collaborators": [
         "Liliana Farber",
@@ -3012,7 +3048,7 @@
       "id": "pf-studios-jeux",
       "title": "Développement Unity pour studios de jeux vidéo",
       "year": 2018,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "France et international — sous accord de confidentialité",
       "collaborators": [],
       "desc": "Série de missions couvertes par des accords de confidentialité toujours en vigueur.\n\nPrototypage de gameplay en C#, développement d'outils éditeurs et de pipelines de production, optimisation des performances (CPU, GPU, mémoire, taille des builds), intégration de SDK et de systèmes réseau (Photon, Mirror, Netcode), implémentation d'UI, shaders avec Shader Graph et VFX Graph, portage de jeux entre plateformes.",
@@ -3028,7 +3064,7 @@
       "id": "pf-fap-tek-terminal",
       "title": "The Terminal — FAP-TEK, Centro Cultural de España",
       "year": 2021,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "Montevideo, Uruguay",
       "collaborators": [
         "Cecilia Almirón",
@@ -3050,7 +3086,7 @@
       "id": "pf-inworld-ai",
       "title": "Inworld AI — personality sheets et acquisition de la base de personnages",
       "year": 2022,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "USA — IA conversationnelle / NPC",
       "collaborators": [],
       "desc": "En 2022, j'avais développé quelques modèles de personnages NPC pilotés par des agents IA pour Eroticissima. Cette production et cette compétence m'ont mise en contact avec un développeur de la compagnie sur un canal Discord consacré aux agents IA et aux systèmes LLM : un échange technique entre pairs qui a débouché sur une relation de travail.\n\nDéveloppement de personality sheets ; la mission s'est conclue par l'acquisition, par l'entreprise, de la base de données des personnages que j'avais conçue pour ma recherche personnelle, pour ses systèmes de voix et de comportement NPC.",
@@ -3065,7 +3101,7 @@
       "id": "pf-triantafyllidis",
       "title": "Theo Triantafyllidis — développement Unity et direction créative",
       "year": 2026,
-      "type": "Activites auto-empreneur",
+      "type": "Activites auto-entrepreneur",
       "institution": "Art (artiste)",
       "collaborators": [],
       "desc": "Développement Unity généraliste, prototypage et direction créative. Activité débutant en septembre 2026.",
@@ -3080,22 +3116,22 @@
       "id": "pf-babyshower",
       "title": "DOB : BabyShowerBélico",
       "year": 2010,
-      "type": "Curatoriat",
+      "type": "Pratique curatoriale",
       "institution": "En ligne",
       "collaborators": [],
       "desc": "Première exposition en ligne réunissant des artistes latino-américains en création numérique.",
       "pos": {
-        "x": 1171.2342889247798,
-        "y": 827.9066162109375
+        "x": 1220.8065545497798,
+        "y": 833.7386474609375
       },
-      "x": 1171.2342889247798,
-      "y": 827.9066162109375
+      "x": 1220.8065545497798,
+      "y": 833.7386474609375
     },
     {
       "id": "pf-dob-collectifs",
       "title": "DOB : mise du streaming au service d'autres collectifs",
       "year": 2011,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "Caracas, Venezuela",
       "collaborators": [
         "Daniel Mercedes",
@@ -3103,23 +3139,25 @@
         "Manuel Eduardo González"
       ],
       "desc": "Le format de conversation en direct est devenu un outil que j'ai mis au service d'autres collectifs vénézuéliens : La Ermita Poética, le collectif de poésie de Daniel Mercedes ; Lado B, le projet curatorial mené par Jorge Mitsuro da Silva à l'Universidad Simón Bolívar ; et le collectif de street art Pon una Foto en la Calle, de l'artiste Manuel Eduardo González.",
+      "image": "pf-dob-collectifs.png",
       "pos": {
-        "x": 1406.9699941781848,
+        "x": 1407.9699941781848,
         "y": 863.7012939453125
       },
-      "x": 1406.9699941781848,
+      "x": 1407.9699941781848,
       "y": 863.7012939453125
     },
     {
       "id": "pf-liberen-internet",
       "title": "DOB : Liberen Internet",
       "year": 2012,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "Espace public, Venezuela",
       "collaborators": [
         "Noxo Stremor"
       ],
       "desc": "Performance itinérante avec l'artiste Noxo Stremor : nous installions des répéteurs Internet pour offrir un accès gratuit dans des lieux publics.\n\nEn installant un accès libre à Internet dans la rue, Liberen Internet contient déjà en germe mon travail ultérieur sur les infrastructures réseau autonomes.",
+      "image": "pf-liberen-internet.jpg",
       "pos": {
         "x": 1586.0991930839343,
         "y": 778.6435546875
@@ -3131,7 +3169,7 @@
       "id": "pf-lenguajes",
       "title": "Conférence : Lenguajes de la Ingobernabilidad",
       "year": 2014,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "Organización Nelson Garrido, Caracas",
       "collaborators": [
         "Helena Acosta",
@@ -3155,7 +3193,7 @@
       "id": "pf-hack-de-patria",
       "title": "Hack de Patria (HDP)",
       "year": 2015,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "En collaboration avec Refrakt",
       "collaborators": [
         "Refrakt"
@@ -3172,7 +3210,7 @@
       "id": "pf-dts-wendys",
       "title": "Dismantling the Simulation",
       "year": 2015,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "Wendy's Subway Library, New York",
       "collaborators": [],
       "desc": "Exposition et présentation. Rôle : co-commissaire, panéliste et graphisme de l'exposition.",
@@ -3188,7 +3226,7 @@
       "id": "pf-republica-vol1",
       "title": "República Colapsada, Vol. 1",
       "year": 2016,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "LiTE-HAUS Galerie, Berlin",
       "collaborators": [
         "Helena Acosta",
@@ -3207,7 +3245,7 @@
       "id": "pf-luis-theis",
       "title": "Mobilisation pour la libération de Luis Theis",
       "year": 2016,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "El Helicoide, Caracas",
       "collaborators": [
         "Luis Theis",
@@ -3225,7 +3263,7 @@
       "id": "pf-requiem",
       "title": "REQUIEM 200≤",
       "year": 2018,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "Washington Square Park, New York",
       "collaborators": [
         "Violette Bulé"
@@ -3242,7 +3280,7 @@
       "id": "pf-archive-lameta",
       "title": "Archive de La Meta sauvegardée dans le VQD",
       "year": 2018,
-      "type": "Engagements sociaux",
+      "type": "Engagements sociales",
       "institution": "≈ 500 Go",
       "collaborators": [],
       "desc": "Le projet a réuni plus de cinquante artistes et photographes vénézuéliens et produit une archive vivante de la crise, dont une part d'environ 500 Go a ensuite été sauvegardée dans Vigipirate Quadcopter Drone.\n\nLa Meta a fonctionné comme un dispositif d'archivage actif, une mémoire collective des événements d'un pays, à un moment où aucun État ne reconnaissait encore le Venezuela comme une dictature.",
@@ -3261,6 +3299,9 @@
       "institution": "2012-2020",
       "collaborators": [],
       "desc": "Série de performances issues de l'exploration des terminaux : une instruction, une contrainte ou une erreur de protocole devenue matériau esthétique, un rapport expérimental à la machine.",
+      "weight": 600,
+      "size": 14,
+      "fontSize": 16.5,
       "pos": {
         "x": 1406.4240221854968,
         "y": -182.76394379568092
@@ -3408,13 +3449,13 @@
       "institution": "",
       "collaborators": [],
       "desc": "DBRAGA v3 (I.M.L.H.A.V.A.S. - Independent Machine Learning Hybrid Avatar / Virtual Agent System)",
-      "y": -756.3668212890625,
-      "x": 4582.462821764824,
+      "weight": 600,
       "pos": {
         "x": 4582.462821764824,
         "y": -756.3668212890625
       },
-      "weight": 600
+      "x": 4582.462821764824,
+      "y": -756.3668212890625
     },
     {
       "id": "node-1786977275715-766",
@@ -3424,14 +3465,14 @@
       "institution": "",
       "collaborators": [],
       "desc": "Publication du LoveTriggerSDK v2.0 (documentation Open Source – Github licence GNU GLP)",
-      "y": -553.7892456054688,
-      "x": 5251.127760667067,
       "weight": 600,
       "size": 14,
       "pos": {
         "x": 5251.127760667067,
         "y": -553.7892456054688
-      }
+      },
+      "x": 5251.127760667067,
+      "y": -553.7892456054688
     },
     {
       "id": "node-1786977360723-474",
@@ -3441,14 +3482,14 @@
       "institution": "",
       "collaborators": [],
       "desc": "J'ai défini la tokenomics du token ErosXT : allocation, distribution, mécanismes de « vesting », logique de marketplace. J’ai déployé ErosXT ($EXT) comme token utilitaire SPL sur la blockchain Solana le 3 mars 2022 — la date est vérifiable sur le repository public Solana-labs/token-list. \nJ'ai documenté les usages du token sur le site officiel du projet et dans le Whitepaper : achat de collections LoveTriggers créées par des artistes tiers, acquisition d’assets NFT HAVAS sur la marketplace, achat de Curated Adventures, après leur période de diffusion gratuite, et rémunération directe des artistes et développeurs à chaque vente - sans intermédiaire, sans commission de plateforme\n\nhttps://solscan.io/token/aEvgNv5DVznzHrmJaqDHVuExH2nbLCGbyfhsNfgCYBS#transactions",
-      "y": -369.4559020996094,
-      "x": 4554.074494190705,
       "weight": 600,
       "size": 14,
       "pos": {
         "x": 4554.074494190705,
         "y": -369.4559020996094
-      }
+      },
+      "x": 4554.074494190705,
+      "y": -369.4559020996094
     }
   ],
   "edges": [
@@ -4732,13 +4773,13 @@
   "typeColors": {
     "Création artistique & recherche-création": "#ff80ff",
     "Études formelles": "#0080ff",
-    "Activites auto-empreneur": "#acac00",
-    "Engagements sociaux": "#fd9782",
+    "Activites auto-entrepreneur": "#acac00",
+    "Engagements sociales": "#fd9782",
     "Exhibitions et publications": "#80ff80",
     "Évenements marquants (historiques et personnels)": "#c0c0c0",
     "Études non-formelles": "#77bbff",
     "Enseignante, interventions, ateliers, jurys, encadrements": "#ffff80",
-    "Curatoriat": "#ff00ff",
+    "Pratique curatoriale": "#ff00ff",
     "Subventions, prix et collections": "#ff0000"
   },
   "yearRange": {
